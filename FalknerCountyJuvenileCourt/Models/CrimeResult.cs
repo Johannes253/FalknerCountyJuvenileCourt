@@ -1,7 +1,9 @@
+using System.ComponentModel.DataAnnotations;
 namespace FalknerCountyJuvenileCourt.Models
 {
     public class CrimeResult
     {
+        [Key]
         public int CCID { get; set; }
         public int Juvenile_ID { get; set; }
         public int Crime_ID { get; set; }
