@@ -14,6 +14,24 @@ namespace FalknerCountyJuvenileCourt.Data
         {
         }
 
-        public DbSet<FalknerCountyJuvenileCourt.Models.Juvenile> Juvenile { get; set; } = default!;
+        public DbSet<Crime> Crimes { get; set; }
+        public DbSet<CrimeResult> CrimeResults { get; set; }
+        public DbSet<IntakeDesc> IntakeDescs { get; set; }
+        public DbSet<Juvenile> Juveniles { get; set; }
+        public DbSet<ProsFilingDesc> ProsFilingDescs { get; set; }
+        public DbSet<Race> Race { get; set; }
+        public DbSet<RiskAssesment> RiskAssesments { get; set; }
+        public DbSet<School> Schools { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Crime>().ToTable("Crime");
+            modelBuilder.Entity<CrimeResult>().ToTable("CrimeResult");
+            modelBuilder.Entity<IntakeDesc>().ToTable("IntakeDesc");
+            modelBuilder.Entity<Juveniles>().ToTable("Juveniles");
+            modelBuilder.Entity<ProsFilingDesc>().ToTable("ProsFilingDesc");
+            modelBuilder.Entity<Race>().ToTable("Race");
+            modelBuilder.Entity<RiskAssesment>().ToTable("RiskAssesment");
+            modelBuilder.Entity<School>().ToTable("School");
+        }
     }
 }
