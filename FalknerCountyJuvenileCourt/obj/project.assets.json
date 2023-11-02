@@ -11574,11 +11574,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\johan\\OneDrive\\Desktop\\Database&WebSystems\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt.csproj",
+      "projectUniqueName": "C:\\Users\\johan\\OneDrive\\Desktop\\test\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt.csproj",
       "projectName": "FalknerCountyJuvenileCourt",
-      "projectPath": "C:\\Users\\johan\\OneDrive\\Desktop\\Database&WebSystems\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt.csproj",
+      "projectPath": "C:\\Users\\johan\\OneDrive\\Desktop\\test\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt.csproj",
       "packagesPath": "C:\\Users\\johan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\johan\\OneDrive\\Desktop\\Database&WebSystems\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt\\obj\\",
+      "outputPath": "C:\\Users\\johan\\OneDrive\\Desktop\\test\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\johan\\AppData\\Roaming\\NuGet\\NuGet.Config",

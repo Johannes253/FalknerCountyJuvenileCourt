@@ -1,6 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-
-
 namespace FalknerCountyJuvenileCourt.Models
 {
     public class CrimeResult
