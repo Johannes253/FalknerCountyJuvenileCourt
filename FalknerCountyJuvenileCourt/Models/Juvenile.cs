@@ -13,7 +13,7 @@ namespace FalknerCountyJuvenileCourt.Models
 
 
         public Race Race { get; set; }
-        public RiskAssessment RiskAssessment { get; set; }
+       // public RiskAssessment RiskAssessment { get; set; }
         public ICollection<CrimeResult> CrimeResults { get; set; }
         
     }

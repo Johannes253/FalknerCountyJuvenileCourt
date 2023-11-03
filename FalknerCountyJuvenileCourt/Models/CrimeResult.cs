@@ -16,7 +16,7 @@ namespace FalknerCountyJuvenileCourt.Models
 
         public Juvenile Juvenile { get; set; }
         public Crime Crime { get; set; }
-        public Schools School { get; set; }
+        public School School { get; set; }
         public ProsFilingDesc ProsFilingDesc { get; set; }
         public IntakeDesc IntakeDesc { get; set; }
         

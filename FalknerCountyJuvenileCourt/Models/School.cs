@@ -1,12 +1,12 @@
 using System.ComponentModel.DataAnnotations;
 namespace FalknerCountyJuvenileCourt.Models
 {
-    public class Schools
+    public class School
     {
         [Key]
-        public int SchoolID { get; set; }
+        public int School_ID { get; set; }
         public string SchoolName { get; set; }
 
-        public ICollection<CrimeResult> CrimeResult { get; set; }
+        public ICollection<Juvenile> Juveniles { get; set; }
     }
 }

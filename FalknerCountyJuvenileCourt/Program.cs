@@ -1,8 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using FalknerCountyJuvenileCourt.Data;
-using Microsoft.EntityFrameworkCore;
-using FalknerCountyJuvenileCourt.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -32,7 +30,7 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
 
-    var context = services.GetRequiredService<SchoolContext>();
+    var context = services.GetRequiredService<CourtContext>();
     context.Database.EnsureCreated();
     // DbInitializer.Initialize(context);
 }
