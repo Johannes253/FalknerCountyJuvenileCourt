@@ -20,7 +20,7 @@ namespace FalknerCountyJuvenileCourt.Data
         public DbSet<Juvenile> Juveniles { get; set; }
         public DbSet<ProsFilingDesc> ProsFilingDescs { get; set; }
         public DbSet<Race> Race { get; set; }
-        public DbSet<RiskAssesment> RiskAssesments { get; set; }
+        public DbSet<RiskAssessment> RiskAssesments { get; set; }
         public DbSet<School> Schools { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,7 +30,7 @@ namespace FalknerCountyJuvenileCourt.Data
             modelBuilder.Entity<Juvenile>().ToTable("Juveniles");
             modelBuilder.Entity<ProsFilingDesc>().ToTable("ProsFilingDesc");
             modelBuilder.Entity<Race>().ToTable("Race");
-            modelBuilder.Entity<RiskAssesment>().ToTable("RiskAssesment");
+            modelBuilder.Entity<RiskAssessment>().ToTable("RiskAssesment");
             modelBuilder.Entity<School>().ToTable("School");
         }
     }
