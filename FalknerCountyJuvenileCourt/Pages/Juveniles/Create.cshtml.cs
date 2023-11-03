@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using FalknerCountyJuvenileCourt.Data;
 using FalknerCountyJuvenileCourt.Models;
 
-namespace FalknerCountyJuvenileCourt.Pages.Juvenile
+namespace FalknerCountyJuvenileCourt.Pages.Juveniles
 {
     public class CreateModel : PageModel
     {
@@ -32,12 +32,12 @@ namespace FalknerCountyJuvenileCourt.Pages.Juvenile
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Juvenile == null || Juvenile == null)
+          if (!ModelState.IsValid || _context.Juveniles == null || Juvenile == null)
             {
                 return Page();
             }
 
-            _context.Juvenile.Add(Juvenile);
+            _context.Juveniles.Add(Juvenile);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

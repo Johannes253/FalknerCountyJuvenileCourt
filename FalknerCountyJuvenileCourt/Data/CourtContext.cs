@@ -27,7 +27,7 @@ namespace FalknerCountyJuvenileCourt.Data
             modelBuilder.Entity<Crime>().ToTable("Crime");
             modelBuilder.Entity<CrimeResult>().ToTable("CrimeResult");
             modelBuilder.Entity<IntakeDesc>().ToTable("IntakeDesc");
-            modelBuilder.Entity<Juveniles>().ToTable("Juveniles");
+            modelBuilder.Entity<Juvenile>().ToTable("Juveniles");
             modelBuilder.Entity<ProsFilingDesc>().ToTable("ProsFilingDesc");
             modelBuilder.Entity<Race>().ToTable("Race");
             modelBuilder.Entity<RiskAssesment>().ToTable("RiskAssesment");

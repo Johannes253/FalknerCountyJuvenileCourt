@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using FalknerCountyJuvenileCourt.Data;
 using FalknerCountyJuvenileCourt.Models;
 
-namespace FalknerCountyJuvenileCourt.Pages.Juvenile
+namespace FalknerCountyJuvenileCourt.Pages.Juveniles
 {
     public class IndexModel : PageModel
     {
@@ -23,9 +23,9 @@ namespace FalknerCountyJuvenileCourt.Pages.Juvenile
 
         public async Task OnGetAsync()
         {
-            if (_context.Juvenile != null)
+            if (_context.Juveniles != null)
             {
-                Juvenile = await _context.Juvenile
+                Juvenile = await _context.Juveniles
                 .Include(j => j.Race).ToListAsync();
             }
         }

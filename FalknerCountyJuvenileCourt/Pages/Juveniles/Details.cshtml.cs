@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using FalknerCountyJuvenileCourt.Data;
 using FalknerCountyJuvenileCourt.Models;
 
-namespace FalknerCountyJuvenileCourt.Pages.Juvenile
+namespace FalknerCountyJuvenileCourt.Pages.Juveniles
 {
     public class DetailsModel : PageModel
     {
@@ -23,12 +23,12 @@ namespace FalknerCountyJuvenileCourt.Pages.Juvenile
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Juvenile == null)
+            if (id == null || _context.Juveniles == null)
             {
                 return NotFound();
             }
 
-            var juvenile = await _context.Juvenile.FirstOrDefaultAsync(m => m.JuvenileID == id);
+            var juvenile = await _context.Juveniles.FirstOrDefaultAsync(m => m.JuvenileID == id);
             if (juvenile == null)
             {
                 return NotFound();
