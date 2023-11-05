@@ -11569,26 +11569,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\johan\\.nuget\\packages\\": {}
+    "C:\\Users\\Justi\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\johan\\OneDrive\\Desktop\\Database&WebSystems\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt.csproj",
+      "projectUniqueName": "C:\\Users\\Justi\\Desktop\\School Documents\\Databases and Web Systems\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt.csproj",
       "projectName": "FalknerCountyJuvenileCourt",
-      "projectPath": "C:\\Users\\johan\\OneDrive\\Desktop\\Database&WebSystems\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt.csproj",
-      "packagesPath": "C:\\Users\\johan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\johan\\OneDrive\\Desktop\\Database&WebSystems\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt\\obj\\",
+      "projectPath": "C:\\Users\\Justi\\Desktop\\School Documents\\Databases and Web Systems\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt.csproj",
+      "packagesPath": "C:\\Users\\Justi\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Justi\\Desktop\\School Documents\\Databases and Web Systems\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\johan\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Justi\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

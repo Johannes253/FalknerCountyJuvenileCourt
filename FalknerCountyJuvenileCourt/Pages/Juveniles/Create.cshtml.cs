@@ -10,7 +10,7 @@ using FalknerCountyJuvenileCourt.Models;
 
 namespace FalknerCountyJuvenileCourt.Pages.Juveniles
 {
-    public class CreateModel : PageModel
+    public class CreateModel : JuvenileNamePageModel
     {
         private readonly FalknerCountyJuvenileCourt.Data.CourtContext _context;
 
@@ -19,9 +19,10 @@ namespace FalknerCountyJuvenileCourt.Pages.Juveniles
             _context = context;
         }
 
-        public IActionResult OnGet()
-        {
-        ViewData["RaceID"] = new SelectList(_context.Set<Race>(), "RaceID", "RaceID");
+        public IActionResult OnGet() {
+            PopulateRacesDropDownList(_context);
+            PopulateGendersDropDownList(_context);
+            PopulateRisksDropDownList(_context);
             return Page();
         }
 
@@ -30,17 +31,23 @@ namespace FalknerCountyJuvenileCourt.Pages.Juveniles
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
-        {
-          if (!ModelState.IsValid || _context.Juveniles == null || Juvenile == null)
-            {
-                return Page();
-            }
+      public async Task<IActionResult> OnPostAsync() {
+         var emptyJuvenile = new Juvenile();
 
-            _context.Juveniles.Add(Juvenile);
+         if (await TryUpdateModelAsync<Juvenile>(
+            emptyJuvenile,
+            "juvenile",   // Prefix for form value.
+            s => s.Age, s => s.Race, s => s.Gender, s => s.Repeat, s => s.Risk))
+         {
+            _context.Juveniles.Add(emptyJuvenile);
             await _context.SaveChangesAsync();
-
             return RedirectToPage("./Index");
-        }
+         }
+
+         PopulateRacesDropDownList(_context, emptyJuvenile.Race);
+         PopulateGendersDropDownList(_context, emptyJuvenile.Gender);
+         PopulateRisksDropDownList(_context, emptyJuvenile.Risk);
+         return Page();
+      }
     }
 }

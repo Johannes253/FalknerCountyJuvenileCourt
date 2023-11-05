@@ -2,57 +2,87 @@
 @model FalknerCountyJuvenileCourt.Pages.Juveniles.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Juveniles";
 }
 
-<h1>Index</h1>
+<h1>Juveniles</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by ID:
+            <input type="text" name="SearchID" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-page="./Index">Back to full List</a>
+        </p>
+    </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Juvenile[0].Risk_Assessment_ID)
+               <a asp-page="./Index" asp-route-sortOrder="@Model.IDSort">
+                  @Html.DisplayNameFor(model => model.Juveniles[0].ID)
+               </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Juvenile[0].Age)
+               <a asp-page="./Index" asp-route-sortOrder="@Model.AgeSort">
+                  @Html.DisplayNameFor(model => model.Juveniles[0].Age)
+               </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Juvenile[0].IsMale)
+               <a asp-page="./Index" asp-route-sortOrder="@Model.RaceSort">
+                  @Html.DisplayNameFor(model => model.Juveniles[0].Race)
+               </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Juvenile[0].RepeatOffender)
+               <a asp-page="./Index" asp-route-sortOrder="@Model.GenderSort">
+                  @Html.DisplayNameFor(model => model.Juveniles[0].Gender)
+               </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Juvenile[0].Race)
+               <a asp-page="./Index" asp-route-sortOrder="@Model.RiskSort">
+                  @Html.DisplayNameFor(model => model.Juveniles[0].Risk)
+               </a>
+            </th>
+            <th>
+               <a asp-page="./Index" asp-route-sortOrder="@Model.RepeatSort">
+                  @Html.DisplayNameFor(model => model.Juveniles[0].Repeat)
+               </a>
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Juvenile) {
+@foreach (var item in Model.Juveniles) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Risk_Assessment_ID)
+                @Html.DisplayFor(modelItem => item.ID)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Age)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IsMale)
+                @Html.DisplayFor(modelItem => item.Race.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.RepeatOffender)
+                @Html.DisplayFor(modelItem => item.Gender.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Race.RaceID)
+                @Html.DisplayFor(modelItem => item.Risk.Name)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.JuvenileID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.JuvenileID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.JuvenileID">Delete</a>
+                @Html.DisplayFor(modelItem => item.Repeat)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
             </td>
         </tr>
 }

@@ -3,18 +3,18 @@ using System.ComponentModel.DataAnnotations;
 namespace FalknerCountyJuvenileCourt.Models
 {  
 
-   // public enum CEnum {
-   //    Battery, Etc
-   // }
+   public enum GEnum {
+      Male, Female
+   }
 
 
-   public class School
+   public class Gender
    {
    [Key]
    public int ID { get; set; }
    
    [Required]
-   public string Name { get; set; }
+   public GEnum Name { get; set; }
 
    public ICollection<Juvenile> Juveniles {get;set;}
 

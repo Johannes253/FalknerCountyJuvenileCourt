@@ -15,23 +15,25 @@ namespace FalknerCountyJuvenileCourt.Data
         }
 
         public DbSet<Crime> Crimes { get; set; }
-        public DbSet<CrimeResult> CrimeResults { get; set; }
-        public DbSet<IntakeDesc> IntakeDescs { get; set; }
+        public DbSet<CrimeType> CrimeTypes { get; set; }
+        public DbSet<IntakeDecision> IntakeDecisions { get; set; }
         public DbSet<Juvenile> Juveniles { get; set; }
-        public DbSet<ProsFilingDesc> ProsFilingDescs { get; set; }
-        public DbSet<Race> Race { get; set; }
-        public DbSet<RiskAssessment> RiskAssesments { get; set; }
+        public DbSet<FilingDecision> FilingDecisions { get; set; }
+        public DbSet<Race> Races { get; set; }
+        public DbSet<Gender> Genders { get; set; }
+        public DbSet<Risk> Risks { get; set; }
         public DbSet<School> Schools { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Crime>().ToTable("Crime");
-            modelBuilder.Entity<CrimeResult>().ToTable("CrimeResult");
-            modelBuilder.Entity<IntakeDesc>().ToTable("IntakeDesc");
+            modelBuilder.Entity<CrimeType>().ToTable("CrimeType");
+            modelBuilder.Entity<IntakeDecision>().ToTable("IntakeDecision");
             modelBuilder.Entity<Juvenile>().ToTable("Juveniles");
-            modelBuilder.Entity<ProsFilingDesc>().ToTable("ProsFilingDesc");
+            modelBuilder.Entity<FilingDecision>().ToTable("FilingDecision");
             modelBuilder.Entity<Race>().ToTable("Race");
-            modelBuilder.Entity<RiskAssessment>().ToTable("RiskAssesment");
+            modelBuilder.Entity<Risk>().ToTable("Risk");
             modelBuilder.Entity<School>().ToTable("School");
+            modelBuilder.Entity<Gender>().ToTable("Gender");
         }
     }
 }
