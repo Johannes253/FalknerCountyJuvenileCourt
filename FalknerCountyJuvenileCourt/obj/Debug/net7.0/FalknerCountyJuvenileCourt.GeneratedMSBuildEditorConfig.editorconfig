@@ -16,6 +16,26 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /Users/justingrubbs/DatabasesAndWebSystems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt
 build_property._RazorSourceGeneratorDebug = 
 
+[/Users/justingrubbs/DatabasesAndWebSystems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Crimes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ3JpbWVzL0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/justingrubbs/DatabasesAndWebSystems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Crimes/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ3JpbWVzL0RlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/justingrubbs/DatabasesAndWebSystems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Crimes/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ3JpbWVzL0RldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/justingrubbs/DatabasesAndWebSystems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Crimes/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ3JpbWVzL0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/justingrubbs/DatabasesAndWebSystems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Crimes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ3JpbWVzL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/justingrubbs/DatabasesAndWebSystems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FalknerCountyJuvenileCourt.Models
 {
@@ -23,6 +24,7 @@ namespace FalknerCountyJuvenileCourt.Models
       public Risk? Risk {get; set; }
 
       [Required]
+      [Display(Name = "Repeat Offender")]
       public bool Repeat { get; set; }
 
       public ICollection<Crime> Crimes { get; set; }
