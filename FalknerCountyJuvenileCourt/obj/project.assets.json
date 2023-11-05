@@ -11569,19 +11569,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Justi\\.nuget\\packages\\": {}
+    "/Users/justingrubbs/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Justi\\Desktop\\School Documents\\Databases and Web Systems\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt.csproj",
+      "projectUniqueName": "/Users/justingrubbs/DatabasesAndWebSystems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt.csproj",
       "projectName": "FalknerCountyJuvenileCourt",
-      "projectPath": "C:\\Users\\Justi\\Desktop\\School Documents\\Databases and Web Systems\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt.csproj",
-      "packagesPath": "C:\\Users\\Justi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Justi\\Desktop\\School Documents\\Databases and Web Systems\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt\\obj\\",
+      "projectPath": "/Users/justingrubbs/DatabasesAndWebSystems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt.csproj",
+      "packagesPath": "/Users/justingrubbs/.nuget/packages/",
+      "outputPath": "/Users/justingrubbs/DatabasesAndWebSystems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Justi\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/justingrubbs/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -11653,7 +11653,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.401/RuntimeIdentifierGraph.json"
       }
     }
   }

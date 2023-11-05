@@ -31,7 +31,10 @@ namespace FalknerCountyJuvenileCourt.Pages.Juveniles
             }
 
             Juvenile = await _context.Juveniles
-                .Include(c => c.Race).FirstOrDefaultAsync(m => m.ID == id);
+               .Include(c => c.Race)
+               .Include(c => c.Gender)
+               .Include(c => c.Risk)
+               .FirstOrDefaultAsync(m => m.ID == id);
 
             if (Juvenile == null)
             {
@@ -40,6 +43,8 @@ namespace FalknerCountyJuvenileCourt.Pages.Juveniles
 
             // Select current DepartmentID.
             PopulateRacesDropDownList(_context, Juvenile.Race.ID);
+            PopulateGendersDropDownList(_context, Juvenile.Gender.ID);
+            PopulateRisksDropDownList(_context, Juvenile.Risk.ID);
             return Page();
         }
 
@@ -51,23 +56,29 @@ namespace FalknerCountyJuvenileCourt.Pages.Juveniles
             }
 
             var raceToUpdate = await _context.Races.FindAsync(id);
+            var genderToUpdate = await _context.Genders.FindAsync(id);
+            var riskToUpdate = await _context.Risks.FindAsync(id);
 
-            if (raceToUpdate == null)
-            {
-                return NotFound();
+            if (raceToUpdate == null || genderToUpdate == null || riskToUpdate == null) {
+               return NotFound();
             }
 
-            if (await TryUpdateModelAsync<Race>(
-                 raceToUpdate,
-                 "race",   // Prefix for form value.
-                   c => c.ID, c => c.Name))
-            {
-                await _context.SaveChangesAsync();
-                return RedirectToPage("./Index");
+            if (await TryUpdateModelAsync<Race>(raceToUpdate,"race", c => c.ID, c => c.Name)) {
+               await _context.SaveChangesAsync();
+               return RedirectToPage("./Index");
+            }
+            if (await TryUpdateModelAsync<Gender>(genderToUpdate,"gender", c => c.ID, c => c.Name)) {
+               await _context.SaveChangesAsync();
+               return RedirectToPage("./Index");
+            }
+            if (await TryUpdateModelAsync<Risk>(riskToUpdate,"risk", c => c.ID, c => c.Name)) {
+               await _context.SaveChangesAsync();
+               return RedirectToPage("./Index");
             }
 
-            // Select DepartmentID if TryUpdateModelAsync fails.
             PopulateRacesDropDownList(_context, raceToUpdate.ID);
+            PopulateGendersDropDownList(_context, genderToUpdate.ID);
+            PopulateRisksDropDownList(_context, riskToUpdate.ID);
             return Page();
         }
     }

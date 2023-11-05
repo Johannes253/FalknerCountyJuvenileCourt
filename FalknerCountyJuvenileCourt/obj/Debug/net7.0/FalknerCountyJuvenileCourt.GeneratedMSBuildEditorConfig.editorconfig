@@ -9,57 +9,57 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = FalknerCountyJuvenileCourt
 build_property.RootNamespace = FalknerCountyJuvenileCourt
-build_property.ProjectDir = C:\Users\Justi\Desktop\School Documents\Databases and Web Systems\FalknerCountyJuvenileCourt\FalknerCountyJuvenileCourt\
+build_property.ProjectDir = /Users/justingrubbs/DatabasesAndWebSystems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Justi\Desktop\School Documents\Databases and Web Systems\FalknerCountyJuvenileCourt\FalknerCountyJuvenileCourt
+build_property.MSBuildProjectDirectory = /Users/justingrubbs/DatabasesAndWebSystems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Justi/Desktop/School Documents/Databases and Web Systems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+[/Users/justingrubbs/DatabasesAndWebSystems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Justi/Desktop/School Documents/Databases and Web Systems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
+[/Users/justingrubbs/DatabasesAndWebSystems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Justi/Desktop/School Documents/Databases and Web Systems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Juveniles/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSnV2ZW5pbGVzXENyZWF0ZS5jc2h0bWw=
+[/Users/justingrubbs/DatabasesAndWebSystems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Juveniles/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSnV2ZW5pbGVzL0NyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Justi/Desktop/School Documents/Databases and Web Systems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Juveniles/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSnV2ZW5pbGVzXERlbGV0ZS5jc2h0bWw=
+[/Users/justingrubbs/DatabasesAndWebSystems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Juveniles/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSnV2ZW5pbGVzL0RlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Justi/Desktop/School Documents/Databases and Web Systems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Juveniles/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSnV2ZW5pbGVzXERldGFpbHMuY3NodG1s
+[/Users/justingrubbs/DatabasesAndWebSystems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Juveniles/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSnV2ZW5pbGVzL0RldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Justi/Desktop/School Documents/Databases and Web Systems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Juveniles/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSnV2ZW5pbGVzXEVkaXQuY3NodG1s
+[/Users/justingrubbs/DatabasesAndWebSystems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Juveniles/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSnV2ZW5pbGVzL0VkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Justi/Desktop/School Documents/Databases and Web Systems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Juveniles/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSnV2ZW5pbGVzXEluZGV4LmNzaHRtbA==
+[/Users/justingrubbs/DatabasesAndWebSystems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Juveniles/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSnV2ZW5pbGVzL0luZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Justi/Desktop/School Documents/Databases and Web Systems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
+[/Users/justingrubbs/DatabasesAndWebSystems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Justi/Desktop/School Documents/Databases and Web Systems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Shared/_ValidationScriptsPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+[/Users/justingrubbs/DatabasesAndWebSystems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Justi/Desktop/School Documents/Databases and Web Systems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+[/Users/justingrubbs/DatabasesAndWebSystems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Justi/Desktop/School Documents/Databases and Web Systems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+[/Users/justingrubbs/DatabasesAndWebSystems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Justi/Desktop/School Documents/Databases and Web Systems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-d6feb80h3u
+[/Users/justingrubbs/DatabasesAndWebSystems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-qb0ema275u
