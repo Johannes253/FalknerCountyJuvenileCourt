@@ -26,32 +26,38 @@
     <thead>
         <tr>
             <th>
-               <a asp-page="./Index" asp-route-sortOrder="@Model.IDSort">
+               <a asp-page="./Index" asp-route-sortOrder="@Model.IDSort"
+                  asp-route-currentFilter="@Model.CurrentFilter">
                   @Html.DisplayNameFor(model => model.Juveniles[0].ID)
                </a>
             </th>
             <th>
-               <a asp-page="./Index" asp-route-sortOrder="@Model.AgeSort">
+               <a asp-page="./Index" asp-route-sortOrder="@Model.AgeSort"
+                  asp-route-currentFilter="@Model.CurrentFilter">
                   @Html.DisplayNameFor(model => model.Juveniles[0].Age)
                </a>
             </th>
             <th>
-               <a asp-page="./Index" asp-route-sortOrder="@Model.RaceSort">
+               <a asp-page="./Index" asp-route-sortOrder="@Model.RaceSort"
+                  asp-route-currentFilter="@Model.CurrentFilter">
                   @Html.DisplayNameFor(model => model.Juveniles[0].Race)
                </a>
             </th>
             <th>
-               <a asp-page="./Index" asp-route-sortOrder="@Model.GenderSort">
+               <a asp-page="./Index" asp-route-sortOrder="@Model.GenderSort"
+                  asp-route-currentFilter="@Model.CurrentFilter">
                   @Html.DisplayNameFor(model => model.Juveniles[0].Gender)
                </a>
             </th>
             <th>
-               <a asp-page="./Index" asp-route-sortOrder="@Model.RiskSort">
+               <a asp-page="./Index" asp-route-sortOrder="@Model.RiskSort"
+                  asp-route-currentFilter="@Model.CurrentFilter">
                   @Html.DisplayNameFor(model => model.Juveniles[0].Risk)
                </a>
             </th>
             <th>
-               <a asp-page="./Index" asp-route-sortOrder="@Model.RepeatSort">
+               <a asp-page="./Index" asp-route-sortOrder="@Model.RepeatSort"
+                  asp-route-currentFilter="@Model.CurrentFilter">
                   @Html.DisplayNameFor(model => model.Juveniles[0].Repeat)
                </a>
             </th>
@@ -88,3 +94,23 @@
 }
     </tbody>
 </table>
+
+@{
+    var prevDisabled = !Model.Juveniles.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Juveniles.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Juveniles.PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @prevDisabled">
+   Previous
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Juveniles.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @nextDisabled">
+   Next
+</a>

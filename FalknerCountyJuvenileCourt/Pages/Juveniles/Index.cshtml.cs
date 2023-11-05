@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using FalknerCountyJuvenileCourt.Data;
 using FalknerCountyJuvenileCourt.Models;
 
@@ -12,12 +13,14 @@ namespace FalknerCountyJuvenileCourt.Pages.Juveniles
 {
     public class IndexModel : PageModel
     {
-        private readonly FalknerCountyJuvenileCourt.Data.CourtContext _context;
+      private readonly FalknerCountyJuvenileCourt.Data.CourtContext _context;
 
-        public IndexModel(FalknerCountyJuvenileCourt.Data.CourtContext context)
-        {
-            _context = context;
-        }
+      private readonly IConfiguration Configuration;
+
+      public IndexModel(CourtContext context, IConfiguration configuration) {
+         _context = context;
+         Configuration = configuration;
+      }
 
 
       public string IDSort {get;set;}
@@ -29,15 +32,23 @@ namespace FalknerCountyJuvenileCourt.Pages.Juveniles
       public string CurrentSort {get;set;}
       public string CurrentFilter {get;set;}
 
-      public IList<Juvenile> Juveniles { get;set; } = default!;
+      public PaginatedList<Juvenile> Juveniles {get;set;}
 
-      public async Task OnGetAsync(string sortOrder, string searchID) {
+      public async Task OnGetAsync(string sortOrder, string searchID, string currentFilter, int? pageIndex) {
+         CurrentSort = sortOrder;
          IDSort     = String.IsNullOrEmpty(sortOrder) ? "id_desc" : "";
          AgeSort    = sortOrder == "Age" ? "age_desc" : "Age";
          RaceSort   = sortOrder == "Race" ? "race_desc" : "Race";
          GenderSort = sortOrder == "Gender" ? "gender_desc" : "Gender";
-         RiskSort   = sortOrder == "Risk" ? "risk" : "Risk";
+         RiskSort   = sortOrder == "Risk" ? "risk_desc" : "Risk";
          RepeatSort = sortOrder == "Repeat" ? "repeat_desc" : "Repeat";
+
+         if (searchID != null) {
+            pageIndex = 1;
+         }
+         else {
+            searchID = currentFilter;
+         }
 
          CurrentFilter = searchID;
 
@@ -85,7 +96,9 @@ namespace FalknerCountyJuvenileCourt.Pages.Juveniles
                juvenilesIQ = juvenilesIQ.OrderBy(s => s.ID);
                break;
          }
-         Juveniles = await juvenilesIQ.AsNoTracking().ToListAsync();
+         var pageSize = Configuration.GetValue("PageSize", 4);
+         Juveniles = await PaginatedList<Juvenile>.CreateAsync(
+            juvenilesIQ.AsNoTracking(), pageIndex ?? 1, pageSize);
         }
     }
 }
