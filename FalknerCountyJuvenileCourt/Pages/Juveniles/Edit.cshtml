@@ -13,30 +13,37 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Juvenile.JuvenileID" />
+            <input type="hidden" asp-for="Juvenile.ID" />
             <div class="form-group">
-                <label asp-for="Juvenile.RaceID" class="control-label"></label>
-                <select asp-for="Juvenile.RaceID" class="form-control" asp-items="ViewBag.RaceID"></select>
-                <span asp-validation-for="Juvenile.RaceID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Juvenile.Risk_Assessment_ID" class="control-label"></label>
-                <input asp-for="Juvenile.Risk_Assessment_ID" class="form-control" />
-                <span asp-validation-for="Juvenile.Risk_Assessment_ID" class="text-danger"></span>
+                <label asp-for="Juvenile.ID" class="control-label"></label>
+                <div>@Html.DisplayFor(model => model.Juvenile.ID)</div>
             </div>
             <div class="form-group">
                 <label asp-for="Juvenile.Age" class="control-label"></label>
                 <input asp-for="Juvenile.Age" class="form-control" />
                 <span asp-validation-for="Juvenile.Age" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Juvenile.IsMale" /> @Html.DisplayNameFor(model => model.Juvenile.IsMale)
-                </label>
+            <div class="form-group">
+                <label asp-for="Juvenile.Race" class="control-label"></label>
+                <select asp-for="Juvenile.Race.ID" class="form-control" 
+                        asp-items="@Model.RaceNameSL"></select>
+                <span asp-validation-for="Juvenile.Race.ID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Juvenile.Gender" class="control-label"></label>
+                <select asp-for="Juvenile.Gender.ID" class="form-control" 
+                        asp-items="@Model.GenderNameSL"></select>
+                <span asp-validation-for="Juvenile.Gender.ID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Juvenile.Risk" class="control-label"></label>
+                <select asp-for="Juvenile.Risk.ID" class="form-control" 
+                        asp-items="@Model.RiskNameSL"></select>
+                <span asp-validation-for="Juvenile.Risk.ID" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Juvenile.RepeatOffender" /> @Html.DisplayNameFor(model => model.Juvenile.RepeatOffender)
+                    <input class="form-check-input" asp-for="Juvenile.Repeat" /> @Html.DisplayNameFor(model => model.Juvenile.Repeat)
                 </label>
             </div>
             <div class="form-group">

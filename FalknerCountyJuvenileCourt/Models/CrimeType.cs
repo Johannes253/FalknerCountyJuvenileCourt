@@ -8,15 +8,15 @@ namespace FalknerCountyJuvenileCourt.Models
    // }
 
 
-   public class School
+   public class CrimeType
    {
    [Key]
    public int ID { get; set; }
    
    [Required]
-   public string Name { get; set; }
+   public string Type { get; set; }
 
-   public ICollection<Juvenile> Juveniles {get;set;}
+   public ICollection<Crime> Crimes {get; set;}
 
    }
 }

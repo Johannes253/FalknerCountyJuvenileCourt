@@ -11,7 +11,7 @@ using FalknerCountyJuvenileCourt.Models;
 
 namespace FalknerCountyJuvenileCourt.Pages.Juveniles
 {
-    public class EditModel : PageModel
+    public class EditModel : JuvenileNamePageModel
     {
         private readonly FalknerCountyJuvenileCourt.Data.CourtContext _context;
 
@@ -25,54 +25,61 @@ namespace FalknerCountyJuvenileCourt.Pages.Juveniles
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Juveniles == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var juvenile =  await _context.Juveniles.FirstOrDefaultAsync(m => m.JuvenileID == id);
-            if (juvenile == null)
+            Juvenile = await _context.Juveniles
+               .Include(c => c.Race)
+               .Include(c => c.Gender)
+               .Include(c => c.Risk)
+               .FirstOrDefaultAsync(m => m.ID == id);
+
+            if (Juvenile == null)
             {
                 return NotFound();
             }
-            Juvenile = juvenile;
-           ViewData["RaceID"] = new SelectList(_context.Set<Race>(), "RaceID", "RaceID");
+
+            // Select current DepartmentID.
+            PopulateRacesDropDownList(_context, Juvenile.Race.ID);
+            PopulateGendersDropDownList(_context, Juvenile.Gender.ID);
+            PopulateRisksDropDownList(_context, Juvenile.Risk.ID);
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return Page();
+                return NotFound();
             }
 
-            _context.Attach(Juvenile).State = EntityState.Modified;
+            var raceToUpdate = await _context.Races.FindAsync(id);
+            var genderToUpdate = await _context.Genders.FindAsync(id);
+            var riskToUpdate = await _context.Risks.FindAsync(id);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!JuvenileExists(Juvenile.JuvenileID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+            if (raceToUpdate == null || genderToUpdate == null || riskToUpdate == null) {
+               return NotFound();
             }
 
-            return RedirectToPage("./Index");
-        }
+            if (await TryUpdateModelAsync<Race>(raceToUpdate,"race", c => c.ID, c => c.Name)) {
+               await _context.SaveChangesAsync();
+               return RedirectToPage("./Index");
+            }
+            if (await TryUpdateModelAsync<Gender>(genderToUpdate,"gender", c => c.ID, c => c.Name)) {
+               await _context.SaveChangesAsync();
+               return RedirectToPage("./Index");
+            }
+            if (await TryUpdateModelAsync<Risk>(riskToUpdate,"risk", c => c.ID, c => c.Name)) {
+               await _context.SaveChangesAsync();
+               return RedirectToPage("./Index");
+            }
 
-        private bool JuvenileExists(int id)
-        {
-          return (_context.Juveniles?.Any(e => e.JuvenileID == id)).GetValueOrDefault();
+            PopulateRacesDropDownList(_context, raceToUpdate.ID);
+            PopulateGendersDropDownList(_context, genderToUpdate.ID);
+            PopulateRisksDropDownList(_context, riskToUpdate.ID);
+            return Page();
         }
     }
 }
