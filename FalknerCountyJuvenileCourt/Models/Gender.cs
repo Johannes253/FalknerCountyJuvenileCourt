@@ -8,15 +8,14 @@ namespace FalknerCountyJuvenileCourt.Models
    }
 
 
-   public class Gender
-   {
-   [Key]
-   public int ID { get; set; }
-   
-   [Required]
-   public GEnum Name { get; set; }
+   public class Gender {
+      [Key]
+      public int ID { get; set; }
+      
+      [Required]
+      public GEnum Name { get; set; }
 
-   public ICollection<Juvenile> Juveniles {get;set;}
+      public ICollection<Juvenile> Juveniles {get;set;}
 
    }
 }
