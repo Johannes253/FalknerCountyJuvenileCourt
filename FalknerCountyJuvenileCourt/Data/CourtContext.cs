@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore; 
 using FalknerCountyJuvenileCourt.Models;
 
 namespace FalknerCountyJuvenileCourt.Data {
-   public class CourtContext : DbContext {
-      public CourtContext (DbContextOptions<CourtContext> options)
-         : base(options)
-      {
-      }
+  public class CourtContext : IdentityDbContext<IdentityUser>
+{
+    public CourtContext(DbContextOptions<CourtContext> options)
+        : base(options)
+    {
+    }
 
       public DbSet<Crime> Crimes { get; set; }
       public DbSet<CrimeType> CrimeTypes { get; set; }
