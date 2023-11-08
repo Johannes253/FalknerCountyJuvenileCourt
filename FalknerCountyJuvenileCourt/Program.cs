@@ -17,11 +17,12 @@ builder.Services.AddDbContext<CourtContext>(options =>
     options.UseSqlite(connectionString);
 });
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+/*builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
     options.SignIn.RequireConfirmedAccount = true;
 })
 .AddEntityFrameworkStores<CourtContext>();
+*/
 
 var options = new DbContextOptionsBuilder<CourtContext>()
     .UseSqlite(connectionString)

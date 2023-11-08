@@ -25,6 +25,7 @@ namespace FalknerCountyJuvenileCourt.Data {
       public DbSet<Risk> Risks { get; set; }
       public DbSet<School> Schools { get; set; }
       protected override void OnModelCreating(ModelBuilder modelBuilder) {
+         base.OnModelCreating(modelBuilder);
          modelBuilder.Entity<Crime>().ToTable("Crime");
          modelBuilder.Entity<CrimeType>().ToTable("CrimeType");
          modelBuilder.Entity<IntakeDecision>().ToTable("IntakeDecision");
