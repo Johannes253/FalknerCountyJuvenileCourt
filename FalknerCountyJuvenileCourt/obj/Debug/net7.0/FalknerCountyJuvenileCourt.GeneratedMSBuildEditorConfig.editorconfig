@@ -16,6 +16,14 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\johan\OneDrive\Desktop\test\FalknerCountyJuvenileCourt\FalknerCountyJuvenileCourt
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/johan/OneDrive/Desktop/test/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/johan/OneDrive/Desktop/test/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Areas/Identity/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/johan/OneDrive/Desktop/test/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Crimes/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3JpbWVzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -66,6 +74,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/johan/OneDrive/Desktop/test/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/johan/OneDrive/Desktop/test/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/johan/OneDrive/Desktop/test/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/Pages/Shared/_ValidationScriptsPartial.cshtml]

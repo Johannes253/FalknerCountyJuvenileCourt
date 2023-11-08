@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using FalknerCountyJuvenileCourt.Data;
+using FalknerCountyJuvenileCourt.Areas.Identity.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
