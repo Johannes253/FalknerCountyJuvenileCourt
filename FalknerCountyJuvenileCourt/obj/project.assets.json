@@ -12644,26 +12644,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\johan\\.nuget\\packages\\": {}
+    "/Users/justingrubbs/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\johan\\OneDrive\\Desktop\\test\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt.csproj",
+      "projectUniqueName": "/Users/justingrubbs/DatabasesAndWebSystems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt.csproj",
       "projectName": "FalknerCountyJuvenileCourt",
-      "projectPath": "C:\\Users\\johan\\OneDrive\\Desktop\\test\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt.csproj",
-      "packagesPath": "C:\\Users\\johan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\johan\\OneDrive\\Desktop\\test\\FalknerCountyJuvenileCourt\\FalknerCountyJuvenileCourt\\obj\\",
+      "projectPath": "/Users/justingrubbs/DatabasesAndWebSystems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt.csproj",
+      "packagesPath": "/Users/justingrubbs/.nuget/packages/",
+      "outputPath": "/Users/justingrubbs/DatabasesAndWebSystems/FalknerCountyJuvenileCourt/FalknerCountyJuvenileCourt/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\johan\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/justingrubbs/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -12742,7 +12740,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.401/RuntimeIdentifierGraph.json"
       }
     }
   }
