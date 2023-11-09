@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using FalknerCountyJuvenileCourt.Data;
 using FalknerCountyJuvenileCourt.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FalknerCountyJuvenileCourt.Pages.Crimes
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly FalknerCountyJuvenileCourt.Data.CourtContext _context;

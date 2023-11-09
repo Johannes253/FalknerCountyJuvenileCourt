@@ -2,12 +2,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FalknerCountyJuvenileCourt.Models
 {  
-
-   // public enum CEnum {
-   //    Battery, Etc
-   // }
-
-
    public class School
    {
    [Key]
