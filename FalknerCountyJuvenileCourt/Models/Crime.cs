@@ -8,14 +8,14 @@ namespace FalknerCountyJuvenileCourt.Models
    [Key]
    public int ID { get; set; }
 
-   public int CrimeTypeID {get;set;}
+   public int OffenseID {get;set;}
    [Required]
    [Display(Name = "Offense")]
-   public CrimeType Name { get; set; }
+   public Offense Offense { get; set; }
 
    public int FilingDecisionID {get;set;}
    [Required]
-   [Display(Name = "Prosecutor Filing Decision")]
+   [Display(Name = "Filing Decision")]
    public FilingDecision FilingDecision { get; set; }
 
    public int IntakeDecisionID {get;set;}
@@ -36,6 +36,7 @@ namespace FalknerCountyJuvenileCourt.Models
    public bool DrugCourt { get; set; }
 
    [Required]
+   [DataType(DataType.Date)]
    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
    public DateTime Date { get; set; }
 

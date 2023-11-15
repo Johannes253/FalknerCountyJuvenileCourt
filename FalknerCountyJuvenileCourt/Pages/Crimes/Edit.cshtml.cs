@@ -11,7 +11,7 @@ using FalknerCountyJuvenileCourt.Models;
 
 namespace FalknerCountyJuvenileCourt.Pages.Crimes
 {
-    public class EditModel : PageModel
+    public class EditModel : CrimeNamePageModel
     {
         private readonly FalknerCountyJuvenileCourt.Data.CourtContext _context;
 
@@ -25,58 +25,71 @@ namespace FalknerCountyJuvenileCourt.Pages.Crimes
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Crimes == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var crime =  await _context.Crimes.FirstOrDefaultAsync(m => m.ID == id);
-            if (crime == null)
+            Crime = await _context.Crimes
+               .Include(c => c.Juvenile)
+               .Include(c => c.Offense)
+               .Include(c => c.IntakeDecision)
+               .Include(c => c.FilingDecision)
+               .Include(c => c.School)
+               .FirstOrDefaultAsync(m => m.ID == id);
+
+            if (Crime == null)
             {
                 return NotFound();
             }
-            Crime = crime;
-           ViewData["FilingDecisionID"] = new SelectList(_context.FilingDecisions, "ID", "ID");
-           ViewData["IntakeDecisionID"] = new SelectList(_context.IntakeDecisions, "ID", "ID");
-           ViewData["JuvenileID"] = new SelectList(_context.Juveniles, "ID", "ID");
-           ViewData["CrimeTypeID"] = new SelectList(_context.CrimeTypes, "ID", "Type");
-           ViewData["SchoolID"] = new SelectList(_context.Schools, "ID", "Name");
+
+            PopulateOffensesDropDownList(_context, Crime.Offense.ID);
+            PopulateIntakeDropDownList(_context, Crime.IntakeDecision.ID);
+            PopulateFilingDropDownList(_context, Crime.FilingDecision.ID);
+            PopulateSchoolDropDownList(_context, Crime.School.ID);
             return Page();
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return Page();
+                return NotFound();
             }
 
-            _context.Attach(Crime).State = EntityState.Modified;
+            var offenseToUpdate = await _context.Offenses.FindAsync(id);
+            var intakeToUpdate = await _context.IntakeDecisions.FindAsync(id);
+            var filingToUpdate = await _context.FilingDecisions.FindAsync(id);
+            var schoolToUpdate = await _context.Schools.FindAsync(id);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CrimeExists(Crime.ID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+            if (offenseToUpdate == null || intakeToUpdate == null || filingToUpdate == null || schoolToUpdate == null) {
+               return NotFound();
             }
 
-            return RedirectToPage("./Index");
-        }
+            if (await TryUpdateModelAsync<Offense>(offenseToUpdate,"offense", c => c.ID, c => c.Name)) {
+               await _context.SaveChangesAsync();
+               return RedirectToPage("./Index");
+            }
+            if (await TryUpdateModelAsync<IntakeDecision>(intakeToUpdate,"intake decision?", c => c.ID, c => c.Name)) {
+               await _context.SaveChangesAsync();
+               return RedirectToPage("./Index");
+            }
+            if (await TryUpdateModelAsync<FilingDecision>(filingToUpdate,"filing", c => c.ID, c => c.Name)) {
+               await _context.SaveChangesAsync();
+               return RedirectToPage("./Index");
+            }
+            if (await TryUpdateModelAsync<School>(schoolToUpdate,"school", c => c.ID, c => c.Name)) {
+               await _context.SaveChangesAsync();
+               return RedirectToPage("./Index");
+            }
 
-        private bool CrimeExists(int id)
-        {
-          return (_context.Crimes?.Any(e => e.ID == id)).GetValueOrDefault();
+            PopulateOffensesDropDownList(_context, offenseToUpdate.ID);
+            PopulateIntakeDropDownList(_context, intakeToUpdate.ID);
+            PopulateFilingDropDownList(_context, filingToUpdate.ID);
+            PopulateSchoolDropDownList(_context, schoolToUpdate.ID);
+            return Page();
         }
     }
 }

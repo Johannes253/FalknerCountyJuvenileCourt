@@ -199,15 +199,15 @@ namespace FalknerCountyJuvenileCourt.Data
             var intakeDecisions = new IntakeDecision[] {
                new IntakeDecision {
                   ID = 1,
-                  Name = IEnum.CiteAndRelease
+                  Name = "Cite and Release"
                },
                new IntakeDecision {
                   ID = 2,
-                  Name = IEnum.DetentionAlternative
+                  Name = "Detention Alternative"
                },
                new IntakeDecision {
                   ID = 3,
-                  Name = IEnum.Detention
+                  Name = "Detention"
                },
             };
 
@@ -216,11 +216,11 @@ namespace FalknerCountyJuvenileCourt.Data
             var genders = new Gender[] {
                new Gender {
                   ID = 1,
-                  Name = GEnum.Male
+                  Name = "Male"
                },
                new Gender {
                   ID = 2,
-                  Name = GEnum.Female 
+                  Name = "Female"
                },
             };
 
@@ -229,32 +229,32 @@ namespace FalknerCountyJuvenileCourt.Data
             var filingDecisions = new FilingDecision[] {
                new FilingDecision {
                   ID = 1,
-                  Name = FEnum.DelinquencyPetitionsFiled
+                  Name = "Delinquency Petition Filed"
                },
                new FilingDecision {
                   ID = 2,
-                  Name = FEnum.DivertedCases
+                  Name = "Case Diverted"
                },
                new FilingDecision {
                   ID = 3,
-                  Name = FEnum.NothingMore
+                  Name = "Nothing Further"
                },
             };
 
             context.AddRange(filingDecisions);
 
-            var offenses = new CrimeType[] {
-               new CrimeType {
+            var offenses = new Offense[] {
+               new Offense {
                   ID = 1,
-                  Type = "Fleeing"
+                  Name = "Fleeing"
                },
-               new CrimeType {
+               new Offense {
                   ID = 2,
-                  Type = "Battery 3rd"
+                  Name = "Battery 3rd"
                },
-               new CrimeType {
+               new Offense {
                   ID = 3,
-                  Type = "Disorderly Conduct"
+                  Name = "Disorderly Conduct"
                },
             };
 
@@ -263,7 +263,7 @@ namespace FalknerCountyJuvenileCourt.Data
             var c0 = new Crime {
                ID = 1,
                JuvenileID = 1,
-               CrimeTypeID = 3,
+               OffenseID = 3,
                FilingDecisionID = 1,
                IntakeDecisionID = 2,
                SchoolID = 1,
@@ -275,7 +275,7 @@ namespace FalknerCountyJuvenileCourt.Data
             var c1 = new Crime {
                ID = 2,
                JuvenileID = 3,
-               CrimeTypeID = 2,
+               OffenseID = 2,
                FilingDecisionID = 3,
                IntakeDecisionID = 3,
                SchoolID = 2,
@@ -287,7 +287,7 @@ namespace FalknerCountyJuvenileCourt.Data
             var c2 = new Crime {
                ID = 3,
                JuvenileID = 3,
-               CrimeTypeID = 2,
+               OffenseID = 2,
                FilingDecisionID = 3,
                IntakeDecisionID = 3,
                SchoolID = 2,

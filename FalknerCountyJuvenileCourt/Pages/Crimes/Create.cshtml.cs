@@ -10,7 +10,7 @@ using FalknerCountyJuvenileCourt.Models;
 
 namespace FalknerCountyJuvenileCourt.Pages.Crimes
 {
-    public class CreateModel : PageModel
+    public class CreateModel : CrimeNamePageModel
     {
         private readonly FalknerCountyJuvenileCourt.Data.CourtContext _context;
 
@@ -19,13 +19,12 @@ namespace FalknerCountyJuvenileCourt.Pages.Crimes
             _context = context;
         }
 
-        public IActionResult OnGet()
-        {
-        ViewData["FilingDecisionID"] = new SelectList(_context.FilingDecisions, "ID", "ID");
-        ViewData["IntakeDecisionID"] = new SelectList(_context.IntakeDecisions, "ID", "ID");
-        ViewData["JuvenileID"] = new SelectList(_context.Juveniles, "ID", "ID");
-        ViewData["CrimeTypeID"] = new SelectList(_context.CrimeTypes, "ID", "Type");
-        ViewData["SchoolID"] = new SelectList(_context.Schools, "ID", "Name");
+        public IActionResult OnGet() {
+            PopulateOffensesDropDownList(_context);
+            PopulateIntakeDropDownList(_context);
+            PopulateFilingDropDownList(_context);
+            PopulateSchoolDropDownList(_context);
+            PopulateJuvenilesDropDownList(_context);
             return Page();
         }
 
@@ -34,17 +33,26 @@ namespace FalknerCountyJuvenileCourt.Pages.Crimes
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
-        {
-          if (!ModelState.IsValid || _context.Crimes == null || Crime == null)
-            {
-                return Page();
-            }
+      public async Task<IActionResult> OnPostAsync() {
+         var emptyCrime = new Crime();
 
-            _context.Crimes.Add(Crime);
+         if (await TryUpdateModelAsync<Crime>(
+            emptyCrime,
+            "crime",   // Prefix for form value.
+            c => c.Offense, c => c.IntakeDecision, c => c.FilingDecision, c => c.School, c => c.Juvenile))
+         {
+            _context.Crimes.Add(emptyCrime);
             await _context.SaveChangesAsync();
-
             return RedirectToPage("./Index");
-        }
+         }
+
+
+         PopulateOffensesDropDownList(_context, emptyCrime.Offense);
+         PopulateIntakeDropDownList(_context, emptyCrime.IntakeDecision);
+         PopulateFilingDropDownList(_context, emptyCrime.FilingDecision);
+         PopulateSchoolDropDownList(_context, emptyCrime.School);
+         PopulateJuvenilesDropDownList(_context, emptyCrime.Juvenile);
+         return Page();
+      }
     }
 }

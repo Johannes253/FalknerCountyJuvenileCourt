@@ -27,19 +27,19 @@
             @Html.DisplayNameFor(model => model.Juvenile.Race)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Juvenile.Race)
+            @Html.DisplayFor(model => model.Juvenile.Race.Name)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Juvenile.Gender)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Juvenile.Gender)
+            @Html.DisplayFor(model => model.Juvenile.Gender.Name)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Juvenile.Risk)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Juvenile.Risk)
+            @Html.DisplayFor(model => model.Juvenile.Risk.Name)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Juvenile.Repeat)
@@ -53,15 +53,19 @@
         <dd class="col-sm-10">
             <table class="table">
                 <tr>
-                    <th>Crime</th>
+                    <th>Crime ID</th>
+                    @* <th>Offense</th> *@
                     <th>Date</th>
                 </tr>
                 @foreach (var item in Model.Juvenile.Crimes)
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Name.Type)
+                            @Html.DisplayFor(modelItem => item.ID)
                         </td>
+                        @* <td>
+                            @Html.DisplayFor(modelItem => item.OffenseID)
+                        </td> *@
                         <td>
                             @Html.DisplayFor(modelItem => item.Date)
                         </td>

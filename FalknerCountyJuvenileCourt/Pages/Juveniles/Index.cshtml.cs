@@ -100,8 +100,12 @@ namespace FalknerCountyJuvenileCourt.Pages.Juveniles
                break;
          }
          var pageSize = Configuration.GetValue("PageSize", 4);
-         Juveniles = await PaginatedList<Juvenile>.CreateAsync(
-            juvenilesIQ.AsNoTracking(), pageIndex ?? 1, pageSize);
+         Juveniles = await PaginatedList<Juvenile>.CreateAsync
+            (juvenilesIQ
+               .Include(j => j.Race)
+               .Include(j => j.Gender)
+               .Include(j => j.Risk)
+               .AsNoTracking(), pageIndex ?? 1, pageSize);
         }
     }
 }

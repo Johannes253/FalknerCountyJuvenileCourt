@@ -16,7 +16,7 @@ namespace FalknerCountyJuvenileCourt.Data {
     }
 
       public DbSet<Crime> Crimes { get; set; }
-      public DbSet<CrimeType> CrimeTypes { get; set; }
+      public DbSet<Offense> Offenses { get; set; }
       public DbSet<IntakeDecision> IntakeDecisions { get; set; }
       public DbSet<Juvenile> Juveniles { get; set; }
       public DbSet<FilingDecision> FilingDecisions { get; set; }
@@ -27,7 +27,7 @@ namespace FalknerCountyJuvenileCourt.Data {
       protected override void OnModelCreating(ModelBuilder modelBuilder) {
          base.OnModelCreating(modelBuilder);
          modelBuilder.Entity<Crime>().ToTable("Crime");
-         modelBuilder.Entity<CrimeType>().ToTable("CrimeType");
+         modelBuilder.Entity<Offense>().ToTable("Offense");
          modelBuilder.Entity<IntakeDecision>().ToTable("IntakeDecision");
          modelBuilder.Entity<Juvenile>().ToTable(nameof(Juveniles)); 
          modelBuilder.Entity<FilingDecision>().ToTable("FilingDecision");

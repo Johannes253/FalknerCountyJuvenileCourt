@@ -14,16 +14,19 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Crimes[0].ID)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Crimes[0].Juvenile)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Crimes[0].Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Crimes[0].FilingDecision)
+                @Html.DisplayNameFor(model => model.Crimes[0].Offense)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Crimes[0].IntakeDecision)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Crimes[0].FilingDecision)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Crimes[0].School)
@@ -44,16 +47,19 @@
 @foreach (var item in Model.Crimes) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Juvenile.ID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FilingDecision.Name)
+                @Html.DisplayFor(modelItem => item.Offense.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IntakeDecision.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FilingDecision.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.School.Name)

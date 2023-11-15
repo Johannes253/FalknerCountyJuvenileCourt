@@ -29,6 +29,9 @@ namespace FalknerCountyJuvenileCourt.Pages.Juveniles
             }
 
             var juvenile = await _context.Juveniles
+               .Include(s => s.Race)
+               .Include(s => s.Gender)
+               .Include(s => s.Risk)
                .Include(s => s.Crimes)
                .AsNoTracking()
                .FirstOrDefaultAsync(m => m.ID == id);

@@ -3,18 +3,14 @@ using System.ComponentModel.DataAnnotations;
 namespace FalknerCountyJuvenileCourt.Models
 {  
 
-   // public enum CEnum {
-   //    Battery, Etc
-   // }
 
-
-   public class CrimeType
+   public class Offense
    {
    [Key]
    public int ID { get; set; }
    
    [Required]
-   public string Type { get; set; }
+   public string Name { get; set; }
 
    public ICollection<Crime> Crimes {get; set;}
 
