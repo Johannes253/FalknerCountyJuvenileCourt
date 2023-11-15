@@ -12,7 +12,7 @@ namespace FalknerCountyJuvenileCourt.Models
    [Required]
    public string Name { get; set; }
 
-   public ICollection<Crime> Crimes {get; set;}
+   public ICollection<Crime>? Crimes {get; set;}
 
    }
 }

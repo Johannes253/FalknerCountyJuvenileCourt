@@ -26,22 +26,16 @@ namespace FalknerCountyJuvenileCourt.Data {
       public DbSet<School> Schools { get; set; }
       protected override void OnModelCreating(ModelBuilder modelBuilder) {
          base.OnModelCreating(modelBuilder);
+         modelBuilder.Entity<Juvenile>().ToTable(nameof(Juveniles));
+            // .HasOne(j => j.Crimes);
          modelBuilder.Entity<Crime>().ToTable("Crime");
          modelBuilder.Entity<Offense>().ToTable("Offense");
-         modelBuilder.Entity<IntakeDecision>().ToTable("IntakeDecision");
-         modelBuilder.Entity<Juvenile>().ToTable(nameof(Juveniles)); 
-         modelBuilder.Entity<FilingDecision>().ToTable("FilingDecision");
+         modelBuilder.Entity<IntakeDecision>().ToTable("Intake Decision");
+         modelBuilder.Entity<FilingDecision>().ToTable("Filing Decision");
          modelBuilder.Entity<Race>().ToTable("Race");
          modelBuilder.Entity<Risk>().ToTable("Risk");
          modelBuilder.Entity<School>().ToTable("School");
-         modelBuilder.Entity<Gender>().ToTable("Gender");
-
-         // Might need to change it to the following when dealing with many-to-many relationships
-         // modelBuilder.Entity<Course>().ToTable(nameof(Course))
-         //        .HasMany(c => c.Instructors)
-         //        .WithMany(i => i.Courses);
-         //    modelBuilder.Entity<Student>().ToTable(nameof(Student));
-         //    modelBuilder.Entity<Instructor>().ToTable(nameof(Instructor));
+         modelBuilder.Entity<Gender>().ToTable("Gender");           
       }
    }
 }

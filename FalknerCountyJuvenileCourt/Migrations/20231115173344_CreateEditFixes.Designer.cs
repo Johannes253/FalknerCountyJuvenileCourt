@@ -3,6 +3,7 @@ using System;
 using FalknerCountyJuvenileCourt.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FalknerCountyJuvenileCourt.Migrations
 {
     [DbContext(typeof(CourtContext))]
-    partial class CourtContextModelSnapshot : ModelSnapshot
+    [Migration("20231115173344_CreateEditFixes")]
+    partial class CreateEditFixes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.13");
@@ -74,7 +77,7 @@ namespace FalknerCountyJuvenileCourt.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Filing Decision", (string)null);
+                    b.ToTable("FilingDecision", (string)null);
                 });
 
             modelBuilder.Entity("FalknerCountyJuvenileCourt.Models.Gender", b =>
@@ -104,7 +107,7 @@ namespace FalknerCountyJuvenileCourt.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Intake Decision", (string)null);
+                    b.ToTable("IntakeDecision", (string)null);
                 });
 
             modelBuilder.Entity("FalknerCountyJuvenileCourt.Models.Juvenile", b =>
