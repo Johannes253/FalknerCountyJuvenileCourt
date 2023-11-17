@@ -9,6 +9,9 @@ namespace FalknerCountyJuvenileCourt.Models
       public int ID { get; set; }
 
       [Required]
+      public string FaulknerCountyIdentification { get; set; }
+
+      [Required]
       public int Age { get; set; }
 
       public int RaceID {get;set;}

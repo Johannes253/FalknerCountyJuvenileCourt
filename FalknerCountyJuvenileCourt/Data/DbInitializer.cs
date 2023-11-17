@@ -16,6 +16,7 @@ namespace FalknerCountyJuvenileCourt.Data
 
             var j0 = new Juvenile {
                ID = 1,
+               FaulknerCountyIdentification = "12d",
                RiskID = 1,
                RaceID = 1,
                GenderID = 2,
@@ -25,6 +26,7 @@ namespace FalknerCountyJuvenileCourt.Data
 
             var j1 = new Juvenile {
                ID = 2,
+               FaulknerCountyIdentification = "122d",
                RiskID = 4,
                RaceID = 3,
                GenderID = 1,
@@ -34,6 +36,7 @@ namespace FalknerCountyJuvenileCourt.Data
 
             var j2 = new Juvenile {
                ID = 3,
+               FaulknerCountyIdentification = "12221d",
                RiskID = 2,
                RaceID = 1,
                GenderID = 2,
@@ -43,6 +46,7 @@ namespace FalknerCountyJuvenileCourt.Data
 
             var j3 = new Juvenile {
                ID = 4,
+               FaulknerCountyIdentification = "12dddd",
                RiskID = 3,
                RaceID = 2,
                GenderID = 1,
@@ -52,6 +56,7 @@ namespace FalknerCountyJuvenileCourt.Data
 
             var j4 = new Juvenile {
                ID = 5,
+               FaulknerCountyIdentification = "1dd2d",
                RiskID = 1,
                RaceID = 4,
                GenderID = 2,
@@ -61,6 +66,7 @@ namespace FalknerCountyJuvenileCourt.Data
 
             var j5 = new Juvenile {
                ID = 6,
+               FaulknerCountyIdentification = "12sasdd",
                RiskID = 2,
                RaceID = 1,
                GenderID = 1,
@@ -70,6 +76,7 @@ namespace FalknerCountyJuvenileCourt.Data
 
             var j6 = new Juvenile {
                ID = 7,
+               FaulknerCountyIdentification = "12werd",
                RiskID = 4,
                RaceID = 1,
                GenderID = 2,
@@ -79,6 +86,7 @@ namespace FalknerCountyJuvenileCourt.Data
 
             var j7 = new Juvenile {
                ID = 8,
+               FaulknerCountyIdentification = "12999d",
                RiskID = 1,
                RaceID = 2,
                GenderID = 2,
@@ -88,6 +96,7 @@ namespace FalknerCountyJuvenileCourt.Data
 
             var j8 = new Juvenile {
                ID = 9,
+               FaulknerCountyIdentification = "12dkkkkk",
                RiskID = 2,
                RaceID = 3,
                GenderID = 2,
@@ -97,6 +106,7 @@ namespace FalknerCountyJuvenileCourt.Data
 
             var j9 = new Juvenile {
                ID = 10,
+               FaulknerCountyIdentification = "12d86532",
                RiskID = 4,
                RaceID = 1,
                GenderID = 1,
@@ -106,6 +116,7 @@ namespace FalknerCountyJuvenileCourt.Data
 
             var j10 = new Juvenile {
                ID = 11,
+               FaulknerCountyIdentification = "ooi12d",
                RiskID = 4,
                RaceID = 1,
                GenderID = 1,

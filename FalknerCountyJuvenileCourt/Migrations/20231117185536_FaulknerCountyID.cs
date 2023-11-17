@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FalknerCountyJuvenileCourt.Migrations
 {
     /// <inheritdoc />
-    public partial class IdentitySchema : Migration
+    public partial class FaulknerCountyID : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -51,29 +51,16 @@ namespace FalknerCountyJuvenileCourt.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CrimeType",
+                name: "Filing Decision",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Type = table.Column<string>(type: "TEXT", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CrimeType", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "FilingDecision",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_FilingDecision", x => x.ID);
+                    table.PrimaryKey("PK_Filing Decision", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -82,7 +69,7 @@ namespace FalknerCountyJuvenileCourt.Migrations
                 {
                     ID = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<int>(type: "INTEGER", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -90,16 +77,29 @@ namespace FalknerCountyJuvenileCourt.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "IntakeDecision",
+                name: "Intake Decision",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<int>(type: "INTEGER", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IntakeDecision", x => x.ID);
+                    table.PrimaryKey("PK_Intake Decision", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Offense",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Offense", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -253,6 +253,7 @@ namespace FalknerCountyJuvenileCourt.Migrations
                 {
                     ID = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    FaulknerCountyIdentification = table.Column<string>(type: "TEXT", nullable: false),
                     Age = table.Column<int>(type: "INTEGER", nullable: false),
                     RaceID = table.Column<int>(type: "INTEGER", nullable: false),
                     GenderID = table.Column<int>(type: "INTEGER", nullable: false),
@@ -294,40 +295,40 @@ namespace FalknerCountyJuvenileCourt.Migrations
                 {
                     ID = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    CrimeTypeID = table.Column<int>(type: "INTEGER", nullable: false),
+                    OffenseID = table.Column<int>(type: "INTEGER", nullable: false),
                     FilingDecisionID = table.Column<int>(type: "INTEGER", nullable: false),
                     IntakeDecisionID = table.Column<int>(type: "INTEGER", nullable: false),
                     SchoolID = table.Column<int>(type: "INTEGER", nullable: false),
                     DrugOffense = table.Column<bool>(type: "INTEGER", nullable: false),
                     DrugCourt = table.Column<bool>(type: "INTEGER", nullable: false),
-                    Date = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Date = table.Column<DateTime>(type: "TEXT", nullable: true),
                     JuvenileID = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Crime", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Crime_CrimeType_CrimeTypeID",
-                        column: x => x.CrimeTypeID,
-                        principalTable: "CrimeType",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Crime_FilingDecision_FilingDecisionID",
+                        name: "FK_Crime_Filing Decision_FilingDecisionID",
                         column: x => x.FilingDecisionID,
-                        principalTable: "FilingDecision",
+                        principalTable: "Filing Decision",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Crime_IntakeDecision_IntakeDecisionID",
+                        name: "FK_Crime_Intake Decision_IntakeDecisionID",
                         column: x => x.IntakeDecisionID,
-                        principalTable: "IntakeDecision",
+                        principalTable: "Intake Decision",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Crime_Juveniles_JuvenileID",
                         column: x => x.JuvenileID,
                         principalTable: "Juveniles",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Crime_Offense_OffenseID",
+                        column: x => x.OffenseID,
+                        principalTable: "Offense",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -376,11 +377,6 @@ namespace FalknerCountyJuvenileCourt.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Crime_CrimeTypeID",
-                table: "Crime",
-                column: "CrimeTypeID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Crime_FilingDecisionID",
                 table: "Crime",
                 column: "FilingDecisionID");
@@ -394,6 +390,11 @@ namespace FalknerCountyJuvenileCourt.Migrations
                 name: "IX_Crime_JuvenileID",
                 table: "Crime",
                 column: "JuvenileID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Crime_OffenseID",
+                table: "Crime",
+                column: "OffenseID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Crime_SchoolID",
@@ -449,16 +450,16 @@ namespace FalknerCountyJuvenileCourt.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "CrimeType");
+                name: "Filing Decision");
 
             migrationBuilder.DropTable(
-                name: "FilingDecision");
-
-            migrationBuilder.DropTable(
-                name: "IntakeDecision");
+                name: "Intake Decision");
 
             migrationBuilder.DropTable(
                 name: "Juveniles");
+
+            migrationBuilder.DropTable(
+                name: "Offense");
 
             migrationBuilder.DropTable(
                 name: "Gender");

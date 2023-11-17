@@ -116,6 +116,10 @@ namespace FalknerCountyJuvenileCourt.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("FaulknerCountyIdentification")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("GenderID")
                         .HasColumnType("INTEGER");
 
