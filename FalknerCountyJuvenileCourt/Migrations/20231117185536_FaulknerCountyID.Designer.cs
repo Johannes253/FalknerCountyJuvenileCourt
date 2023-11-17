@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FalknerCountyJuvenileCourt.Migrations
 {
     [DbContext(typeof(CourtContext))]
-    [Migration("20231108172048_IdentitySchema")]
-    partial class IdentitySchema
+    [Migration("20231117185536_FaulknerCountyID")]
+    partial class FaulknerCountyID
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,10 +26,7 @@ namespace FalknerCountyJuvenileCourt.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("CrimeTypeID")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime?>("Date")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("DrugCourt")
@@ -47,12 +44,13 @@ namespace FalknerCountyJuvenileCourt.Migrations
                     b.Property<int>("JuvenileID")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("OffenseID")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("SchoolID")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("CrimeTypeID");
 
                     b.HasIndex("FilingDecisionID");
 
@@ -60,24 +58,11 @@ namespace FalknerCountyJuvenileCourt.Migrations
 
                     b.HasIndex("JuvenileID");
 
+                    b.HasIndex("OffenseID");
+
                     b.HasIndex("SchoolID");
 
                     b.ToTable("Crime", (string)null);
-                });
-
-            modelBuilder.Entity("FalknerCountyJuvenileCourt.Models.CrimeType", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("CrimeType", (string)null);
                 });
 
             modelBuilder.Entity("FalknerCountyJuvenileCourt.Models.FilingDecision", b =>
@@ -86,12 +71,13 @@ namespace FalknerCountyJuvenileCourt.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Name")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("ID");
 
-                    b.ToTable("FilingDecision", (string)null);
+                    b.ToTable("Filing Decision", (string)null);
                 });
 
             modelBuilder.Entity("FalknerCountyJuvenileCourt.Models.Gender", b =>
@@ -100,8 +86,9 @@ namespace FalknerCountyJuvenileCourt.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Name")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("ID");
 
@@ -114,12 +101,13 @@ namespace FalknerCountyJuvenileCourt.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Name")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("ID");
 
-                    b.ToTable("IntakeDecision", (string)null);
+                    b.ToTable("Intake Decision", (string)null);
                 });
 
             modelBuilder.Entity("FalknerCountyJuvenileCourt.Models.Juvenile", b =>
@@ -130,6 +118,10 @@ namespace FalknerCountyJuvenileCourt.Migrations
 
                     b.Property<int>("Age")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("FaulknerCountyIdentification")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("GenderID")
                         .HasColumnType("INTEGER");
@@ -157,6 +149,21 @@ namespace FalknerCountyJuvenileCourt.Migrations
                     b.HasIndex("SchoolID");
 
                     b.ToTable("Juveniles", (string)null);
+                });
+
+            modelBuilder.Entity("FalknerCountyJuvenileCourt.Models.Offense", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Offense", (string)null);
                 });
 
             modelBuilder.Entity("FalknerCountyJuvenileCourt.Models.Race", b =>
@@ -401,12 +408,6 @@ namespace FalknerCountyJuvenileCourt.Migrations
 
             modelBuilder.Entity("FalknerCountyJuvenileCourt.Models.Crime", b =>
                 {
-                    b.HasOne("FalknerCountyJuvenileCourt.Models.CrimeType", "Name")
-                        .WithMany("Crimes")
-                        .HasForeignKey("CrimeTypeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("FalknerCountyJuvenileCourt.Models.FilingDecision", "FilingDecision")
                         .WithMany("Crimes")
                         .HasForeignKey("FilingDecisionID")
@@ -425,6 +426,12 @@ namespace FalknerCountyJuvenileCourt.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("FalknerCountyJuvenileCourt.Models.Offense", "Offense")
+                        .WithMany("Crimes")
+                        .HasForeignKey("OffenseID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("FalknerCountyJuvenileCourt.Models.School", "School")
                         .WithMany()
                         .HasForeignKey("SchoolID")
@@ -437,7 +444,7 @@ namespace FalknerCountyJuvenileCourt.Migrations
 
                     b.Navigation("Juvenile");
 
-                    b.Navigation("Name");
+                    b.Navigation("Offense");
 
                     b.Navigation("School");
                 });
@@ -524,11 +531,6 @@ namespace FalknerCountyJuvenileCourt.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("FalknerCountyJuvenileCourt.Models.CrimeType", b =>
-                {
-                    b.Navigation("Crimes");
-                });
-
             modelBuilder.Entity("FalknerCountyJuvenileCourt.Models.FilingDecision", b =>
                 {
                     b.Navigation("Crimes");
@@ -545,6 +547,11 @@ namespace FalknerCountyJuvenileCourt.Migrations
                 });
 
             modelBuilder.Entity("FalknerCountyJuvenileCourt.Models.Juvenile", b =>
+                {
+                    b.Navigation("Crimes");
+                });
+
+            modelBuilder.Entity("FalknerCountyJuvenileCourt.Models.Offense", b =>
                 {
                     b.Navigation("Crimes");
                 });

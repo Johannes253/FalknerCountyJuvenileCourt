@@ -16,6 +16,7 @@ namespace FalknerCountyJuvenileCourt.Data
 
             var j0 = new Juvenile {
                ID = 1,
+               FaulknerCountyIdentification = "12d",
                RiskID = 1,
                RaceID = 1,
                GenderID = 2,
@@ -25,6 +26,7 @@ namespace FalknerCountyJuvenileCourt.Data
 
             var j1 = new Juvenile {
                ID = 2,
+               FaulknerCountyIdentification = "122d",
                RiskID = 4,
                RaceID = 3,
                GenderID = 1,
@@ -34,6 +36,7 @@ namespace FalknerCountyJuvenileCourt.Data
 
             var j2 = new Juvenile {
                ID = 3,
+               FaulknerCountyIdentification = "12221d",
                RiskID = 2,
                RaceID = 1,
                GenderID = 2,
@@ -43,6 +46,7 @@ namespace FalknerCountyJuvenileCourt.Data
 
             var j3 = new Juvenile {
                ID = 4,
+               FaulknerCountyIdentification = "12dddd",
                RiskID = 3,
                RaceID = 2,
                GenderID = 1,
@@ -52,6 +56,7 @@ namespace FalknerCountyJuvenileCourt.Data
 
             var j4 = new Juvenile {
                ID = 5,
+               FaulknerCountyIdentification = "1dd2d",
                RiskID = 1,
                RaceID = 4,
                GenderID = 2,
@@ -61,6 +66,7 @@ namespace FalknerCountyJuvenileCourt.Data
 
             var j5 = new Juvenile {
                ID = 6,
+               FaulknerCountyIdentification = "12sasdd",
                RiskID = 2,
                RaceID = 1,
                GenderID = 1,
@@ -70,6 +76,7 @@ namespace FalknerCountyJuvenileCourt.Data
 
             var j6 = new Juvenile {
                ID = 7,
+               FaulknerCountyIdentification = "12werd",
                RiskID = 4,
                RaceID = 1,
                GenderID = 2,
@@ -79,6 +86,7 @@ namespace FalknerCountyJuvenileCourt.Data
 
             var j7 = new Juvenile {
                ID = 8,
+               FaulknerCountyIdentification = "12999d",
                RiskID = 1,
                RaceID = 2,
                GenderID = 2,
@@ -88,6 +96,7 @@ namespace FalknerCountyJuvenileCourt.Data
 
             var j8 = new Juvenile {
                ID = 9,
+               FaulknerCountyIdentification = "12dkkkkk",
                RiskID = 2,
                RaceID = 3,
                GenderID = 2,
@@ -97,6 +106,7 @@ namespace FalknerCountyJuvenileCourt.Data
 
             var j9 = new Juvenile {
                ID = 10,
+               FaulknerCountyIdentification = "12d86532",
                RiskID = 4,
                RaceID = 1,
                GenderID = 1,
@@ -106,6 +116,7 @@ namespace FalknerCountyJuvenileCourt.Data
 
             var j10 = new Juvenile {
                ID = 11,
+               FaulknerCountyIdentification = "ooi12d",
                RiskID = 4,
                RaceID = 1,
                GenderID = 1,
@@ -199,15 +210,15 @@ namespace FalknerCountyJuvenileCourt.Data
             var intakeDecisions = new IntakeDecision[] {
                new IntakeDecision {
                   ID = 1,
-                  Name = IEnum.CiteAndRelease
+                  Name = "Cite and Release"
                },
                new IntakeDecision {
                   ID = 2,
-                  Name = IEnum.DetentionAlternative
+                  Name = "Detention Alternative"
                },
                new IntakeDecision {
                   ID = 3,
-                  Name = IEnum.Detention
+                  Name = "Detention"
                },
             };
 
@@ -216,11 +227,11 @@ namespace FalknerCountyJuvenileCourt.Data
             var genders = new Gender[] {
                new Gender {
                   ID = 1,
-                  Name = GEnum.Male
+                  Name = "Male"
                },
                new Gender {
                   ID = 2,
-                  Name = GEnum.Female 
+                  Name = "Female"
                },
             };
 
@@ -229,32 +240,32 @@ namespace FalknerCountyJuvenileCourt.Data
             var filingDecisions = new FilingDecision[] {
                new FilingDecision {
                   ID = 1,
-                  Name = FEnum.DelinquencyPetitionsFiled
+                  Name = "Delinquency Petition Filed"
                },
                new FilingDecision {
                   ID = 2,
-                  Name = FEnum.DivertedCases
+                  Name = "Case Diverted"
                },
                new FilingDecision {
                   ID = 3,
-                  Name = FEnum.NothingMore
+                  Name = "Nothing Further"
                },
             };
 
             context.AddRange(filingDecisions);
 
-            var offenses = new CrimeType[] {
-               new CrimeType {
+            var offenses = new Offense[] {
+               new Offense {
                   ID = 1,
-                  Type = "Fleeing"
+                  Name = "Fleeing"
                },
-               new CrimeType {
+               new Offense {
                   ID = 2,
-                  Type = "Battery 3rd"
+                  Name = "Battery 3rd"
                },
-               new CrimeType {
+               new Offense {
                   ID = 3,
-                  Type = "Disorderly Conduct"
+                  Name = "Disorderly Conduct"
                },
             };
 
@@ -263,7 +274,7 @@ namespace FalknerCountyJuvenileCourt.Data
             var c0 = new Crime {
                ID = 1,
                JuvenileID = 1,
-               CrimeTypeID = 3,
+               OffenseID = 3,
                FilingDecisionID = 1,
                IntakeDecisionID = 2,
                SchoolID = 1,
@@ -275,7 +286,7 @@ namespace FalknerCountyJuvenileCourt.Data
             var c1 = new Crime {
                ID = 2,
                JuvenileID = 3,
-               CrimeTypeID = 2,
+               OffenseID = 2,
                FilingDecisionID = 3,
                IntakeDecisionID = 3,
                SchoolID = 2,
@@ -287,7 +298,7 @@ namespace FalknerCountyJuvenileCourt.Data
             var c2 = new Crime {
                ID = 3,
                JuvenileID = 3,
-               CrimeTypeID = 2,
+               OffenseID = 2,
                FilingDecisionID = 3,
                IntakeDecisionID = 3,
                SchoolID = 2,

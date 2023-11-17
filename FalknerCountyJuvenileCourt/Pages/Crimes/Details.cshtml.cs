@@ -28,7 +28,14 @@ namespace FalknerCountyJuvenileCourt.Pages.Crimes
                 return NotFound();
             }
 
-            var crime = await _context.Crimes.FirstOrDefaultAsync(m => m.ID == id);
+            var crime = await _context.Crimes
+               .Include(c => c.Juvenile)
+               .Include(c => c.Offense)
+               .Include(c => c.FilingDecision)
+               .Include(c => c.IntakeDecision)
+               .Include(c => c.School)
+               .FirstOrDefaultAsync(m => m.ID == id);
+               
             if (crime == null)
             {
                 return NotFound();

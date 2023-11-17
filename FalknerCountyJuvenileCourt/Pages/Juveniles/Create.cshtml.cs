@@ -33,7 +33,7 @@ namespace FalknerCountyJuvenileCourt.Pages.Juveniles
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
       public async Task<IActionResult> OnPostAsync() {
          var emptyJuvenile = new Juvenile();
-
+         
          if (await TryUpdateModelAsync<Juvenile>(
             emptyJuvenile,
             "juvenile",   // Prefix for form value.
@@ -43,6 +43,10 @@ namespace FalknerCountyJuvenileCourt.Pages.Juveniles
             await _context.SaveChangesAsync();
             return RedirectToPage("./Index");
          }
+         var validationErrors = ModelState.Values.Where(E => E.Errors.Count > 0)
+            .SelectMany(E => E.Errors)
+            .Select(E => E.ErrorMessage)
+            .ToList(); 
 
          PopulateRacesDropDownList(_context, emptyJuvenile.Race);
          PopulateGendersDropDownList(_context, emptyJuvenile.Gender);

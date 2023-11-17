@@ -7,9 +7,9 @@ namespace FalknerCountyJuvenileCourt.Models
       [Key]
       public int ID { get; set; }
       
-      [Required]
+
       public string Name { get; set; }
 
-      public ICollection<Juvenile> Juveniles {get;set;}
+      public ICollection<Juvenile>? Juveniles {get;set;}
    }
 }

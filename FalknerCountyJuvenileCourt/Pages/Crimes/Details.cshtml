@@ -12,28 +12,34 @@
    <hr />
    <dl class="row">
       <dt class="col-sm-2">
+         @Html.DisplayNameFor(model => model.Crime.ID)
+      </dt>
+      <dd class="col-sm-10">
+         @Html.DisplayFor(model => model.Crime.ID)
+      </dd>
+      <dt class="col-sm-2">
          @Html.DisplayNameFor(model => model.Crime.Juvenile)
       </dt>
       <dd class="col-sm-10">
          @Html.DisplayFor(model => model.Crime.Juvenile.ID)
       </dd>
       <dt class="col-sm-2">
-         @Html.DisplayNameFor(model => model.Crime.Name)
+         @Html.DisplayNameFor(model => model.Crime.Offense)
       </dt>
       <dd class="col-sm-10">
-         @Html.DisplayFor(model => model.Crime.Name.Type)
-      </dd>
-      <dt class="col-sm-2">
-         @Html.DisplayNameFor(model => model.Crime.FilingDecision)
-      </dt>
-      <dd class="col-sm-10">
-         @Html.DisplayFor(model => model.Crime.FilingDecision.Name)
+         @Html.DisplayFor(model => model.Crime.Offense.Name)
       </dd>
       <dt class="col-sm-2">
          @Html.DisplayNameFor(model => model.Crime.IntakeDecision)
       </dt>
       <dd class="col-sm-10">
          @Html.DisplayFor(model => model.Crime.IntakeDecision.Name)
+      </dd>
+      <dt class="col-sm-2">
+         @Html.DisplayNameFor(model => model.Crime.FilingDecision)
+      </dt>
+      <dd class="col-sm-10">
+         @Html.DisplayFor(model => model.Crime.FilingDecision.Name)
       </dd>
       <dt class="col-sm-2">
          @Html.DisplayNameFor(model => model.Crime.School)

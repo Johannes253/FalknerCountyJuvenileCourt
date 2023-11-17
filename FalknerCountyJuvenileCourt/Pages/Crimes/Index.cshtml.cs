@@ -31,7 +31,7 @@ namespace FalknerCountyJuvenileCourt.Pages.Crimes
                 .Include(c => c.FilingDecision)
                 .Include(c => c.IntakeDecision)
                 .Include(c => c.Juvenile)
-                .Include(c => c.Name)
+                .Include(c => c.Offense)
                 .Include(c => c.School).ToListAsync();
             }
         }
