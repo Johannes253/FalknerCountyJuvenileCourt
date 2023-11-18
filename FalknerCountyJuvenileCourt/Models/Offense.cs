@@ -13,6 +13,10 @@ namespace FalknerCountyJuvenileCourt.Models
    public string Name { get; set; }
 
    public ICollection<Crime>? Crimes {get; set;}
+   public override string ToString()
+   {
+        return Name;
+   }
 
    }
 }
