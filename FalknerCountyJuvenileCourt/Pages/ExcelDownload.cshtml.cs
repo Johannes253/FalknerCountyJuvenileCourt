@@ -21,7 +21,7 @@ public class ExcelDownloadModel : PageModel {
     }
 
     public FileResult OnGet() {
-
+        //getting database contexts
         var juveniles = _context.Juveniles
             .Include(j => j.Race)
             .Include(j => j.Gender)
@@ -35,6 +35,7 @@ public class ExcelDownloadModel : PageModel {
             .Include(c => c.School)
             .ToList();
 
+        //creating headlines
         using (var workbook = new XLWorkbook()) {
             IXLWorksheet juvenileworksheet =
             workbook.Worksheets.Add("Juveniles");
@@ -49,6 +50,7 @@ public class ExcelDownloadModel : PageModel {
 
             int index = 1;
 
+        //filling sheet up with data
             foreach (var juvenile in juveniles) {
                 index++;
 
@@ -62,36 +64,43 @@ public class ExcelDownloadModel : PageModel {
 
             }
 
-        IXLWorksheet crimeWorksheet = workbook.Worksheets.Add("Crimes");
-        crimeWorksheet.Cell(1, 1).Value = "Offense";
-        crimeWorksheet.Cell(1, 2).Value = "Filing Decision";
-        crimeWorksheet.Cell(1, 3).Value = "Intake Decision";
-        crimeWorksheet.Cell(1, 4).Value = "School";
-        crimeWorksheet.Cell(1, 5).Value = "Drug Offense";
-        crimeWorksheet.Cell(1, 6).Value = "Drug Court";
-        crimeWorksheet.Cell(1, 7).Value = "Date";
-        crimeWorksheet.Cell(1, 8).Value = "Faulkner County Juvenile ID";
+            IXLWorksheet crimeWorksheet = workbook.Worksheets.Add("Crimes");
+            crimeWorksheet.Cell(1, 1).Value = "Offense";
+            crimeWorksheet.Cell(1, 2).Value = "Filing Decision";
+            crimeWorksheet.Cell(1, 3).Value = "Intake Decision";
+            crimeWorksheet.Cell(1, 4).Value = "School";
+            crimeWorksheet.Cell(1, 5).Value = "Drug Offense";
+            crimeWorksheet.Cell(1, 6).Value = "Drug Court";
+            crimeWorksheet.Cell(1, 7).Value = "Date";
+            crimeWorksheet.Cell(1, 8).Value = "Faulkner County Juvenile ID";
 
-        index = 1;
+            index = 1;
 
-        foreach (var crime in crimes)
+            foreach (var crime in crimes)
+            {
+                index++;
+
+                crimeWorksheet.Cell(index, 1).Value = crime.Offense?.ToString() ?? string.Empty;
+                crimeWorksheet.Cell(index, 2).Value = crime.FilingDecision?.ToString() ?? string.Empty;
+                crimeWorksheet.Cell(index, 3).Value = crime.IntakeDecision?.ToString() ?? string.Empty;
+                crimeWorksheet.Cell(index, 4).Value = crime.School?.ToString() ?? string.Empty;
+                crimeWorksheet.Cell(index, 5).Value = crime.DrugOffense ? "Yes" : "No";
+                crimeWorksheet.Cell(index, 6).Value = crime.DrugCourt ? "Yes" : "No";
+                crimeWorksheet.Cell(index, 7).Value = crime.Date?.ToString("yyyy-MM-dd") ?? string.Empty;
+
+                var juvenileIdentification = _context.Juveniles
+                .Where(j => j.ID == crime.JuvenileID)
+                .Select(j => j.FaulknerCountyIdentification)
+                .FirstOrDefault();
+                crimeWorksheet.Cell(index, 8).Value = juvenileIdentification;
+
+        }
+
+        // Ensures that the Excel cells display the full content without being cut off
+        for (int i = 1; i <= 8; i++)
         {
-            index++;
-
-            crimeWorksheet.Cell(index, 1).Value = crime.Offense?.ToString() ?? string.Empty;
-            crimeWorksheet.Cell(index, 2).Value = crime.FilingDecision?.ToString() ?? string.Empty;
-            crimeWorksheet.Cell(index, 3).Value = crime.IntakeDecision?.ToString() ?? string.Empty;
-            crimeWorksheet.Cell(index, 4).Value = crime.School?.ToString() ?? string.Empty;
-            crimeWorksheet.Cell(index, 5).Value = crime.DrugOffense ? "Yes" : "No";
-            crimeWorksheet.Cell(index, 6).Value = crime.DrugCourt ? "Yes" : "No";
-            crimeWorksheet.Cell(index, 7).Value = crime.Date?.ToString("yyyy-MM-dd") ?? string.Empty;
-
-            var juvenileIdentification = _context.Juveniles
-            .Where(j => j.ID == crime.JuvenileID)
-            .Select(j => j.FaulknerCountyIdentification)
-            .FirstOrDefault();
-            crimeWorksheet.Cell(index, 8).Value = juvenileIdentification;
-            
+            juvenileworksheet.Column(i).AdjustToContents();
+            crimeWorksheet.Column(i).AdjustToContents();
         }
 
                 using (var stream = new MemoryStream())
