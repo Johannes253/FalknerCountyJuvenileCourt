@@ -5,45 +5,31 @@
 }
 
 <head>
-  <style>
-    #container {
-      position: relative;
-      min-height: 75vh;
+    <style>
+    #tableCon{
+        text-align: center;
+        width: 600px;
     }
-    #footer {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      background: #f2f2f2;
-      text-align: center;
-      padding: 10px 0;
-      color: gray;
-    }
-  </style>
+    </style>
 </head>
 <body>
-  <div id="container">
-    <div id="content">
-      <<div class="text-center">
+  <div class="container" id="tableCon">
     <H1>Table Hub</H1>
-    <p aria-setsize="4">
-      Below you can find the links to important tables that help the database run. 
+
+    <p>
+      Below you can find the links to important tables that help the database run. In each table you are able to edit, add, and remove objects as you please. 
+    Adding to one these tables allowes you to edit or add a juvenile with that new attribute.
     </p>
     
     
-   <h2 class="display-8"><a asp-area="" asp-page="/Offenses/Index">Offenses</a></h2>
-   <h2 class="display-8"><a asp-area="" asp-page="/Schools/Index">Schools</a></h2>
-   <h2 class="display-8"><a asp-area="" asp-page="/IntakeDecisions/Index">Intake Decisions</a></h2>
-   <h2 class="display-8"><a asp-area="" asp-page="/FilingDecisions/Index">Filing Decisions</a></h2>
-   <h2 class="display-8"><a asp-area="" asp-page="/Races/Index">Races</a></h2>
-   <h2 class="display-8"><a asp-area="" asp-page="/Genders/Index">Genders</a></h2>
+   <h2 class="display-8"><a id="tableB" href="/Offenses/Index" class="btn btn-link" role="button">Offenses</a></h2>
+   <h2 class="display-8"><a id="tableB" href="/Schools/Index" class="btn btn-link" role="button">Schools</a></h2>
+   <h2 class="display-8"><a id="tableB" href="/IntakeDecisions/Index" class="btn btn-link" role="button">Intake Decisions</a></h2>
+   <h2 class="display-8"><a id="tableB" href="/FilingDecisions/Index" class="btn btn-link" role="button">Filing Decisions</a></h2>
+   <h2 class="display-8"><a id="tableB" href="/Races/Index" class="btn btn-link" role="button">Races</a></h2>
+   <h2 class="display-8"><a id="tableB" href="/Genders/Index" class="btn btn-link" role="button">Genders</a></h2>
    </div>
-    </div>
-    <div id="footer">
-      In each table you are able to edit, add, and remove objects as you please. 
-    Adding to one these tables allowes you to edit or add a juvenile with that new attribute
-    </div>
-  </div>
+
   </body>
 
 
