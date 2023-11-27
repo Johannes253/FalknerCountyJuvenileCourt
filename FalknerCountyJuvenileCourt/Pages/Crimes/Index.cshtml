@@ -4,7 +4,23 @@
 @{
     ViewData["Title"] = "Crimes";
 }
-
+<head>
+  <style>
+    #container {
+      position: relative;
+      min-height: 75vh;
+    }
+    #bottom {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: white;
+      text-align: center;
+      padding: 10px 0;
+    }
+  </style>
+</head>
+<body>
 <h1>Crimes</h1>
 
 <p>
@@ -43,6 +59,10 @@
             <th></th>
         </tr>
     </thead>
+    <div id="bottom">
+            Here you can find the crimes commited be juveniles.
+        </div>
+        </body>
     <tbody>
 @foreach (var item in Model.Crimes) {
         <tr>
@@ -79,6 +99,7 @@
                 <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
             </td>
         </tr>
+        
 }
     </tbody>
 </table>
