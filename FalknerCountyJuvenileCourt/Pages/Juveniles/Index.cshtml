@@ -5,10 +5,14 @@
     ViewData["Title"] = "Juveniles";
 }
 
+<div id=bottom>
+    Here you are able to view the current juveniles in the database.
+</div>
+
 <h1>Juveniles</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a id="Cbtn" asp-page="Create">Create New</a>
 </p>
 
 <form asp-page="./Index" method="get">
@@ -86,9 +90,9 @@
                 @Html.DisplayFor(modelItem => item.Repeat)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                <a id="EDbtn" asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a id="EDbtn" asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a id="EDbtn" asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
             </td>
         </tr>
 }

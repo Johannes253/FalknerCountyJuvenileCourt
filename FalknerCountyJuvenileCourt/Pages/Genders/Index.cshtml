@@ -5,10 +5,14 @@
     ViewData["Title"] = "Genders";
 }
 
+<div id=bottom>
+    Here you are able to view the possible genders that can be assigned to a juvenile.
+</div>
+
 <h1>Genders</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a id="Cbtn" asp-page="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -25,8 +29,8 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                <a id="EDbtn" asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a id="EDbtn" asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
             </td>
         </tr>
 }
