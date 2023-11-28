@@ -4,28 +4,11 @@
 @{
     ViewData["Title"] = "Crimes";
 }
-<head>
-  <style>
-    #container {
-      position: relative;
-      min-height: 75vh;
-    }
-    #bottom {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      background: white;
-      text-align: center;
-      padding: 10px 0;
-      line-height: 43px;
-    }
-  </style>
-</head>
 <body>
 <h1>Crimes</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a id="Cbtn" asp-page="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -95,9 +78,9 @@
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                <a id="EDbtn" asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a id="EDbtn" asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a id="EDbtn" asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
             </td>
         </tr>
         

@@ -9,10 +9,12 @@ a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
+  
 }
 
 a {
-  color: #0077cc;
+  color: blue;
+  
 }
 
 .btn-primary {
@@ -22,7 +24,7 @@ a {
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
+  color: rgba(58, 58, 41, 0.9);
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
@@ -50,3 +52,4 @@ button.accept-policy {
   white-space: nowrap;
   line-height: 60px;
 }
+
