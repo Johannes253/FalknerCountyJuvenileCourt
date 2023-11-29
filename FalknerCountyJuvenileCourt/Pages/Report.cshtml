@@ -17,12 +17,12 @@
     });
         //console.log("Raw response data:", await response.text());
         if (response.ok) {
-
             var raceData = await response.json();
+            
+            console.log('Received raceData:', raceData);
 
-
-            var raceLabels = raceData.map(item => item.Race);
-            var raceValues = raceData.map(item => item.Count);
+            var raceLabels = raceData.map(item => item.race);
+            var raceValues = raceData.map(item => item.count);
 
             var ctx = document.getElementById('racePieChart').getContext('2d');
             var racePieChart = new Chart(ctx, {

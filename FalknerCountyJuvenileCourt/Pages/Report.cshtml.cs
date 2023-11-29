@@ -27,10 +27,12 @@ public class ReportModel : PageModel
             var raceCounts = crimes
                 .Select(c => c.Juvenile?.Race?.Name)
                 .Where(race => !string.IsNullOrEmpty(race))
-                .Where(group => group.Key != null)
                 .GroupBy(race => race)
                 .Select(group => new { Race = group.Key, Count = group.Count() })
                 .ToList();
+                foreach (var race in raceCounts)
+                    Console.WriteLine($"Race: {race.Race}, Count: {race.Count}");
+
 
             return new JsonResult(raceCounts);
         }
