@@ -14,15 +14,18 @@
     </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', async function () {
-        try {
-            var response = await fetch('@Url.Page("/Report", "OnGetRaceDistributionData")', {
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
+   document.addEventListener('DOMContentLoaded', async function () {
+    try {
+        var response = await fetch('/Report?handler=OnGetRaceDistributionData', {
+            headers: {
+            'Accept': 'application/json'
+        }
+    });
+   //for demonstration purposes of the json console.log("Raw response data:", await response.text());
+        if (response.ok) {
+
             var raceData = await response.json();
-            console.log("Raw response data:", raceData);
+
 
             var raceLabels = raceData.map(item => item.Race);
             var raceValues = raceData.map(item => item.Count);
@@ -52,10 +55,17 @@
                     }
                 }
             });
-        } catch (error) {
-            console.error("Error fetching or parsing data:", error);
+        } else {
+            console.error("Error fetching data. Status:", response.status);
+            console.log("Raw response data:", await response.text());
         }
-    });
+    } catch (error) {
+        console.error("Error fetching or parsing data:", error);
+
+    }
+});
+
+
 </script>
 
 </body>

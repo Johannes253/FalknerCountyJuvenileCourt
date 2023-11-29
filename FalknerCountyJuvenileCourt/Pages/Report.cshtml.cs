@@ -15,7 +15,7 @@ public class ReportModel : PageModel
     }
 
     [IgnoreAntiforgeryToken]
-    public JsonResult OnGetRaceDistributionData()
+    public IActionResult OnGetRaceDistributionData()
     {
         try
         {
@@ -36,7 +36,10 @@ public class ReportModel : PageModel
         catch (Exception ex)
         {
             Console.WriteLine(ex.ToString());
-            return new JsonResult("An error occurred while processing the data.");
+            return new JsonResult("An error occurred while processing the data.")
+            {
+                StatusCode = 500
+            };
         }
     }
 }
