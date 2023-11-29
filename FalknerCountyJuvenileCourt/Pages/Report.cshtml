@@ -1,12 +1,6 @@
 @page
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Your Razor Page</title>
+@model ReportModel
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
     <h1>Race Distribution of Juveniles</h1>
     
    <div style="width: 400px; height: 400px;">
@@ -16,12 +10,12 @@
 <script>
    document.addEventListener('DOMContentLoaded', async function () {
     try {
-        var response = await fetch('/Report?handler=OnGetRaceDistributionData', {
+        var response = await fetch('/Report?handler=RaceDistributionData', {
             headers: {
             'Accept': 'application/json'
         }
     });
-   //for demonstration purposes of the json console.log("Raw response data:", await response.text());
+        //console.log("Raw response data:", await response.text());
         if (response.ok) {
 
             var raceData = await response.json();
@@ -67,6 +61,3 @@
 
 
 </script>
-
-</body>
-</html>
