@@ -8,52 +8,66 @@
     </div>
 
 <script>
-   document.addEventListener('DOMContentLoaded', async function () {
-    try {
-        var response = await fetch('/Report?handler=RaceDistributionData', {
-            headers: {
-            'Accept': 'application/json'
-        }
-    });
-        //console.log("Raw response data:", await response.text());
-        if (response.ok) {
-            var raceData = await response.json();
-            
-            console.log('Received raceData:', raceData);
-
-            var raceLabels = raceData.map(item => item.race);
-            var raceValues = raceData.map(item => item.count);
-
-            var backgroundColors = generateRandomColors(raceLabels.length);
-
-            var ctx = document.getElementById('racePieChart').getContext('2d');
-            var racePieChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: raceLabels,
-                    datasets: [{
-                        data: raceValues,
-                        backgroundColor: backgroundColors
-                    }]
-                },
-                    options: {                        responsive: true,
-                    maintainAspectRatio: false,
-                    legend: {
-                        position: 'top',
-                    }
+    // Predefined set of colors, use this for every piechart so that color scheme is similar
+    var predefinedColors = [
+        'rgba(255, 99, 132, 0.8)',
+        'rgba(54, 162, 235, 0.8)',
+        'rgba(255, 206, 86, 0.8)',
+        'rgba(75, 192, 192, 0.8)',
+        'rgba(153, 102, 255, 0.8)'
+        ];
+    document.addEventListener('DOMContentLoaded', async function () {
+        try {
+            var response = await fetch('/Report?handler=RaceDistributionData', {
+                headers: {
+                    'Accept': 'application/json'
                 }
             });
-        } else {
-            console.error("Error fetching data. Status:", response.status);
-            console.log("Raw response data:", await response.text());
-        }
-    } catch (error) {
-        console.error("Error fetching or parsing data:", error);
+            //console.log("Raw response data:", await response.text());
+            if (response.ok) {
+                var raceData = await response.json();
 
-    }
-        function generateRandomColors(count) {
+                console.log('Received raceData:', raceData);
+
+                var raceLabels = raceData.map(item => item.race);
+                var raceValues = raceData.map(item => item.count);
+
+                // Use predefined colors for the first 5 colors
+                var backgroundColors = predefinedColors.slice(0, Math.min(raceLabels.length, predefinedColors.length));
+                backgroundColors = backgroundColors.concat(generateRandomColors(Math.max(0, raceLabels.length - predefinedColors.length)));
+
+                var ctx = document.getElementById('racePieChart').getContext('2d');
+                var racePieChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: raceLabels,
+                        datasets: [{
+                            data: raceValues,
+                            backgroundColor: backgroundColors
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                });
+            } else {
+                console.error("Error fetching data. Status:", response.status);
+                console.log("Raw response data:", await response.text());
+            }
+        } catch (error) {
+            console.error("Error fetching or parsing data:", error);
+
+        }
+    });
+
+    //Generate random colors
+    function generateRandomColors(count) {
         var colors = [];
-        var hexDigits = '0123456789ABCDEF';
+        var letters = '0123456789ABCDEF';
         for (var i = 0; i < count; i++) {
             var color = '#';
             for (var j = 0; j < 6; j++) {
@@ -63,7 +77,4 @@
         }
         return colors;
     }
-});
-
-
 </script>
