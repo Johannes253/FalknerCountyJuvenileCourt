@@ -9,31 +9,39 @@ a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
-  
 }
 
 a {
-  color: blue;
+  color: white;
   
 }
 
 .btn-primary {
   color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+  background-color: black;
+  border-color: black;
+  outline: 2px solid black;
+  border-radius: .25rem;
+  text-decoration: none;
+  font-size: 1rem;
+  width: fit-content;
+  height: fit-content;
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
+  padding: 0.375rem 0.75rem;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: rgba(58, 58, 41, 0.9);
   background-color: #1b6ec2;
-  border-color: #1861ac;
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid #885/*#e5e5e5*/;
 }
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #885;
 }
 
 .box-shadow {
