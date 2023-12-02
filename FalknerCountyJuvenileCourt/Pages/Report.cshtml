@@ -133,7 +133,7 @@
 
             console.log('Received ageData:', ageData);
 
-            var ageLabels = ageData.map(item => `${item.age}-${item.age + 2}`);
+            var ageLabels = ageData.map(item => item.ageGroups);
             var ageValues = ageData.map(item => item.count);
 
             // Use predefined colors for the first 5 colors

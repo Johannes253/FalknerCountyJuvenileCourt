@@ -82,7 +82,7 @@ public class ReportModel : PageModel
         var ageGroups = juvenilesWithAge
             .GroupBy(j => ((j.Age - 1) / 3) * 3)
             .OrderBy(group => group.Key)
-            .Select(group => new { AgeGroup = $"{group.Key + 1}-{group.Key + 3}", Count = group.Count() })
+            .Select(group => new { ageGroups = $"{group.Key + 1}-{group.Key + 3}", Count = group.Count() })
             .ToList();
 
 
