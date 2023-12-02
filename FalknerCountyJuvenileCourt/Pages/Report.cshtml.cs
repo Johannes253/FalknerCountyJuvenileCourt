@@ -16,7 +16,7 @@ public class ReportModel : PageModel
 
     public async Task<IActionResult> OnGetRaceDistributionDataAsync()
     {
-         Console.WriteLine("Function called");
+        Console.WriteLine("Function called");
         try
         {
             var crimes = _context.Crimes
@@ -47,30 +47,55 @@ public class ReportModel : PageModel
     }
 
     public async Task<IActionResult> OnGetGenderDistributionDataAsync()
-{
-    Console.WriteLine("Function called");
-    try
     {
-        var juvenilesWithGender = _context.Juveniles
-            .Include(j => j.Gender)
-            .ToList();
-
-        var genderCounts = juvenilesWithGender
-            .Where(j => j.Gender != null)
-            .GroupBy(j => j.Gender.Name)
-            .Select(group => new { Gender = group.Key, Count = group.Count() })
-            .ToList();
-
-        return new JsonResult(genderCounts);
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine(ex.ToString());
-        return new JsonResult("An error occurred while processing the data.")
+        Console.WriteLine("Function called");
+        try
         {
-            StatusCode = 500
-        };
-    }
-}
+            var juvenilesWithGender = _context.Juveniles
+                .Include(j => j.Gender)
+                .ToList();
 
+            var genderCounts = juvenilesWithGender
+                .Where(j => j.Gender != null)
+                .GroupBy(j => j.Gender.Name)
+                .Select(group => new { Gender = group.Key, Count = group.Count() })
+                .ToList();
+
+            return new JsonResult(genderCounts);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+            return new JsonResult("An error occurred while processing the data.")
+            {
+                StatusCode = 500
+            };
+        }
+    }
+    public async Task<IActionResult> OnGetAgeDistributionDataAsync()
+    {
+        Console.WriteLine("Function called");
+        try
+        {
+            var juvenilesWithAge = _context.Juveniles
+                .Include(j => j.Age)
+                .ToList();
+
+            var Agegroups = juvenilesWithAge
+                .GroupBy(j => (j.Age/3)*3)
+                .OrderBy(group => group.Key)
+                .Select(group => new { AgeGroup = $"{group.Key}-{group.Key + 3}", Count = group.Count() })
+                .ToList();
+
+            return new JsonResult(Agegroups);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+            return new JsonResult("An error occurred while processing the data.")
+            {
+                StatusCode = 500
+            };
+        }
+    }
 }
