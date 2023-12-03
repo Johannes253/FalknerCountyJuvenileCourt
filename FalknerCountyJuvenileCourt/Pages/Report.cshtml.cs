@@ -100,4 +100,28 @@ public class ReportModel : PageModel
             };
         }
     }
+    public async Task<IActionResult> OnGetIntakeDecisionDistributionDataAsync()
+    {
+
+        try
+        {
+            var juvenileIntakeDecision = _context.IntakeDecisions.ToList();
+
+            var IntakeDecisionCounts = juvenileIntakeDecision
+                .Where(j => j.Name != null)
+                .GroupBy(j => j.Name)
+                .Select(group => new { IntakeDecisionCounts = group.Key, count = group.Count() })
+                .ToList();
+
+            return new JsonResult(IntakeDecisionCounts);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+            return new JsonResult("An error occurred while processing the data." +ex)
+            {
+                StatusCode = 500
+            };
+        }
+    }
 }
