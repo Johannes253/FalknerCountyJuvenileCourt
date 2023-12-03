@@ -124,4 +124,28 @@ public class ReportModel : PageModel
             };
         }
     }
+    public async Task<IActionResult> OnGetRiskDistributionDataAsync()
+    {
+
+        try
+        {
+            var juvenileRisk = _context.Risks.ToList();
+
+            var RiskCounts = juvenileRisk
+                .Where(j => j.Name != null)
+                .GroupBy(j => j.Name)
+                .Select(group => new { RiskCounts = group.Key, count = group.Count() })
+                .ToList();
+
+            return new JsonResult(RiskCounts);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+            return new JsonResult("An error occurred while processing the data." +ex)
+            {
+                StatusCode = 500
+            };
+        }
+    }
 }
