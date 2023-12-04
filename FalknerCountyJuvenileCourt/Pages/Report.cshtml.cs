@@ -134,10 +134,34 @@ public class ReportModel : PageModel
             var RiskCounts = juvenileRisk
                 .Where(j => j.Name != null)
                 .GroupBy(j => j.Name)
-                .Select(group => new { RiskCounts = group.Key, count = group.Count() })
+                .Select(group => new { riskCount = group.Key, count = group.Count() })
                 .ToList();
 
             return new JsonResult(RiskCounts);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+            return new JsonResult("An error occurred while processing the data." +ex)
+            {
+                StatusCode = 500
+            };
+        }
+    }
+    public async Task<IActionResult> OnGetSchoolDistributionDataAsync()
+    {
+
+        try
+        {
+            var juvenileSchool = _context.Schools.ToList();
+
+            var SchoolCounts = juvenileSchool
+                .Where(j => j.Name != null)
+                .GroupBy(j => j.Name)
+                .Select(group => new { schoolCount = group.Key, count = group.Count() })
+                .ToList();
+
+            return new JsonResult(SchoolCounts);
         }
         catch (Exception ex)
         {
