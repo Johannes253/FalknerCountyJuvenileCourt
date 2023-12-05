@@ -146,3 +146,28 @@ input[type=checkbox] {
   border-radius: 0;
   padding-right: 5px;
 }
+.forgot{
+  color: black;
+}
+.forgot:hover{
+  color:darkgoldenrod;
+}
+#login-submit, #registerSubmit{
+  color: #fff;
+  background-color: black;
+  border-color: black;
+  outline: 2px solid black;
+  text-decoration: none;
+  font-size: 1rem;
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
+  
+  transition-duration: 0.2s;
+}
+#login-submit:hover, #registerSubmit:hover{
+  background-color:darkgoldenrod;
+}
+.header{
+  background-color: rgba(58, 58, 41, 0.9);
+}
