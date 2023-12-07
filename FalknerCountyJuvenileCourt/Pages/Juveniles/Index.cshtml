@@ -5,9 +5,7 @@
     ViewData["Title"] = "Juveniles";
 }
 
-<div id=bottom>
-    Here you are able to view the current juveniles in the database.
-</div>
+
 
 <h1>Juveniles</h1>
 
@@ -21,7 +19,7 @@
             Find by ID:
             <input type="text" name="SearchID" value="@Model.CurrentFilter" />
             <input type="submit" value="Search" class="btn btn-primary" /> |
-            <a asp-page="./Index">Back to full List</a>
+            <a id="Back_To_List" asp-page="./Index">Back to full List</a>
         </p>
     </div>
 </form>
@@ -30,37 +28,37 @@
     <thead>
         <tr>
             <th>
-               <a asp-page="./Index" asp-route-sortOrder="@Model.IDSort"
+               <a id="Back_To_List" asp-page="./Index" asp-route-sortOrder="@Model.IDSort"
                   asp-route-currentFilter="@Model.CurrentFilter">
                   @Html.DisplayNameFor(model => model.Juveniles[0].ID)
                </a>
             </th>
             <th>
-               <a asp-page="./Index" asp-route-sortOrder="@Model.AgeSort"
+               <a id="Back_To_List" asp-page="./Index" asp-route-sortOrder="@Model.AgeSort"
                   asp-route-currentFilter="@Model.CurrentFilter">
                   @Html.DisplayNameFor(model => model.Juveniles[0].Age)
                </a>
             </th>
             <th>
-               <a asp-page="./Index" asp-route-sortOrder="@Model.RaceSort"
+               <a id="Back_To_List" asp-page="./Index" asp-route-sortOrder="@Model.RaceSort"
                   asp-route-currentFilter="@Model.CurrentFilter">
                   @Html.DisplayNameFor(model => model.Juveniles[0].Race)
                </a>
             </th>
             <th>
-               <a asp-page="./Index" asp-route-sortOrder="@Model.GenderSort"
+               <a id="Back_To_List" asp-page="./Index" asp-route-sortOrder="@Model.GenderSort"
                   asp-route-currentFilter="@Model.CurrentFilter">
                   @Html.DisplayNameFor(model => model.Juveniles[0].Gender)
                </a>
             </th>
             <th>
-               <a asp-page="./Index" asp-route-sortOrder="@Model.RiskSort"
+               <a id="Back_To_List" asp-page="./Index" asp-route-sortOrder="@Model.RiskSort"
                   asp-route-currentFilter="@Model.CurrentFilter">
                   @Html.DisplayNameFor(model => model.Juveniles[0].Risk)
                </a>
             </th>
             <th>
-               <a asp-page="./Index" asp-route-sortOrder="@Model.RepeatSort"
+               <a id="Back_To_List" asp-page="./Index" asp-route-sortOrder="@Model.RepeatSort"
                   asp-route-currentFilter="@Model.CurrentFilter">
                   @Html.DisplayNameFor(model => model.Juveniles[0].Repeat)
                </a>
@@ -108,13 +106,13 @@
    asp-route-sortOrder="@Model.CurrentSort"
    asp-route-pageIndex="@(Model.Juveniles.PageIndex - 1)"
    asp-route-currentFilter="@Model.CurrentFilter"
-   class="btn btn-primary @prevDisabled">
+   id="NP" class="btn btn-primary @prevDisabled">
    Previous
 </a>
 <a asp-page="./Index"
    asp-route-sortOrder="@Model.CurrentSort"
    asp-route-pageIndex="@(Model.Juveniles.PageIndex + 1)"
    asp-route-currentFilter="@Model.CurrentFilter"
-   class="btn btn-primary @nextDisabled">
+   id="NP" class="btn btn-primary @nextDisabled">
    Next
 </a>

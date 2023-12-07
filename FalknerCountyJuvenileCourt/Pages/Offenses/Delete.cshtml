@@ -5,9 +5,7 @@
     ViewData["Title"] = "Delete";
 }
 
-<div id=bottom>
-    Here you are able to delete a offense from being assigned to a juvenile.
-</div>
+
 
 <h1>Delete</h1>
 
@@ -26,6 +24,6 @@
     <form method="post">
         <input type="hidden" asp-for="Offense.ID" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
+        <a id="Back_To_List" asp-page="./Index">Back to List</a>
     </form>
 </div>
