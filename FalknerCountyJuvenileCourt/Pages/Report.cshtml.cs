@@ -172,4 +172,28 @@ public class ReportModel : PageModel
             };
         }
     }
+    public async Task<IActionResult> OnGetFilingDecisionDistributionDataAsync()
+    {
+
+        try
+        {
+            var juvenileFilingDecision = _context.FilingDecisions.ToList();
+
+            var FilingDecisionCounts = juvenileFilingDecision
+                .Where(j => j.Name != null)
+                .GroupBy(j => j.Name)
+                .Select(group => new { FilingDecisionCounts = group.Key, count = group.Count() })
+                .ToList();
+
+            return new JsonResult(FilingDecisionCounts);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+            return new JsonResult("An error occurred while processing the data." +ex)
+            {
+                StatusCode = 500
+            };
+        }
+    }
 }
