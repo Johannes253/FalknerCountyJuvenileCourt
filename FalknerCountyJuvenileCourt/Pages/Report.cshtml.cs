@@ -129,12 +129,14 @@ public class ReportModel : PageModel
 
         try
         {
-            var juvenileRisk = _context.Risks.ToList();
+            var juvenileRisk = _context.Juveniles
+                .Include(j => j.Risk)
+                .ToList();
 
             var RiskCounts = juvenileRisk
-                .Where(j => j.Name != null)
-                .GroupBy(j => j.Name)
-                .Select(group => new { riskCount = group.Key, count = group.Count() })
+                .Where(j => j.Risk != null)
+                .GroupBy(j => j.Risk.Name)
+                .Select(group => new { riskcount = group.Key, count = group.Count() })
                 .ToList();
 
             return new JsonResult(RiskCounts);
@@ -153,11 +155,13 @@ public class ReportModel : PageModel
 
         try
         {
-            var juvenileSchool = _context.Schools.ToList();
+            var juvenileSchool = _context.Crimes
+                .Include(j => j.School)
+                .ToList();
 
             var SchoolCounts = juvenileSchool
-                .Where(j => j.Name != null)
-                .GroupBy(j => j.Name)
+                .Where(j => j.School != null)
+                .GroupBy(j => j.School.Name)
                 .Select(group => new { schoolCount = group.Key, count = group.Count() })
                 .ToList();
 
@@ -182,7 +186,7 @@ public class ReportModel : PageModel
             var FilingDecisionCounts = juvenileFilingDecision
                 .Where(j => j.Name != null)
                 .GroupBy(j => j.Name)
-                .Select(group => new { FilingDecisionCounts = group.Key, count = group.Count() })
+                .Select(group => new { filingdecisioncount = group.Key, count = group.Count() })
                 .ToList();
 
             return new JsonResult(FilingDecisionCounts);

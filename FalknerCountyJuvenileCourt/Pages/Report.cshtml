@@ -245,7 +245,7 @@
  
                 console.log('Received RiskData:', RiskData);
  
-                var RiskLabels = RiskData.map(item => item.riskCount);
+                var RiskLabels = RiskData.map(item => item.riskcount);
                 var RiskValues = RiskData.map(item => item.count);
  
                 // Use predefined colors for the first 5 colors
@@ -339,7 +339,7 @@
  
                 console.log('Received FilingDecisionData:', FilingDecisionData);
  
-                var FilingDecisionLabels = FilingDecisionData.map(item => item.filingDecsionCounts);
+                var FilingDecisionLabels = FilingDecisionData.map(item => item.filingdecisioncount);
                 var FilingDecisionValues = FilingDecisionData.map(item => item.count);
  
                 // Use predefined colors for the first 5 colors
