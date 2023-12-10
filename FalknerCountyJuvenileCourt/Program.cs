@@ -15,13 +15,13 @@ if (string.IsNullOrEmpty(connectionString))
 
 builder.Services.AddDbContext<CourtContext>(options =>
 {
-    options.UseSqlite("Faulkner_ConnectionString");
+    options.UseSqlite("AZURE_SQL_CONNECTIONSTRING");
 });
 builder.Services.AddDistributedMemoryCache();
 
 
 var options = new DbContextOptionsBuilder<CourtContext>()
-    .UseSqlite("Faulkner_ConnectionString")
+    .UseSqlite("AZURE_SQL_CONNECTIONSTRING")
     .Options;
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
