@@ -9,14 +9,8 @@
             <canvas id="ArrestedRaceBarChart" width="400" height="400"></canvas>
         </div>
         <!-- Text 1 -->
-        <div style="flex: 1; font-size: 24px; margin-top: 150px;">
-            <p>African American: 105 (37.4%)<br>
-               Asian: 2 (.7%)<br>
-               Caucasian: 154 (54.8%) <br>
-               Latino: 20 (7.1%) <br>
-               Grand Total: 281
-            </p>
-        </div>
+        <div id="arrestedRaceText" style="flex: 1; font-size: 24px; margin-top: 150px;">
+    </div>
     </div>
     <br>
     <div style="display: flex; flex-direction: row;">
@@ -136,6 +130,10 @@
  
                 var raceLabels = raceData.map(item => item.race);
                 var raceValues = raceData.map(item => item.count);
+
+                var arrestedRaceText = document.getElementById('arrestedRaceText');
+                arrestedRaceText.innerHTML = raceData.map(item => `${item.race}: ${item.count} (${((item.count / raceData.reduce((acc, curr) => acc + curr.count, 0)) * 100).toFixed(1)}%)`).join('<br>') +
+                `<br>Grand Total: ${raceData.reduce((acc, curr) => acc + curr.count, 0)}`;
  
                 // Use predefined colors for the first 5 colors
                 var backgroundColors = predefinedColors.slice(0, Math.min(raceLabels.length, predefinedColors.length));
