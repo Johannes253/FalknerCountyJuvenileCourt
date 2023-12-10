@@ -15,13 +15,13 @@ if (string.IsNullOrEmpty(connectionString))
 
 builder.Services.AddDbContext<CourtContext>(options =>
 {
-    options.UseSqlite(Faulkner_ConnectionString);
+    options.UseSqlite("Faulkner_ConnectionString");
 });
 builder.Services.AddDistributedMemoryCache();
 
 
 var options = new DbContextOptionsBuilder<CourtContext>()
-    .UseSqlite(Faulkner_ConnectionString)
+    .UseSqlite("Faulkner_ConnectionString")
     .Options;
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
