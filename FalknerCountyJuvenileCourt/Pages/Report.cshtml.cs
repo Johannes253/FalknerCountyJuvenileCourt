@@ -284,4 +284,28 @@ public class ReportModel : PageModel
             };
         }
     }
+    public async Task<IActionResult> OnGetDelinquencyGenderDistributionDataAsync()
+    {
+
+        try
+        {
+            var juvenilesWithGender = _context.Crimes.ToList();
+
+            var genderCounts = juvenilesWithGender
+                .Where(j => j.FilingDecision.ID == 1)
+                .GroupBy(j => j.Juvenile.Gender.Name)
+                .Select(group => new { delinquencygender = group.Key, Count = group.Count() })
+                .ToList();
+
+            return new JsonResult(genderCounts);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+            return new JsonResult("An error occurred while processing the data.")
+            {
+                StatusCode = 500
+            };
+        }
+    }
 }
