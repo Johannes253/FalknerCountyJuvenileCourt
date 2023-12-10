@@ -13,7 +13,7 @@ if (string.IsNullOrEmpty(connectionString))
     throw new InvalidOperationException("Connection string 'CourtContext' not found.");
 }
 
-builder.Services.AddDbContext<Faulkner_ConnectionString>(options =>
+builder.Services.AddDbContext<CourtContext>(options =>
 {
     options.UseSqlite(Faulkner_ConnectionString);
 });
@@ -23,11 +23,11 @@ builder.Services.AddDistributedMemoryCache();
 {
     options.SignIn.RequireConfirmedAccount = true;
 })
-.AddEntityFrameworkStores<Faulkner_ConnectionString>();
+.AddEntityFrameworkStores<CourtContext>();
 */
 
 var options = new DbContextOptionsBuilder<CourtContext>()
-    .UseSqlite(Faulkner_ConnectionString)
+    .UseSqlite(CourtContext)
     .Options;
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
