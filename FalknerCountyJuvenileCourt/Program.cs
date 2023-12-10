@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-var connectionString = builder.Configuration.GetConnectionString("AZURE_POSTGRESQL_CONNECTIONSTRING");
+var connectionString = builder.Configuration.GetConnectionString("CourtContext");
 if (string.IsNullOrEmpty(connectionString))
 {
     throw new InvalidOperationException("Connection string 'CourtContext' not found.");
@@ -15,7 +15,7 @@ if (string.IsNullOrEmpty(connectionString))
 
 builder.Services.AddDbContext<CourtContext>(options =>
 {
-    options.UseSqlite(AZURE_POSTGRESQL_CONNECTIONSTRING);
+    options.UseSqlite(Faulkner_ConnectionString);
 });
 builder.Services.AddDistributedMemoryCache();
 
@@ -27,7 +27,7 @@ builder.Services.AddDistributedMemoryCache();
 */
 
 var options = new DbContextOptionsBuilder<CourtContext>()
-    .UseSqlite(AZURE_POSTGRESQL_CONNECTIONSTRING)
+    .UseSqlite(Faulkner_ConnectionString)
     .Options;
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
