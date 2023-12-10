@@ -43,6 +43,7 @@ namespace FalknerCountyJuvenileCourt.Pages.Crimes
                 return NotFound();
             }
 
+
             PopulateOffensesDropDownList(_context, Crime.OffenseID);
             PopulateIntakeDropDownList(_context, Crime.IntakeDecisionID);
             PopulateFilingDropDownList(_context, Crime.FilingDecisionID);
@@ -59,36 +60,41 @@ namespace FalknerCountyJuvenileCourt.Pages.Crimes
                 return NotFound();
             }
 
-            var offenseToUpdate = await _context.Offenses.FindAsync(id);
-            var intakeToUpdate = await _context.IntakeDecisions.FindAsync(id);
-            var filingToUpdate = await _context.FilingDecisions.FindAsync(id);
-            var schoolToUpdate = await _context.Schools.FindAsync(id);
+            var crimeToUpdate = await _context.Crimes.FindAsync(id);
 
-            if (offenseToUpdate == null || intakeToUpdate == null || filingToUpdate == null || schoolToUpdate == null) {
+            if (crimeToUpdate == null) {
                return NotFound();
             }
 
-            if (await TryUpdateModelAsync<Offense>(offenseToUpdate,"offense", c => c.ID, c => c.Name)) {
+            if (await TryUpdateModelAsync<Crime>(
+                  crimeToUpdate,"Crime", 
+                  c => c.FilingDecisionID,
+                  c => c.IntakeDecisionID,
+                  c => c.Date,
+                  c => c.SchoolID,
+                  c => c.DrugOffense,
+                  c => c.DrugCourt,
+                  c => c.OffenseID,
+                  c => c.Juvenile.FaulknerCountyIdentification)) {
                await _context.SaveChangesAsync();
-               return RedirectToPage("./Index");
-            }
-            if (await TryUpdateModelAsync<IntakeDecision>(intakeToUpdate,"intake decision?", c => c.ID, c => c.Name)) {
-               await _context.SaveChangesAsync();
-               return RedirectToPage("./Index");
-            }
-            if (await TryUpdateModelAsync<FilingDecision>(filingToUpdate,"filing", c => c.ID, c => c.Name)) {
-               await _context.SaveChangesAsync();
-               return RedirectToPage("./Index");
-            }
-            if (await TryUpdateModelAsync<School>(schoolToUpdate,"school", c => c.ID, c => c.Name)) {
-               await _context.SaveChangesAsync();
+               Console.WriteLine($"Crime with ID {id} successfully updated.");
                return RedirectToPage("./Index");
             }
 
-            PopulateOffensesDropDownList(_context, offenseToUpdate);
-            PopulateIntakeDropDownList(_context, intakeToUpdate);
-            PopulateFilingDropDownList(_context, filingToUpdate);
-            PopulateSchoolDropDownList(_context, schoolToUpdate);
+            Console.WriteLine($"Update failed for Crime with ID {id}. Model state errors:");
+            foreach (var key in ModelState.Keys)
+            {
+                var modelStateEntry = ModelState[key];
+                foreach (var error in modelStateEntry.Errors)
+                {
+                    Console.WriteLine($"Key: {key}, Error: {error.ErrorMessage}");
+                }
+            }
+
+            PopulateOffensesDropDownList(_context, crimeToUpdate.OffenseID);
+            PopulateIntakeDropDownList(_context, crimeToUpdate.IntakeDecisionID);
+            PopulateFilingDropDownList(_context, crimeToUpdate.FilingDecisionID);
+            PopulateSchoolDropDownList(_context, crimeToUpdate.SchoolID);
             return Page();
         }
     }

@@ -85,32 +85,6 @@ namespace FalknerCountyJuvenileCourt.Pages.Juveniles
                     Console.WriteLine($"Key: {key}, Error: {error.ErrorMessage}");
                 }
             }
-            if (id == null) {
-               return NotFound();
-            }
-
-            // Juvenile = await _context.Juveniles
-            //    .Include(j => j.Race)
-            //    .Include(j => j.Gender)
-            //    .Include(j => j.Risk)
-            //    .Include(j => j.Crimes)
-            //    .FirstOrDefaultAsync(m => m.ID == id);
-
-            // if (Juvenile == null) {
-            //     return NotFound();
-            // }
-
-            // if (await TryUpdateModelAsync<Juvenile>(
-            //       Juvenile, "juvenile", 
-            //       j => j.Age, 
-            //       j => j.RaceID, 
-            //       j => j.GenderID,
-            //       j => j.RiskID,
-            //       j => j.Repeat)) 
-            //    {
-            //    await _context.SaveChangesAsync();
-            //    return RedirectToPage("./Index");
-            // }
 
             PopulateRacesDropDownList(_context, juvenileToUpdate.RaceID);
             PopulateGendersDropDownList(_context, juvenileToUpdate.GenderID);

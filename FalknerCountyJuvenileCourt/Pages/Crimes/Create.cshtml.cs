@@ -39,7 +39,13 @@ namespace FalknerCountyJuvenileCourt.Pages.Crimes
          if (await TryUpdateModelAsync<Crime>(
             emptyCrime,
             "crime",   // Prefix for form value.
-            c => c.OffenseID, c => c.IntakeDecisionID, c => c.FilingDecisionID, c => c.SchoolID, c => c.JuvenileID))
+            c => c.OffenseID, 
+            c => c.IntakeDecisionID, 
+            c => c.FilingDecisionID, 
+            c => c.SchoolID, 
+            c => c.Date,
+            c => c.DrugCourt,
+            c => c.DrugOffense))
          {
             _context.Crimes.Add(emptyCrime);
             await _context.SaveChangesAsync();
