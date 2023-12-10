@@ -8,11 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using FalknerCountyJuvenileCourt.Data;
 using FalknerCountyJuvenileCourt.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FalknerCountyJuvenileCourt.Pages.Crimes
 {
     [Authorize]
-    public class IndexModel : PageModel
+    public class IndexModel : CrimeNamePageModel
     {
         private readonly FalknerCountyJuvenileCourt.Data.CourtContext _context;
 
@@ -34,11 +35,12 @@ namespace FalknerCountyJuvenileCourt.Pages.Crimes
          public string DCourtSort {get;set;}
          public string DateSort {get;set;}
          public string CurrentSort {get;set;}
+         public string DateFilter {get;set;}
          public string CurrentFilter {get;set;}
 
         public PaginatedList<Crime> Crimes { get;set; } = default!;
 
-        public async Task OnGetAsync(string sortOrder, string searchID, string searchJuvenile, string searchDate, string currentFilter, int? pageIndex) {
+        public async Task OnGetAsync(string sortOrder, string searchID, string dateFilter, string currentFilter, int? pageIndex) {
          CurrentSort = sortOrder;
          IDSort = String.IsNullOrEmpty(sortOrder) ? "id_desc" : "";
          JuvenileSort = sortOrder == "Juvenile" ? "juvenile_desc" : "Juvenile";
@@ -50,6 +52,12 @@ namespace FalknerCountyJuvenileCourt.Pages.Crimes
          DCourtSort = sortOrder == "DrugCourt" ? "drugCourt_desc" : "DrugCourt";
          DateSort = sortOrder == "Date" ? "date_desc" : "Date";
 
+         if (dateFilter != null) {
+            pageIndex = 1;
+         } else {
+            dateFilter = DateFilter;
+         }
+
          if (searchID != null) {
             pageIndex = 1;
          }
@@ -57,12 +65,18 @@ namespace FalknerCountyJuvenileCourt.Pages.Crimes
             searchID = currentFilter;
          }
 
+         // dateFilter = "2023";
+
          CurrentFilter = searchID;
+         DateFilter = dateFilter;
 
          IQueryable<Crime> crimesIQ = from c in _context.Crimes select c;
 
+         if (!String.IsNullOrEmpty(DateFilter)) {
+            crimesIQ = crimesIQ.Where(c => c.Date.ToString().Contains(dateFilter));
+         }
          if (!String.IsNullOrEmpty(searchID)) {
-            crimesIQ = crimesIQ.Where(c => c.ID == int.Parse(searchID));
+            crimesIQ = crimesIQ.Where(c => c.Juvenile.FaulknerCountyIdentification.Contains(searchID));
          }
 
          switch (sortOrder) {
@@ -131,7 +145,6 @@ namespace FalknerCountyJuvenileCourt.Pages.Crimes
                .Include(c => c.Offense)
                .Include(c => c.School)
                .AsNoTracking(), pageIndex ?? 1, pageSize);
-         
         }
     }
 }
