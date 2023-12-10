@@ -15,8 +15,9 @@ if (string.IsNullOrEmpty(connectionString))
 
 builder.Services.AddDbContext<CourtContext>(options =>
 {
-    options.UseSqlite(connectionString);
+    options.UseSqlite(AZURE_POSTGRESQL_CONNECTIONSTRING);
 });
+builder.Services.AddDistributedMemoryCache();
 
 /*builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
