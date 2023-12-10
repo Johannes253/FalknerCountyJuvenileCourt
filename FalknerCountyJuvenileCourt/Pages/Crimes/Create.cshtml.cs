@@ -41,7 +41,8 @@ namespace FalknerCountyJuvenileCourt.Pages.Crimes
             "crime",   // Prefix for form value.
             c => c.OffenseID, 
             c => c.IntakeDecisionID, 
-            c => c.FilingDecisionID, 
+            c => c.FilingDecisionID,
+            c => c.JuvenileID, 
             c => c.SchoolID, 
             c => c.Date,
             c => c.DrugCourt,
@@ -51,7 +52,6 @@ namespace FalknerCountyJuvenileCourt.Pages.Crimes
             await _context.SaveChangesAsync();
             return RedirectToPage("./Index");
          }
-
 
          PopulateOffensesDropDownList(_context, emptyCrime.OffenseID);
          PopulateIntakeDropDownList(_context, emptyCrime.IntakeDecisionID);

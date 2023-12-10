@@ -16,12 +16,17 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Crime.Juvenile" class="control-label"></label>
+               <div class="form-group">
+                <label asp-for="Crime.Juvenile.FaulknerCountyIdentification" class="control-label"></label>
+                <input asp-for="Crime.Juvenile.FaulknerCountyIdentification" class="form-control" />
+                <span asp-validation-for="Crime.Juvenile.FaulknerCountyIdentification" class="text-danger"></span>
+            </div>
+                @* <label asp-for="Crime.Juvenile" class="control-label"></label>
                 <select asp-for="Crime.JuvenileID" class="form-control"
                         asp-items="@Model.JuvenileNameSL">
                     <option value="">-- Select one --</option>
                 </select>
-                <span asp-validation-for="Crime.JuvenileID" class="text-danger" />
+                <span asp-validation-for="Crime.JuvenileID" class="text-danger" /> *@
             </div>
             <div class="form-group">
                 <label asp-for="Crime.Offense" class="control-label"></label>
