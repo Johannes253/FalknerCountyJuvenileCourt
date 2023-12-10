@@ -223,6 +223,85 @@ public class ReportModel : PageModel
             };
         }
     }
+    public async Task<IActionResult> OnGetDelinquencyRaceDistributionDataAsync()
+    {
+
+        try
+        {
+            var juvenilesWithrace = _context.Crimes
+                .Include(j => j.Juvenile)
+                .ToList();
+
+            var delinquencyrace = juvenilesWithrace
+                .Where(j => j.FilingDecision != null && j.FilingDecision.ID == 1 && j.Juvenile.Race != null)
+                .GroupBy(j => j.Juvenile.Race.Name)
+                .Select(group => new { delinquencyrace = group.Key, Count = group.Count() })
+                .ToList();
+
+            return new JsonResult(delinquencyrace);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+            return new JsonResult("An error occurred while processing the data." +ex)
+            {
+                StatusCode = 500
+            };
+        }
+    }
+    public async Task<IActionResult> OnGetDelinquencyGenderDistributionDataAsync()
+    {
+
+        try
+        {
+            var juvenilesWithGender = _context.Crimes
+                .Include(j => j.Juvenile)
+                .ToList();
+
+            var delinquencygender = juvenilesWithGender
+                .Where(j => j.FilingDecision != null && j.FilingDecision.ID == 1 && j.Juvenile.Gender != null)
+                .GroupBy(j => j.Juvenile.Gender.Name)
+                .Select(group => new { delinquencygender = group.Key, Count = group.Count() })
+                .ToList();
+
+            return new JsonResult(delinquencygender);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+            return new JsonResult("An error occurred while processing the data.")
+            {
+                StatusCode = 500
+            };
+        }
+    }
+    public async Task<IActionResult> OnGetDelinquencyAgeDistributionDataAsync()
+    {
+        Console.WriteLine("Function called");
+        try
+        {
+        var juvenilesWithAge = _context.Crimes
+            .Include(j => j.Juvenile)
+            .ToList();
+
+        var delinquencyage = juvenilesWithAge
+            .Where(j => j.FilingDecision != null && j.FilingDecision.ID == 1 && j.Juvenile.Age != null)
+            .GroupBy(j => ((j.Juvenile.Age - 1) / 3) * 3)
+            .OrderBy(group => group.Key)
+            .Select(group => new { delinquencyage = $"{group.Key + 1}-{group.Key + 3}", Count = group.Count() })
+            .ToList();
+
+            return new JsonResult(delinquencyage);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+            return new JsonResult("An error occurred while processing the data." +ex)
+            {
+                StatusCode = 500
+            };
+        }
+    }
     public async Task<IActionResult> OnGetRaceDistributionDataAsync()
     {
 
