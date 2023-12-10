@@ -24,8 +24,6 @@ var options = new DbContextOptionsBuilder<CourtContext>()
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDistributedMemoryCache();
-
 // Add Identity services
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
