@@ -17,8 +17,11 @@ builder.Services.AddDbContext<CourtContext>(options =>
 {
     options.UseSqlite("AZURE_SQL_CONNECTIONSTRING");
 });
-builder.Services.AddDistributedMemoryCache();
-
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+options.Configuration = builder.Configuration["AZURE_REDIS_CONNECTIONSTRING"];
+options.InstanceName = "SampleInstance";
+});
 
 var options = new DbContextOptionsBuilder<CourtContext>()
     .UseSqlite("AZURE_SQL_CONNECTIONSTRING")
