@@ -62,40 +62,43 @@ namespace FalknerCountyJuvenileCourt.Pages.Crimes
 
             var crimeToUpdate = await _context.Crimes.FindAsync(id);
 
-            if (crimeToUpdate == null) {
-               return NotFound();
+            if (crimeToUpdate == null)
+            {
+                return NotFound();
             }
 
             if (await TryUpdateModelAsync<Crime>(
-                  crimeToUpdate,"Crime", 
-                  c => c.FilingDecisionID,
-                  c => c.IntakeDecisionID,
-                  c => c.Date,
-                  c => c.SchoolID,
-                  c => c.DrugOffense,
-                  c => c.DrugCourt,
-                  c => c.OffenseID,
-                  c => c.Juvenile.FaulknerCountyIdentification)) {
-               await _context.SaveChangesAsync();
-               Console.WriteLine($"Crime with ID {id} successfully updated.");
-               return RedirectToPage("./Index");
-            }
-
-            Console.WriteLine($"Update failed for Crime with ID {id}. Model state errors:");
-            foreach (var key in ModelState.Keys)
+                crimeToUpdate, "Crime",
+                c => c.FilingDecisionID,
+                c => c.IntakeDecisionID,
+                c => c.Date,
+                c => c.SchoolID,
+                c => c.DrugOffense,
+                c => c.DrugCourt,
+                c => c.OffenseID))
             {
-                var modelStateEntry = ModelState[key];
-                foreach (var error in modelStateEntry.Errors)
-                {
-                    Console.WriteLine($"Key: {key}, Error: {error.ErrorMessage}");
-                }
-            }
+            crimeToUpdate.Juvenile.FaulknerCountyIdentification = Crime.Juvenile.FaulknerCountyIdentification;
 
-            PopulateOffensesDropDownList(_context, crimeToUpdate.OffenseID);
-            PopulateIntakeDropDownList(_context, crimeToUpdate.IntakeDecisionID);
-            PopulateFilingDropDownList(_context, crimeToUpdate.FilingDecisionID);
-            PopulateSchoolDropDownList(_context, crimeToUpdate.SchoolID);
-            return Page();
+            await _context.SaveChangesAsync();
+            Console.WriteLine($"Crime with ID {id} successfully updated.");
+            return RedirectToPage("./Index");
+        }
+
+        Console.WriteLine($"Update failed for Crime with ID {id}. Model state errors:");
+        foreach (var key in ModelState.Keys)
+        {
+            var modelStateEntry = ModelState[key];
+            foreach (var error in modelStateEntry.Errors)
+            {
+                Console.WriteLine($"Key: {key}, Error: {error.ErrorMessage}");
+            }
+        }
+
+        PopulateOffensesDropDownList(_context, crimeToUpdate.OffenseID);
+        PopulateIntakeDropDownList(_context, crimeToUpdate.IntakeDecisionID);
+        PopulateFilingDropDownList(_context, crimeToUpdate.FilingDecisionID);
+        PopulateSchoolDropDownList(_context, crimeToUpdate.SchoolID);
+        return Page();
         }
     }
 }
