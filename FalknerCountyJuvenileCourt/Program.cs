@@ -24,6 +24,12 @@ var options = new DbContextOptionsBuilder<CourtContext>()
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+options.Configuration = builder.Configuration["AZURE_REDIS_CONNECTIONSTRING"];
+options.InstanceName = "SampleInstance";
+});
+
 // Add Identity services
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
