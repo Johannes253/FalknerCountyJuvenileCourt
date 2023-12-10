@@ -22,8 +22,9 @@
                 <div>@Html.DisplayFor(model => model.Crime.ID)</div>
             </div>
             <div class="form-group">
-                <label asp-for="Crime.Juvenile" class="control-label"></label>
-                <div>@Html.DisplayFor(model => model.Crime.Juvenile.FaulknerCountyIdentification)</div>
+                <label asp-for="Crime.Juvenile.FaulknerCountyIdentification" class="control-label"></label>
+                <input asp-for="Crime.Juvenile.FaulknerCountyIdentification" class="form-control" readonly/>
+                <span asp-validation-for="Crime.Juvenile.FaulknerCountyIdentification" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Crime.Offense" class="control-label"></label>

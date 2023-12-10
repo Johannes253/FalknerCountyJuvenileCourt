@@ -77,8 +77,12 @@ namespace FalknerCountyJuvenileCourt.Pages.Crimes
                 c => c.DrugCourt,
                 c => c.OffenseID))
             {
-            crimeToUpdate.Juvenile.FaulknerCountyIdentification = Crime.Juvenile.FaulknerCountyIdentification;
 
+            if (Crime.Juvenile != null && crimeToUpdate.Juvenile != null)
+            {
+                crimeToUpdate.Juvenile.FaulknerCountyIdentification = Crime.Juvenile.FaulknerCountyIdentification;
+            }
+            
             await _context.SaveChangesAsync();
             Console.WriteLine($"Crime with ID {id} successfully updated.");
             return RedirectToPage("./Index");
