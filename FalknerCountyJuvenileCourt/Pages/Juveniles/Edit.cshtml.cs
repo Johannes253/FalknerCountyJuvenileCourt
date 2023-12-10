@@ -71,9 +71,19 @@ namespace FalknerCountyJuvenileCourt.Pages.Juveniles
                   j => j.Repeat)) 
                {
                await _context.SaveChangesAsync();
+               Console.WriteLine($"Juvenile with ID {id} successfully updated.");
                return RedirectToPage("./Index");
             }
 
+            Console.WriteLine($"Update failed for Juvenile with ID {id}. Model state errors:");
+            foreach (var key in ModelState.Keys)
+            {
+                var modelStateEntry = ModelState[key];
+                foreach (var error in modelStateEntry.Errors)
+                {
+                    Console.WriteLine($"Key: {key}, Error: {error.ErrorMessage}");
+                }
+            }
             if (id == null) {
                return NotFound();
             }
