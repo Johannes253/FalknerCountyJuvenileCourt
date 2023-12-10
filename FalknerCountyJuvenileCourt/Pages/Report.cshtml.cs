@@ -294,7 +294,7 @@ public class ReportModel : PageModel
             var genderCounts = juvenilesWithGender
                 .Where(j => j.FilingDecision.ID == 1)
                 .GroupBy(j => j.Juvenile.Gender.Name)
-                .Select(group => new { delinquencygender = group.Key, Count = group.Count() })
+                .Select(group => new { gender = group.Key, Count = group.Count() })
                 .ToList();
 
             return new JsonResult(genderCounts);

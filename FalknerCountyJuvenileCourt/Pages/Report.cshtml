@@ -63,30 +63,61 @@
         </div>
     </div>
     <br>
-    <div style="width: 400px; height: 400px; margin-bottom: 40px;">
-        <h1>School Related Arrests</h1>
-        <canvas id="SchoolPieChart" width="400" height="400"></canvas>
+    <div style="display: flex; flex-direction: row;">
+        <!-- Graph 6 -->
+        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 40px;">
+            <h1>School Related Arrests</h1>
+            <canvas id="SchoolPieChart" width="400" height="400"></canvas>
+        </div>
+        <!-- Text 6 -->
+        <div id="schoolText" style="flex: 1; font-size: 24px; margin-top: 150px;">
+        </div>
     </div>
     <br>
-    <div style="width: 400px; height: 400px; margin-bottom: 75px;">
-        <h1>Prosecutor Filing Decisions</h1>
-        <canvas id="FilingDecisionPieChart" width="400" height="400"></canvas>
+    <div style="display: flex; flex-direction: row;">
+        <!-- Graph 7 -->
+        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 75px;">
+            <h1>Prosecutor Filing Decisions</h1>
+            <canvas id="FilingDecisionPieChart" width="400" height="400"></canvas>
+        </div>
+        <!-- Text 7 -->
+        <div id="filingDecisionText" style="flex: 1; font-size: 24px; margin-top: 150px;">
+        </div>
     </div>
     <br>
-    <div style="width: 400px; height: 400px; margin-bottom: 35px;">
-        <h1>Admissions by Race</h1>
-        <canvas id="adracePieChart" width="400" height="400"></canvas>
+    <div style="display: flex; flex-direction: row;">
+        <!-- Graph 8 -->
+        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 35px;">
+            <h1>Admissions by Race</h1>
+            <canvas id="adracePieChart" width="400" height="400"></canvas>
+        </div>
+        <!-- Text 8 -->
+        <div id="adraceText" style="flex: 1; font-size: 24px; margin-top: 150px;">
+        </div>
     </div>
     <br>
-    <div style="width: 400px; height: 400px; margin-bottom: 40px;">
-        <h1>Admission by Gender</h1>
-        <canvas id="adgenderPieChart" width="400" height="400"></canvas>
+    <div style="display: flex; flex-direction: row;">
+        <!-- Graph 9 -->
+        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 40px;">
+            <h1>Admission by Gender</h1>
+            <canvas id="adgenderPieChart" width="400" height="400"></canvas>
+        </div>
+        <!-- Text 9 -->
+        <div id="adgenderText" style="flex: 1; font-size: 24px; margin-top: 150px;">
+        </div>
     </div>
     <br>
-    <div style="width: 400px; height: 400px; margin-bottom: 40px;">
-        <h1>Admission by Age</h1>
-        <canvas id="adagebarChart" width="400" height="400"></canvas>
+    <div style="display: flex; flex-direction: row;">
+        <!-- Graph 10 -->
+        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 40px;">
+            <h1>Admission by Age</h1>
+            <canvas id="adagebarChart" width="400" height="400"></canvas>
+        </div>
+        <!-- Text 10 -->
+        <div id="adageText" style="flex: 1; font-size: 24px; margin-top: 150px;">
+        </div>
     </div>
+    <br>
     <div style="width: 400px; height: 400px; margin-bottom: 40px;">
         <h1>School and Non-School Related Delinquency Petitions</h1>
         <canvas id="DelinquencyGenderPieChart" width="400" height="400"></canvas>
@@ -377,6 +408,10 @@
  
                 var SchoolLabels = SchoolData.map(item => item.schoolCount);
                 var SchoolValues = SchoolData.map(item => item.count);
+
+                var schoolText = document.getElementById('schoolText');
+                schoolText.innerHTML = SchoolData.map(item => `${item.schoolCount}: ${item.count} (${((item.count / SchoolData.reduce((acc, curr) => acc + curr.count, 0)) * 100).toFixed(1)}%)`).join('<br>') +
+                `<br>Grand Total: ${SchoolData.reduce((acc, curr) => acc + curr.count, 0)}`;
  
                 // Use predefined colors for the first 5 colors
                 var backgroundColors = predefinedColors.slice(0, Math.min(SchoolLabels.length, predefinedColors.length));
@@ -424,6 +459,10 @@
  
                 var FilingDecisionLabels = FilingDecisionData.map(item => item.filingdecisioncount);
                 var FilingDecisionValues = FilingDecisionData.map(item => item.count);
+
+                var filingDecisionText = document.getElementById('filingDecisionText');
+                filingDecisionText.innerHTML = FilingDecisionData.map(item => `${item.filingdecisioncount}: ${item.count} (${((item.count / FilingDecisionData.reduce((acc, curr) => acc + curr.count, 0)) * 100).toFixed(1)}%)`).join('<br>') +
+                `<br>Grand Total: ${FilingDecisionData.reduce((acc, curr) => acc + curr.count, 0)}`;
  
                 // Use predefined colors for the first 5 colors
                 var backgroundColors = predefinedColors.slice(0, Math.min(FilingDecisionLabels.length, predefinedColors.length));
@@ -471,6 +510,10 @@
  
                 var raceLabels = raceData.map(item => item.race);
                 var raceValues = raceData.map(item => item.count);
+
+                var adraceText = document.getElementById('adraceText');
+                adraceText.innerHTML = raceData.map(item => `${item.race}: ${item.count} (${((item.count / raceData.reduce((acc, curr) => acc + curr.count, 0)) * 100).toFixed(1)}%)`).join('<br>') +
+                `<br>Grand Total: ${raceData.reduce((acc, curr) => acc + curr.count, 0)}`;
  
                 // Use predefined colors for the first 5 colors
                 var backgroundColors = predefinedColors.slice(0, Math.min(raceLabels.length, predefinedColors.length));
@@ -518,6 +561,10 @@
  
                 var genderLabels = genderData.map(item => item.gender);
                 var genderValues = genderData.map(item => item.count);
+
+                var adgenderText = document.getElementById('adgenderText');
+                adgenderText.innerHTML = genderData.map(item => `${item.gender}: ${item.count} (${((item.count / genderData.reduce((acc, curr) => acc + curr.count, 0)) * 100).toFixed(1)}%)`).join('<br>') +
+                `<br>Grand Total: ${genderData.reduce((acc, curr) => acc + curr.count, 0)}`;
  
                 // Use predefined colors for the first 5 colors
                 var backgroundColors = predefinedColors.slice(0, Math.min(genderLabels.length, predefinedColors.length));
@@ -564,6 +611,10 @@
 
                 var ageLabels = ageData.map(item => item.ageGroups);
                 var ageValues = ageData.map(item => item.count);
+
+                var adageText = document.getElementById('adageText');
+                adageText.innerHTML = ageData.map(item => `${item.ageGroups}: ${item.count} (${((item.count / ageData.reduce((acc, curr) => acc + curr.count, 0)) * 100).toFixed(1)}%)`).join('<br>') +
+                `<br>Grand Total: ${ageData.reduce((acc, curr) => acc + curr.count, 0)}`;
 
                 // Use predefined colors for the first 5 colors
                 var backgroundColors = predefinedColors.slice(0, Math.min(ageLabels.length, predefinedColors.length));
