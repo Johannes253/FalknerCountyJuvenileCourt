@@ -126,20 +126,20 @@ public class ReportModel : PageModel
     public async Task<IActionResult> OnGetRiskDistributionDataAsync()
     {
 
-        try
-        {
-            var juvenileRisk = _context.Juveniles
-                .Include(j => j.Risk)
-                .ToList();
+         try
+    {
+        var juvenileRisk = _context.Juveniles
+            .Include(j => j.Risk)
+            .ToList();
 
-            var RiskCounts = juvenileRisk
-                .Where(j => j.Risk != null)
-                .GroupBy(j => j.Risk.Name)
-                .Select(group => new { riskcount = group.Key, count = group.Count() })
-                .ToList();
+        var RiskCounts = juvenileRisk
+            .Where(j => j.Risk != null)
+            .GroupBy(j => j.Risk.Name)
+            .Select(group => new { riskcount = group.Key.ToString(), count = group.Count() })
+            .ToList();
 
-            return new JsonResult(RiskCounts);
-        }
+        return new JsonResult(RiskCounts);
+    }
         catch (Exception ex)
         {
             Console.WriteLine(ex.ToString());
