@@ -20,10 +20,7 @@
             <canvas id="genderPieChart" width="400" height="400"></canvas>
         </div>
         <!-- Text 2 -->
-        <div style= "flex 1; font-size: 24px; margin-top: 150px;">
-            <p> Male: 170<br>
-                Female: 111
-            </p>
+        <div id="genderText" style="flex: 1; font-size: 24px; margin-top: 150px;">
         </div>
     </div>
     <br>
@@ -182,6 +179,10 @@
  
                 var genderLabels = genderData.map(item => item.gender);
                 var genderValues = genderData.map(item => item.count);
+
+                var genderText = document.getElementById('genderText');
+                genderText.innerHTML = genderData.map(item => `${item.gender}: ${item.count} (${((item.count / genderData.reduce((acc, curr) => acc + curr.count, 0)) * 100).toFixed(1)}%)`).join('<br>') +
+                `<br>Grand Total: ${genderData.reduce((acc, curr) => acc + curr.count, 0)}`;
  
                 // Use predefined colors for the first 5 colors
                 var backgroundColors = predefinedColors.slice(0, Math.min(genderLabels.length, predefinedColors.length));
