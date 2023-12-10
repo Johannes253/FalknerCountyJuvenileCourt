@@ -59,12 +59,7 @@
             <canvas id="RiskPieChart" width="400" height="400"></canvas>
         </div>
         <!-- Text 5 -->
-        <div style= "flex 1; font-size: 24px; margin-top: 150px;">
-            <p> High Risk: 28<br>
-                Moderate Risk: 14<br>
-                Low Risk: 4<br>
-                Unknown:: 14
-            </p>
+         <div id="savryText" style="flex: 1; font-size: 24px; margin-top: 150px;">
         </div>
     </div>
     <br>
@@ -327,6 +322,10 @@
  
                 var RiskLabels = RiskData.map(item => item.riskcount);
                 var RiskValues = RiskData.map(item => item.count);
+
+                var savryText = document.getElementById('savryText');
+                savryText.innerHTML = RiskData.map(item => `${item.riskcount}: ${item.count} (${((item.count / RiskData.reduce((acc, curr) => acc + curr.count, 0)) * 100).toFixed(1)}%)`).join('<br>') +
+                `<br>Grand Total: ${RiskData.reduce((acc, curr) => acc + curr.count, 0)}`;
  
                 // Use predefined colors for the first 5 colors
                 var backgroundColors = predefinedColors.slice(0, Math.min(RiskLabels.length, predefinedColors.length));
