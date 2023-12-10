@@ -7,13 +7,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-var connectionString = builder.Configuration.GetConnectionString("CourtContext");
+var connectionString = builder.Configuration.GetConnectionString("Faulkner_ConnectionString");
 if (string.IsNullOrEmpty(connectionString))
 {
     throw new InvalidOperationException("Connection string 'CourtContext' not found.");
 }
 
-builder.Services.AddDbContext<CourtContext>(options =>
+builder.Services.AddDbContext<Faulkner_ConnectionString>(options =>
 {
     options.UseSqlite(Faulkner_ConnectionString);
 });
@@ -23,10 +23,10 @@ builder.Services.AddDistributedMemoryCache();
 {
     options.SignIn.RequireConfirmedAccount = true;
 })
-.AddEntityFrameworkStores<CourtContext>();
+.AddEntityFrameworkStores<Faulkner_ConnectionString>();
 */
 
-var options = new DbContextOptionsBuilder<CourtContext>()
+var options = new DbContextOptionsBuilder<Faulkner_ConnectionString>()
     .UseSqlite(Faulkner_ConnectionString)
     .Options;
 
@@ -37,7 +37,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
 })
-.AddEntityFrameworkStores<CourtContext>();
+.AddEntityFrameworkStores<Faulkner_ConnectionString>();
 
 var app = builder.Build();
 
@@ -57,7 +57,7 @@ using (var scope = app.Services.CreateScope())
 {
    var services = scope.ServiceProvider;
 
-   var context = services.GetRequiredService<CourtContext>();
+   var context = services.GetRequiredService<Faulkner_ConnectionString>();
    // context.Database.EnsureCreated();
   DbInitializer.Initialize(context);
 }
