@@ -16,24 +16,122 @@ namespace FalknerCountyJuvenileCourt.Pages.Crimes
     {
         private readonly FalknerCountyJuvenileCourt.Data.CourtContext _context;
 
-        public IndexModel(FalknerCountyJuvenileCourt.Data.CourtContext context)
+        private readonly IConfiguration Configuration;
+
+        public IndexModel(CourtContext context, IConfiguration configuration)
         {
             _context = context;
+            Configuration = configuration;
         }
 
-        public IList<Crime> Crimes { get;set; } = default!;
+         public string IDSort {get;set;}
+         public string JuvenileSort {get;set;}
+         public string OffenseSort {get;set;}
+         public string IntakeSort {get;set;}
+         public string FilingSort {get;set;}
+         public string SchoolSort {get;set;}
+         public string DOffenseSort {get;set;}
+         public string DCourtSort {get;set;}
+         public string DateSort {get;set;}
+         public string CurrentSort {get;set;}
+         public string CurrentFilter {get;set;}
 
-        public async Task OnGetAsync()
-        {
-            if (_context.Crimes != null)
-            {
-                Crimes = await _context.Crimes
-                .Include(c => c.FilingDecision)
-                .Include(c => c.IntakeDecision)
-                .Include(c => c.Juvenile)
-                .Include(c => c.Offense)
-                .Include(c => c.School).ToListAsync();
-            }
+        public PaginatedList<Crime> Crimes { get;set; } = default!;
+
+        public async Task OnGetAsync(string sortOrder, string searchID, string searchJuvenile, string searchDate, string currentFilter, int? pageIndex) {
+         CurrentSort = sortOrder;
+         IDSort = String.IsNullOrEmpty(sortOrder) ? "id_desc" : "";
+         JuvenileSort = sortOrder == "Juvenile" ? "juvenile_desc" : "Juvenile";
+         OffenseSort = sortOrder == "Offense" ? "offense_desc" : "Offense";
+         IntakeSort = sortOrder == "Intake" ? "intake_desc" : "Intake";
+         FilingSort = sortOrder == "Filing" ? "filing_desc" : "Filing";
+         SchoolSort = sortOrder == "School" ? "school_desc" : "School";
+         DOffenseSort = sortOrder == "DrugOffense" ? "drugOffense_desc" : "DrugOffense";
+         DCourtSort = sortOrder == "DrugCourt" ? "drugCourt_desc" : "DrugCourt";
+         DateSort = sortOrder == "Date" ? "date_desc" : "Date";
+
+         if (searchID != null) {
+            pageIndex = 1;
+         }
+         else {
+            searchID = currentFilter;
+         }
+
+         CurrentFilter = searchID;
+
+         IQueryable<Crime> crimesIQ = from c in _context.Crimes select c;
+
+         if (!String.IsNullOrEmpty(searchID)) {
+            crimesIQ = crimesIQ.Where(c => c.ID == int.Parse(searchID));
+         }
+
+         switch (sortOrder) {
+            case "id_desc":
+               crimesIQ = crimesIQ.OrderByDescending(s => s.ID);
+               break;
+            case "Juvenile":
+               crimesIQ = crimesIQ.OrderBy(s => s.Juvenile.FaulknerCountyIdentification);
+               break;
+            case "juvenile_desc":
+               crimesIQ = crimesIQ.OrderByDescending(s => s.Juvenile.FaulknerCountyIdentification);
+               break;
+            case "Offense":
+               crimesIQ = crimesIQ.OrderBy(s => s.Offense);
+               break;
+            case "offense_desc":
+               crimesIQ = crimesIQ.OrderByDescending(s => s.Offense);
+               break;
+            case "Intake":
+               crimesIQ = crimesIQ.OrderBy(s => s.IntakeDecision);
+               break;
+            case "intake_desc":
+               crimesIQ = crimesIQ.OrderByDescending(s => s.IntakeDecision);
+               break;
+            case "Filing":
+               crimesIQ = crimesIQ.OrderBy(s => s.FilingDecision);
+               break;
+            case "filing_desc":
+               crimesIQ = crimesIQ.OrderByDescending(s => s.FilingDecision);
+               break;
+            case "School":
+               crimesIQ = crimesIQ.OrderBy(s => s.School);
+               break;
+            case "school_desc":
+               crimesIQ = crimesIQ.OrderByDescending(s => s.School);
+               break;
+            case "DrugOffense":
+               crimesIQ = crimesIQ.OrderBy(s => s.DrugOffense);
+               break;
+            case "drugOffense_desc":
+               crimesIQ = crimesIQ.OrderByDescending(s => s.DrugOffense);
+               break;
+            case "DrugCourt":
+               crimesIQ = crimesIQ.OrderBy(s => s.DrugCourt);
+               break;
+            case "drugCourt_desc":
+               crimesIQ = crimesIQ.OrderByDescending(s => s.DrugCourt);
+               break;
+            case "Date":
+               crimesIQ = crimesIQ.OrderBy(s => s.Date);
+               break;
+            case "date_desc":
+               crimesIQ = crimesIQ.OrderByDescending(s => s.Date);
+               break;
+            default:
+               crimesIQ = crimesIQ.OrderBy(s => s.ID);
+               break;
+         }
+
+         var pageSize = Configuration.GetValue("PageSize", 4);
+         Crimes = await PaginatedList<Crime>.CreateAsync
+            (crimesIQ
+               .Include(c => c.FilingDecision)
+               .Include(c => c.IntakeDecision)
+               .Include(c => c.Juvenile)
+               .Include(c => c.Offense)
+               .Include(c => c.School)
+               .AsNoTracking(), pageIndex ?? 1, pageSize);
+         
         }
     }
 }
