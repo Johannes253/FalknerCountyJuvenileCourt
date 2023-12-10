@@ -104,11 +104,8 @@ public class ReportModel : PageModel
 
         try
         {
-            var juvenileIntakeDecision = _context.IntakeDecisions.ToList();
-
-            var IntakeDecisionCounts = juvenileIntakeDecision
-                .Where(j => j.Name != null)
-                .GroupBy(j => j.Name)
+            var IntakeDecisionCounts = _context.Crimes
+                .GroupBy(j => j.IntakeDecisionID)
                 .Select(group => new { IntakeDecisionCounts = group.Key, count = group.Count() })
                 .ToList();
 
@@ -180,11 +177,8 @@ public class ReportModel : PageModel
 
         try
         {
-            var juvenileFilingDecision = _context.FilingDecisions.ToList();
-
-            var FilingDecisionCounts = juvenileFilingDecision
-                .Where(j => j.Name != null)
-                .GroupBy(j => j.Name)
+            var FilingDecisionCounts = _context.Crimes
+                .GroupBy(j => j.FilingDecisionID)
                 .Select(group => new { filingdecisioncount = group.Key, count = group.Count() })
                 .ToList();
 
