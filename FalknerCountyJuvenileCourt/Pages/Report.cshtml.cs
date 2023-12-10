@@ -199,6 +199,30 @@ public class ReportModel : PageModel
             };
         }
     }
+    public async Task<IActionResult> OnGetDelinquencySchoolDistributionDataAsync()
+    {
+
+        try
+        {
+            var juvenilesWithSchool = _context.Crimes.ToList();
+
+            var delinquencyschool = juvenilesWithSchool
+                .Where(j => j.FilingDecision != null && j.FilingDecision.ID == 1 && j.School != null)
+                .GroupBy(j => j.School.Name)
+                .Select(group => new { delinquencyschool = group.Key, Count = group.Count() })
+                .ToList();
+
+            return new JsonResult(delinquencyschool);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+            return new JsonResult("An error occurred while processing the data." +ex)
+            {
+                StatusCode = 500
+            };
+        }
+    }
     public async Task<IActionResult> OnGetRaceDistributionDataAsync()
     {
 
@@ -284,25 +308,75 @@ public class ReportModel : PageModel
             };
         }
     }
-    public async Task<IActionResult> OnGetDelinquencyGenderDistributionDataAsync()
+    public async Task<IActionResult> OnGetAdRiskDistributionDataAsync()
+    {
+
+         try
+    {
+        var juvenileRisk = _context.Juveniles
+            .Include(j => j.Risk)
+            .ToList();
+
+        var AdRiskCounts = juvenileRisk
+            .Where(j => j.Risk != null)
+            .GroupBy(j => j.Risk.Name)
+            .Select(group => new { adriskcount = group.Key.ToString(), count = group.Count() })
+            .ToList();
+
+        return new JsonResult(AdRiskCounts);
+    }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+            return new JsonResult("An error occurred while processing the data." +ex)
+            {
+                StatusCode = 500
+            };
+        }
+    }
+    public async Task<IActionResult> OnGetDrugGenderDistributionDataAsync()
     {
 
         try
         {
             var juvenilesWithGender = _context.Crimes.ToList();
 
-            var genderCounts = juvenilesWithGender
-                .Where(j => j.FilingDecision.ID == 1)
+            var druggenderCounts = juvenilesWithGender
+                .Where(j => j.DrugCourt == true)
                 .GroupBy(j => j.Juvenile.Gender.Name)
-                .Select(group => new { gender = group.Key, Count = group.Count() })
+                .Select(group => new { druggendercount = group.Key, Count = group.Count() })
                 .ToList();
 
-            return new JsonResult(genderCounts);
+            return new JsonResult(druggenderCounts);
         }
         catch (Exception ex)
         {
             Console.WriteLine(ex.ToString());
-            return new JsonResult("An error occurred while processing the data.")
+            return new JsonResult("An error occurred while processing the data." +ex)
+            {
+                StatusCode = 500
+            };
+        }
+    }
+    public async Task<IActionResult> OnGetDrugRaceDistributionDataAsync()
+    {
+
+        try
+        {
+            var juvenilesWithRace = _context.Crimes.ToList();
+
+            var drugraceCounts = juvenilesWithRace
+                .Where(j => j.DrugCourt == true)
+                .GroupBy(j => j.Juvenile.Race.Name)
+                .Select(group => new { drugracecount = group.Key, Count = group.Count() })
+                .ToList();
+
+            return new JsonResult(drugraceCounts);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+            return new JsonResult("An error occurred while processing the data." +ex)
             {
                 StatusCode = 500
             };

@@ -87,40 +87,77 @@
     <br>
     <div style="display: flex; flex-direction: row;">
         <!-- Graph 8 -->
-        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 35px;">
-            <h1>Admissions by Race</h1>
-            <canvas id="adracePieChart" width="400" height="400"></canvas>
+        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 75px;">
+            <h1>School and Non-School Related Delinquency Petitions</h1>
+            <canvas id="DelinquencySchoolPieChart" width="400" height="400"></canvas>
         </div>
         <!-- Text 8 -->
-        <div id="adraceText" style="flex: 1; font-size: 24px; margin-top: 150px;">
+        <div id="DelinquencySchoolText" style="flex: 1; font-size: 24px; margin-top: 150px;">
         </div>
     </div>
     <br>
     <div style="display: flex; flex-direction: row;">
         <!-- Graph 9 -->
-        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 40px;">
-            <h1>Admission by Gender</h1>
-            <canvas id="adgenderPieChart" width="400" height="400"></canvas>
+        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 35px;">
+            <h1>Admissions by Race</h1>
+            <canvas id="adracePieChart" width="400" height="400"></canvas>
         </div>
         <!-- Text 9 -->
-        <div id="adgenderText" style="flex: 1; font-size: 24px; margin-top: 150px;">
+        <div id="adraceText" style="flex: 1; font-size: 24px; margin-top: 150px;">
         </div>
     </div>
     <br>
     <div style="display: flex; flex-direction: row;">
         <!-- Graph 10 -->
         <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 40px;">
-            <h1>Admission by Age</h1>
-            <canvas id="adagebarChart" width="400" height="400"></canvas>
+            <h1>Admission by Gender</h1>
+            <canvas id="adgenderPieChart" width="400" height="400"></canvas>
         </div>
         <!-- Text 10 -->
+        <div id="adgenderText" style="flex: 1; font-size: 24px; margin-top: 150px;">
+        </div>
+    </div>
+    <br>
+    <div style="display: flex; flex-direction: row;">
+        <!-- Graph 11 -->
+        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 40px;">
+            <h1>Admissions by Age</h1>
+            <canvas id="adagebarChart" width="400" height="400"></canvas>
+        </div>
+        <!-- Text 11 -->
         <div id="adageText" style="flex: 1; font-size: 24px; margin-top: 150px;">
         </div>
     </div>
     <br>
-    <div style="width: 400px; height: 400px; margin-bottom: 40px;">
-        <h1>School and Non-School Related Delinquency Petitions</h1>
-        <canvas id="DelinquencyGenderPieChart" width="400" height="400"></canvas>
+    <div style="display: flex; flex-direction: row;">
+        <!-- Graph 12 -->
+        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 130px;">
+            <h1>SAVRY Levels of Admitted Youth</h1>
+            <canvas id="AdRiskPieChart" width="400" height="400"></canvas>
+        </div>
+        <!-- Text 12 -->
+         <div id="adsavryText" style="flex: 1; font-size: 24px; margin-top: 150px;">
+        </div>
+    </div>
+    <div style="display: flex; flex-direction: row;">
+        <!-- Graph 13 -->
+        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 130px;">
+            <h1>Participants by Gender</h1>
+            <canvas id="DrugGenderPieChart" width="400" height="400"></canvas>
+        </div>
+        <!-- Text 13 -->
+         <div id="DrugGenderText" style="flex: 1; font-size: 24px; margin-top: 120px;">
+        </div>
+    </div>
+    <div style="display: flex; flex-direction: row;">
+        <!-- Graph 14 -->
+        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 130px;">
+            <h1>Participants by Race</h1>
+            <canvas id="DrugRacePieChart" width="400" height="400"></canvas>
+        </div>
+        <!-- Text 14 -->
+         <div id="DrugRaceText" style="flex: 1; font-size: 24px; margin-top: 150px;">
+        </div>
     </div>
  
  
@@ -497,6 +534,55 @@
     });
     document.addEventListener('DOMContentLoaded', async function () {
         try {
+            var response = await fetch('/Report?handler=DelinquencySchoolDistributionData', {
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            if (response.ok) {
+                var DelinquencySchoolData = await response.json();
+
+                console.log('Received DelinquencySchoolData:', DelinquencySchoolData);
+
+                var DelinquencySchoolLabels = DelinquencySchoolData.map(item => item.delinquencyschool);
+                var DelinquencySchoolValues = DelinquencySchoolData.map(item => item.Count);
+
+                var DelinquencySchoolText = document.getElementById('DelinquencySchoolText');
+                DelinquencySchoolText.innerHTML = DelinquencySchoolData.map(item => `${item.delinquencyschool}: ${item.Count} (${((item.Count / DelinquencySchoolData.reduce((acc, curr) => acc + curr.Count, 0)) * 100).toFixed(1)}%)`).join('<br>') +
+                `<br>Grand Total: ${DelinquencySchoolData.reduce((acc, curr) => acc + curr.Count, 0)}`;
+
+                // Use predefined colors for the first 5 colors
+                var backgroundColors = predefinedColors.slice(0, Math.min(DelinquencySchoolLabels.length, predefinedColors.length));
+                backgroundColors = backgroundColors.concat(generateRandomColors(Math.max(0, DelinquencySchoolLabels.length - predefinedColors.length)));
+
+                var ctx = document.getElementById('DelinquencySchoolPieChart').getContext('2d');
+                var DelinquencySchoolPieChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: DelinquencySchoolLabels,
+                        datasets: [{
+                            data: DelinquencySchoolValues,
+                            backgroundColor: backgroundColors
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                });
+            } else {
+                console.error("Error fetching data. Status:", response.status);
+                console.log("Raw response data:", await response.text());
+            }
+        } catch (error) {
+            console.error("Error fetching or parsing data:", error);
+        }
+    });
+    document.addEventListener('DOMContentLoaded', async function () {
+        try {
             var response = await fetch('/Report?handler=RaceDistributionData', {
                 headers: {
                     'Accept': 'application/json'
@@ -649,30 +735,35 @@
     });
     document.addEventListener('DOMContentLoaded', async function () {
         try {
-            var response = await fetch('/Report?handler=DelinquencyGenderDistributionData', {
+            var response = await fetch('/Report?handler=AdRiskDistributionData', {
                 headers: {
                     'Accept': 'application/json'
                 }
             });
+            //console.log("Raw response data:", await response.text());
             if (response.ok) {
-                var delinquencyData = await response.json();
+                var AdRiskData = await response.json();
+ 
+                console.log('Received AdRiskData:', AdRiskData);
+ 
+                var AdRiskLabels = AdRiskData.map(item => item.adriskcount);
+                var AdRiskValues = AdRiskData.map(item => item.count);
 
-                console.log('Received DelinquencyData:', delinquencyData);
-
-                var delinquencyLabels = delinquencyData.map(item => item.delinquencygender);
-                var delinquencyValues = delinquencyData.map(item => item.count);
-
+                var adsavryText = document.getElementById('adsavryText');
+                adsavryText.innerHTML = AdRiskData.map(item => `${item.adriskcount}: ${item.count} (${((item.count / AdRiskData.reduce((acc, curr) => acc + curr.count, 0)) * 100).toFixed(1)}%)`).join('<br>') +
+                `<br>Grand Total: ${AdRiskData.reduce((acc, curr) => acc + curr.count, 0)}`;
+ 
                 // Use predefined colors for the first 5 colors
-                var backgroundColors = predefinedColors.slice(0, Math.min(delinquencyLabels.length, predefinedColors.length));
-                backgroundColors = backgroundColors.concat(generateRandomColors(Math.max(0, delinquencyLabels.length - predefinedColors.length)));
-
-                var ctx = document.getElementById('DelinquencyGenderPieChart').getContext('2d');
-                var delinquencyPieChart = new Chart(ctx, {
+                var backgroundColors = predefinedColors.slice(0, Math.min(AdRiskLabels.length, predefinedColors.length));
+                backgroundColors = backgroundColors.concat(generateRandomColors(Math.max(0, AdRiskLabels.length - predefinedColors.length)));
+ 
+                var ctx = document.getElementById('AdRiskPieChart').getContext('2d');
+                var AdRiskPieChart = new Chart(ctx, {
                     type: 'pie',
                     data: {
-                        labels: delinquencyLabels,
+                        labels: AdRiskLabels,
                         datasets: [{
-                            data: delinquencyValues,
+                            data: AdRiskValues,
                             backgroundColor: backgroundColors
                         }]
                     },
@@ -690,6 +781,109 @@
             }
         } catch (error) {
             console.error("Error fetching or parsing data:", error);
+ 
+        }
+    });
+    document.addEventListener('DOMContentLoaded', async function () {
+        try {
+            var response = await fetch('/Report?handler=DrugGenderDistributionData', {
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            //console.log("Raw response data:", await response.text());
+            if (response.ok) {
+                var DrugGenderData = await response.json();
+ 
+                console.log('Received DrugGenderData:', DrugGenderData);
+ 
+                var DrugGenderLabels = DrugGenderData.map(item => item.druggendercount);
+                var DrugGenderValues = DrugGenderData.map(item => item.count);
+
+                var DrugGenderText = document.getElementById('DrugGenderText');
+                DrugGenderText.innerHTML = DrugGenderData.map(item => `${item.druggendercount}: ${item.count} (${((item.count / DrugGenderData.reduce((acc, curr) => acc + curr.count, 0)) * 100).toFixed(1)}%)`).join('<br>') +
+                `<br>Grand Total: ${DrugGenderData.reduce((acc, curr) => acc + curr.count, 0)}`;
+ 
+                // Use predefined colors for the first 5 colors
+                var backgroundColors = predefinedColors.slice(0, Math.min(DrugGenderLabels.length, predefinedColors.length));
+                backgroundColors = backgroundColors.concat(generateRandomColors(Math.max(0, DrugGenderLabels.length - predefinedColors.length)));
+ 
+                var ctx = document.getElementById('DrugGenderPieChart').getContext('2d');
+                var DrugGenderPieChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: DrugGenderLabels,
+                        datasets: [{
+                            data: DrugGenderValues,
+                            backgroundColor: backgroundColors
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                });
+            } else {
+                console.error("Error fetching data. Status:", response.status);
+                console.log("Raw response data:", await response.text());
+            }
+        } catch (error) {
+            console.error("Error fetching or parsing data:", error);
+ 
+        }
+    });
+    document.addEventListener('DOMContentLoaded', async function () {
+        try {
+            var response = await fetch('/Report?handler=DrugRaceDistributionData', {
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            //console.log("Raw response data:", await response.text());
+            if (response.ok) {
+                var DrugRaceData = await response.json();
+ 
+                console.log('Received DrugRaceData:', DrugRaceData);
+ 
+                var DrugRaceLabels = DrugRaceData.map(item => item.drugracecount);
+                var DrugRaceValues = DrugRaceData.map(item => item.count);
+
+                var DrugRaceText = document.getElementById('DrugRaceText');
+                DrugRaceText.innerHTML = DrugRaceData.map(item => `${item.drugracecount}: ${item.count} (${((item.count / DrugRaceData.reduce((acc, curr) => acc + curr.count, 0)) * 100).toFixed(1)}%)`).join('<br>') +
+                `<br>Grand Total: ${DrugRaceData.reduce((acc, curr) => acc + curr.count, 0)}`;
+ 
+                // Use predefined colors for the first 5 colors
+                var backgroundColors = predefinedColors.slice(0, Math.min(DrugRaceLabels.length, predefinedColors.length));
+                backgroundColors = backgroundColors.concat(generateRandomColors(Math.max(0, DrugRaceLabels.length - predefinedColors.length)));
+ 
+                var ctx = document.getElementById('DrugRacePieChart').getContext('2d');
+                var DrugRacePieChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: DrugRaceLabels,
+                        datasets: [{
+                            data: DrugRaceValues,
+                            backgroundColor: backgroundColors
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                });
+            } else {
+                console.error("Error fetching data. Status:", response.status);
+                console.log("Raw response data:", await response.text());
+            }
+        } catch (error) {
+            console.error("Error fetching or parsing data:", error);
+ 
         }
     });
  
