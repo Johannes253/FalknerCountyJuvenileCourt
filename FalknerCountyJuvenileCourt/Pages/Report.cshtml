@@ -274,6 +274,11 @@
  
                 var IntakeDecisionLabels = IntakeDecisionData.map(item => item.intakeDecisionCounts);
                 var IntakeDecisionValues = IntakeDecisionData.map(item => item.count);
+
+                var intakeText = document.getElementById('intakeText');
+                intakeText.innerHTML = IntakeDecisionData.map(item => `${item.intakeDecisionCounts}: ${item.count} (${((item.count / IntakeDecisionData.reduce((acc, curr) => acc + curr.count, 0)) * 100).toFixed(1)}%)`).join('<br>') +
+                `<br>Grand Total: ${IntakeDecisionData.reduce((acc, curr) => acc + curr.count, 0)}`;
+ 
  
                 // Use predefined colors for the first 5 colors
                 var backgroundColors = predefinedColors.slice(0, Math.min(IntakeDecisionLabels.length, predefinedColors.length));
