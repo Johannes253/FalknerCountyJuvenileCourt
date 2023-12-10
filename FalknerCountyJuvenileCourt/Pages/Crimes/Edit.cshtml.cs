@@ -43,10 +43,10 @@ namespace FalknerCountyJuvenileCourt.Pages.Crimes
                 return NotFound();
             }
 
-            PopulateOffensesDropDownList(_context, Crime.Offense.ID);
-            PopulateIntakeDropDownList(_context, Crime.IntakeDecision.ID);
-            PopulateFilingDropDownList(_context, Crime.FilingDecision.ID);
-            PopulateSchoolDropDownList(_context, Crime.School.ID);
+            PopulateOffensesDropDownList(_context, Crime.OffenseID);
+            PopulateIntakeDropDownList(_context, Crime.IntakeDecisionID);
+            PopulateFilingDropDownList(_context, Crime.FilingDecisionID);
+            PopulateSchoolDropDownList(_context, Crime.SchoolID);
             return Page();
         }
 
@@ -85,10 +85,10 @@ namespace FalknerCountyJuvenileCourt.Pages.Crimes
                return RedirectToPage("./Index");
             }
 
-            PopulateOffensesDropDownList(_context, offenseToUpdate.ID);
-            PopulateIntakeDropDownList(_context, intakeToUpdate.ID);
-            PopulateFilingDropDownList(_context, filingToUpdate.ID);
-            PopulateSchoolDropDownList(_context, schoolToUpdate.ID);
+            PopulateOffensesDropDownList(_context, offenseToUpdate);
+            PopulateIntakeDropDownList(_context, intakeToUpdate);
+            PopulateFilingDropDownList(_context, filingToUpdate);
+            PopulateSchoolDropDownList(_context, schoolToUpdate);
             return Page();
         }
     }

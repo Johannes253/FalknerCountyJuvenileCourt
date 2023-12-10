@@ -8,6 +8,7 @@ namespace FalknerCountyJuvenileCourt.Models
       [Key]
       public int ID { get; set; }
 
+      [Display(Name = "Identification Number")]
       [Required]
       public string FaulknerCountyIdentification { get; set; }
 
@@ -23,9 +24,9 @@ namespace FalknerCountyJuvenileCourt.Models
       public Gender? Gender { get; set; }
 
       public int RiskID {get;set;}
+      
       [DisplayFormat(NullDisplayText = "Unknown")]
       public Risk? Risk {get; set; }
-
 
       [Display(Name = "Repeat Offender")]
       public bool Repeat { get; set; }

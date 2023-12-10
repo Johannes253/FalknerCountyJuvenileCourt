@@ -16,8 +16,8 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Juvenile.ID" />
             <div class="form-group">
-                <label asp-for="Juvenile.ID" class="control-label"></label>
-                <div>@Html.DisplayFor(model => model.Juvenile.ID)</div>
+                <label asp-for="Juvenile.FaulknerCountyIdentification" class="control-label"></label>
+                <div>@Html.DisplayFor(model => model.Juvenile.FaulknerCountyIdentification)</div>
             </div>
             <div class="form-group">
                 <label asp-for="Juvenile.Age" class="control-label"></label>
@@ -48,14 +48,17 @@
                 </label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+               <input id="NP" type="submit" value="Save" class="btn btn-primary" />
+               @* <a asp-page="./Index"
+               id="NP" type="submit" value="Save" class="btn btn-primary">Save
+               </a> *@
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a id="Back_To_List" asp-page="./Index">Back to List</a>
+    <a id="Back_To_List" asp-page="Index">Back to List</a>
 </div>
 
 @section Scripts {

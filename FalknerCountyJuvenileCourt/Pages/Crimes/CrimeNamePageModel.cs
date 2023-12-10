@@ -67,12 +67,12 @@ namespace FalknerCountyJuvenileCourt.Pages.Crimes
             object selectedJuvenile = null)
         {
             var juvenilesQuery = from d in _context.Juveniles
-                                   orderby d.ID // Sort by name.
+                                   orderby d.FaulknerCountyIdentification // Sort by name.
                                    select d;
 
             JuvenileNameSL = new SelectList(juvenilesQuery.AsNoTracking(),
                 nameof(Juvenile.ID),
-                nameof(Juvenile.ID),
+                nameof(Juvenile.FaulknerCountyIdentification),
                 selectedJuvenile);
         }
     }

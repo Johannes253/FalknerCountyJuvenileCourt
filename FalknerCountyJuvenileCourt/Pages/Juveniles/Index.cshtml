@@ -30,7 +30,7 @@
             <th>
                <a id="Back_To_List" asp-page="./Index" asp-route-sortOrder="@Model.IDSort"
                   asp-route-currentFilter="@Model.CurrentFilter">
-                  @Html.DisplayNameFor(model => model.Juveniles[0].ID)
+                  @Html.DisplayNameFor(model => model.Juveniles[0].FaulknerCountyIdentification)
                </a>
             </th>
             <th>
@@ -70,7 +70,7 @@
 @foreach (var item in Model.Juveniles) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ID)
+                @Html.DisplayFor(modelItem => item.FaulknerCountyIdentification)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Age)
