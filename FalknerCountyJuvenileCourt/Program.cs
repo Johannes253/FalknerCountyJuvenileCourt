@@ -19,15 +19,9 @@ builder.Services.AddDbContext<CourtContext>(options =>
 });
 builder.Services.AddDistributedMemoryCache();
 
-/*builder.Services.AddDefaultIdentity<IdentityUser>(options =>
-{
-    options.SignIn.RequireConfirmedAccount = true;
-})
-.AddEntityFrameworkStores<CourtContext>();
-*/
 
 var options = new DbContextOptionsBuilder<CourtContext>()
-    .UseSqlite(CourtContext)
+    .UseSqlite(Faulkner_ConnectionString)
     .Options;
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
