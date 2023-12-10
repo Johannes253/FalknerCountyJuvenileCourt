@@ -2,29 +2,87 @@
 @model ReportModel
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
    
-    <div style="width: 400px; height: 400px; margin-bottom: 40px;">
-        <h1>Person arrested by Race</h1>
-        <canvas id="ArrestedRaceBarChart" width="400" height="400"></canvas>
+    <div style="display: flex; flex-direction: row;">
+        <!-- Graph 1 -->
+        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 40px;">
+            <h1>Person arrested by Race</h1>
+            <canvas id="ArrestedRaceBarChart" width="400" height="400"></canvas>
+        </div>
+        <!-- Text 1 -->
+        <div style="flex: 1; font-size: 24px; margin-top: 150px;">
+            <p>African American: 105 (37.4%)<br>
+               Asian: 2 (.7%)<br>
+               Caucasian: 154 (54.8%) <br>
+               Latino: 20 (7.1%) <br>
+               Grand Total: 281
+            </p>
+        </div>
     </div>
     <br>
-    <div style="width: 400px; height: 400px; margin-bottom: 70px;">
-        <h1>Person arrested by Gender</h1>
-        <canvas id="genderPieChart" width="400" height="400"></canvas>
+    <div style="display: flex; flex-direction: row;">
+        <!-- Graph 2 -->
+        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 85px;">
+            <h1>Person arrested by Gender</h1>
+            <canvas id="genderPieChart" width="400" height="400"></canvas>
+        </div>
+        <!-- Text 2 -->
+        <div style= "flex 1; font-size: 24px; margin-top: 150px;">
+            <p> Male: 170<br>
+                Female: 111
+            </p>
+        </div>
     </div>
     <br>
-    <div style="width: 400px; height: 400px; margin-bottom: 60px;">
-        <h1>Person arrested by Age</h1>
-        <canvas id="agePieChart" width="400" height="400"></canvas>
-    </div>
-
-    <div style="width: 400px; height: 400px; margin-bottom: 40px;">
-        <h1>Intake Decisions</h1>
-        <canvas id="IntakeDecisionPieChart" width="400" height="400"></canvas>
+    <div style="display: flex; flex-direction: row;">
+        <!-- Graph 3 -->
+        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 60px;">
+            <h1>Person Arrested by Age</h1>
+            <canvas id="agePieChart" width="400" height="400"></canvas>
+        </div>
+        <!-- Text 3 -->
+        <div style= "flex 1; font-size: 24px; margin-top: 150px;">
+            <p> 10-12 years of age: 30<br>
+                13-15 years of age: 153<br>
+                16-18 years of age: 98
+            </p>
+        </div>
     </div>
     <br>
-    <div style="width: 400px; height: 400px; margin-bottom: 120px;">
-        <h1>SAVRY Levels for Detained Youth Upon Intake</h1>
-        <canvas id="RiskPieChart" width="400" height="400"></canvas>
+    <div style="text-align: center; font-weight:bold; margin-bottom: 40px; margin-top:40px; font-size: 24px;">
+        Juvenile Court provides on-call juvenile officers 24/7/365. 
+        This officer determines the youth’s placement at the time of arrest given specific factors (risk to the community and mental health). 
+        An objective 20th Judicial District Juvenile Court Detention Risk Assessment is used in this process with a release override if needed.
+    </div>
+    <br>
+    <div style="display: flex; flex-direction: row;">
+        <!-- Graph 4 -->
+        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 40px;">
+            <h1>Intake Decisions</h1>
+            <canvas id="IntakeDecisionPieChart" width="400" height="400"></canvas>
+        </div>
+        <!-- Text 4 -->
+        <div style= "flex 1; font-size: 24px; margin-top: 150px;">
+            <p> Cite and Release: 206<br>
+                Detention Alternative: 15<br>
+                Detention: 60
+            </p>
+        </div>
+    </div>
+    <br>
+    <div style="display: flex; flex-direction: row;">
+        <!-- Graph 5 -->
+        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 130px;">
+            <h1>SAVRY Levels for Detained Youth Upon Intake</h1>
+            <canvas id="RiskPieChart" width="400" height="400"></canvas>
+        </div>
+        <!-- Text 5 -->
+        <div style= "flex 1; font-size: 24px; margin-top: 150px;">
+            <p> High Risk: 28<br>
+                Moderate Risk: 14<br>
+                Low Risk: 4<br>
+                Unknown:: 14
+            </p>
+        </div>
     </div>
     <br>
     <div style="width: 400px; height: 400px; margin-bottom: 40px;">
@@ -549,4 +607,3 @@
         return colors;
     }
 </script>
-
