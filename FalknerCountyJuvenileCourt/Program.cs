@@ -17,17 +17,18 @@ builder.Services.AddDbContext<CourtContext>(options =>
 {
     options.UseSqlite("AZURE_SQL_CONNECTIONSTRING");
 });
-builder.Services.AddStackExchangeRedisCache(options =>
-{
-options.Configuration = builder.Configuration["AZURE_REDIS_CONNECTIONSTRING"];
-options.InstanceName = "SampleInstance";
-});
 
 var options = new DbContextOptionsBuilder<CourtContext>()
     .UseSqlite("AZURE_SQL_CONNECTIONSTRING")
     .Options;
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+options.Configuration = builder.Configuration["AZURE_REDIS_CONNECTIONSTRING"];
+options.InstanceName = "SampleInstance";
+});
 
 // Add Identity services
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
