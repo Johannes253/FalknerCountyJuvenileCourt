@@ -2,44 +2,55 @@
 @model ReportModel
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
    
-   
-   <div style="width: 400px; height: 400px;">
+    <div style="width: 400px; height: 400px; margin-bottom: 40px;">
+        <h1>Person arrested by Race</h1>
+        <canvas id="ArrestedRaceBarChart" width="400" height="400"></canvas>
+    </div>
+    <br>
+    <div style="width: 400px; height: 400px; margin-bottom: 70px;">
         <h1>Person arrested by Gender</h1>
         <canvas id="genderPieChart" width="400" height="400"></canvas>
     </div>
-    <div style="width: 400px; height: 400px;">
+    <br>
+    <div style="width: 400px; height: 400px; margin-bottom: 60px;">
         <h1>Person arrested by Age</h1>
         <canvas id="agePieChart" width="400" height="400"></canvas>
     </div>
-    <div style="width: 400px; height: 400px;">
+
+    <div style="width: 400px; height: 400px; margin-bottom: 40px;">
         <h1>Intake Decisions</h1>
         <canvas id="IntakeDecisionPieChart" width="400" height="400"></canvas>
     </div>
-    <div style="width: 400px; height: 400px;">
+    <br>
+    <div style="width: 400px; height: 400px; margin-bottom: 120px;">
         <h1>SAVRY Levels for Detained Youth Upon Intake</h1>
         <canvas id="RiskPieChart" width="400" height="400"></canvas>
     </div>
-    <div style="width: 400px; height: 400px;">
+    <br>
+    <div style="width: 400px; height: 400px; margin-bottom: 40px;">
         <h1>School Related Arrests</h1>
         <canvas id="SchoolPieChart" width="400" height="400"></canvas>
     </div>
-    <div style="width: 400px; height: 400px;">
+    <br>
+    <div style="width: 400px; height: 400px; margin-bottom: 75px;">
         <h1>Prosecutor Filing Decisions</h1>
         <canvas id="FilingDecisionPieChart" width="400" height="400"></canvas>
     </div>
-    <div style="width: 400px; height: 400px;">
+    <br>
+    <div style="width: 400px; height: 400px; margin-bottom: 35px;">
         <h1>Admissions by Race</h1>
         <canvas id="adracePieChart" width="400" height="400"></canvas>
     </div>
-    <div style="width: 400px; height: 400px;">
+    <br>
+    <div style="width: 400px; height: 400px; margin-bottom: 40px;">
         <h1>Admission by Gender</h1>
         <canvas id="adgenderPieChart" width="400" height="400"></canvas>
     </div>
-    <div style="width: 400px; height: 400px;">
+    <br>
+    <div style="width: 400px; height: 400px; margin-bottom: 40px;">
         <h1>Admission by Age</h1>
         <canvas id="adagebarChart" width="400" height="400"></canvas>
     </div>
-    
  
  
 <script>
@@ -52,6 +63,53 @@
         'rgba(0, 128, 0, 0.8)'      // Green
         ];
 
+    document.addEventListener('DOMContentLoaded', async function () {
+        try {
+            var response = await fetch('/Report?handler=ArrestedRaceDistributionData', {
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            //console.log("Raw response data:", await response.text());
+            if (response.ok) {
+                var raceData = await response.json();
+ 
+                console.log('Received raceData:', raceData);
+ 
+                var raceLabels = raceData.map(item => item.race);
+                var raceValues = raceData.map(item => item.count);
+ 
+                // Use predefined colors for the first 5 colors
+                var backgroundColors = predefinedColors.slice(0, Math.min(raceLabels.length, predefinedColors.length));
+                backgroundColors = backgroundColors.concat(generateRandomColors(Math.max(0, raceLabels.length - predefinedColors.length)));
+ 
+                var ctx = document.getElementById('ArrestedRaceBarChart').getContext('2d');
+                var racePieChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: raceLabels,
+                        datasets: [{
+                            data: raceValues,
+                            backgroundColor: backgroundColors
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                });
+            } else {
+                console.error("Error fetching data. Status:", response.status);
+                console.log("Raw response data:", await response.text());
+            }
+        } catch (error) {
+            console.error("Error fetching or parsing data:", error);
+ 
+        }
+    });
     document.addEventListener('DOMContentLoaded', async function () {
         try {
             var response = await fetch('/Report?handler=GenderDistributionData', {
