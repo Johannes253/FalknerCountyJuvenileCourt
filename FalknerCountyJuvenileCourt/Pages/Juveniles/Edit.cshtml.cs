@@ -64,6 +64,7 @@ namespace FalknerCountyJuvenileCourt.Pages.Juveniles
 
             if (await TryUpdateModelAsync<Juvenile>(
                   juvenileToUpdate, "Juvenile", 
+                  j => j.FaulknerCountyIdentification,
                   j => j.Age, 
                   j => j.RaceID, 
                   j => j.GenderID,
