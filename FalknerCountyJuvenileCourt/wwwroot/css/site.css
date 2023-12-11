@@ -197,7 +197,8 @@ input[type=checkbox] {
   color: darkgoldenrod;
 }
 #picture_logo{
-  width: 250px; 
-  height: 250px;
-  padding: 0px;
+  width: 200px; 
+  height: 200px;
+  float: left; /* Float the image to the left */
+  margin-right: 10px;
 }
