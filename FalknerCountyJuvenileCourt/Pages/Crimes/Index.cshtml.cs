@@ -65,19 +65,20 @@ namespace FalknerCountyJuvenileCourt.Pages.Crimes
             searchID = currentFilter;
          }
 
-         // dateFilter = "2023";
-
          CurrentFilter = searchID;
          DateFilter = dateFilter;
 
          IQueryable<Crime> crimesIQ = from c in _context.Crimes select c;
 
-         if (!String.IsNullOrEmpty(DateFilter)) {
+         if (!String.IsNullOrEmpty(dateFilter)) {
+            // crimesIQ = crimesIQ.Where(c => DateTime.Parse(c.Date).Year);
             crimesIQ = crimesIQ.Where(c => c.Date.ToString().Contains(dateFilter));
          }
          if (!String.IsNullOrEmpty(searchID)) {
             crimesIQ = crimesIQ.Where(c => c.Juvenile.FaulknerCountyIdentification.Contains(searchID));
          }
+
+         PopulateDateDropDown(_context, DateFilter);
 
          switch (sortOrder) {
             case "id_desc":
