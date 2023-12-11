@@ -916,6 +916,56 @@
             console.error("Error fetching or parsing data:", error);
         }
     });
+   document.addEventListener('DOMContentLoaded', async function () {
+        try {
+            var response = await fetch('/Report?handler=DelinquencyAgeDistributionData', {
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            if (response.ok) {
+                var DelinquencyAgeData = await response.json();
+
+                console.log('Received DelinquencyAgeData:', DelinquencyAgeData);
+
+                var DelinquencyAgeLabels = DelinquencyAgeData.map(item => item.delinquencyage);
+                var DelinquencyAgeValues = DelinquencyAgeData.map(item => item.Count);
+
+                var DelinquencyAgeText = document.getElementById('DelinquencyAgeText');
+                DelinquencyAgeText.innerHTML = DelinquencyAgeData.map(item => `${item.delinquencyage}: ${item.Count} (${((item.Count / DelinquencyAgeData.reduce((acc, curr) => acc + curr.Count, 0)) * 100).toFixed(1)}%)`).join('<br>') +
+                `<br>Grand Total: ${DelinquencyAgeData.reduce((acc, curr) => acc + curr.Count, 0)}`;
+
+                // Use predefined colors for the first 5 colors
+                var backgroundColors = predefinedColors.slice(0, Math.min(DelinquencyAgeLabels.length, predefinedColors.length));
+                backgroundColors = backgroundColors.concat(generateRandomColors(Math.max(0, DelinquencyAgeLabels.length - predefinedColors.length)));
+
+                var ctx = document.getElementById('DelinquencyAgeBarChart').getContext('2d');
+                var DelinquencyAgeBarChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: DelinquencyAgeLabels,
+                        datasets: [{
+                            label: 'Delinquency Petitions Filed',
+                            data: DelinquencyAgeValues,
+                            backgroundColor: backgroundColors
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                });
+            } else {
+                console.error("Error fetching data. Status:", response.status);
+                console.log("Raw response data:", await response.text());
+            }
+        } catch (error) {
+            console.error("Error fetching or parsing data:", error);
+        }
+    });
     document.addEventListener('DOMContentLoaded', async function () {
         try {
             var response = await fetch('/Report?handler=AdRiskDistributionData', {

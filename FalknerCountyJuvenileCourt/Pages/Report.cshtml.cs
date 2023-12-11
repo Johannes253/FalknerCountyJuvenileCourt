@@ -19,19 +19,14 @@ public class ReportModel : PageModel
 
         try
         {
-            var crimes = _context.Crimes
-                .Include(c => c.Juvenile)
-                .ThenInclude(j => j.Race)
-                .ToList();
-
-            var raceCounts = crimes
-                .Select(c => c.Juvenile?.Race?.Name)
-                .Where(race => !string.IsNullOrEmpty(race))
-                .GroupBy(race => race)
+            var raceCounts = _context.Juveniles
+                .Select(c => c.Race)
+                .GroupBy(c => c.Name)
                 .Select(group => new { Race = group.Key, Count = group.Count() })
                 .ToList();
-                foreach (var race in raceCounts)
-                    Console.WriteLine($"Race: {race.Race}, Count: {race.Count}");
+
+               //  foreach (var race in raceCounts)
+               //      Console.WriteLine($"Race: {race.Race}, Count: {race.Count}");
 
 
             return new JsonResult(raceCounts);
@@ -125,13 +120,9 @@ public class ReportModel : PageModel
 
          try
     {
-        var juvenileRisk = _context.Juveniles
-            .Include(j => j.Risk)
-            .ToList();
-
-        var RiskCounts = juvenileRisk
-            .Where(j => j.Risk != null)
-            .GroupBy(j => j.Risk.Name)
+        var RiskCounts = _context.Crimes
+            .Where(j => j.IntakeDecisionID == 3)
+            .GroupBy(j => j.Juvenile.Risk.Name)
             .Select(group => new { riskcount = group.Key.ToString(), count = group.Count() })
             .ToList();
 
@@ -198,13 +189,13 @@ public class ReportModel : PageModel
 
         try
         {
-            var juvenilesWithSchool = _context.Crimes.ToList();
-
-            var delinquencyschool = juvenilesWithSchool
-                .Where(j => j.FilingDecision != null && j.FilingDecision.ID == 1 && j.School != null)
+            var delinquencyschool = _context.Crimes
+                .Where(j => j.FilingDecision.ID == 1)
                 .GroupBy(j => j.School.Name)
                 .Select(group => new { delinquencyschool = group.Key, Count = group.Count() })
                 .ToList();
+            
+            Console.WriteLine(delinquencyschool);
 
             return new JsonResult(delinquencyschool);
         }
@@ -222,12 +213,9 @@ public class ReportModel : PageModel
 
         try
         {
-            var juvenilesWithrace = _context.Crimes
-                .Include(j => j.Juvenile)
-                .ToList();
 
-            var delinquencyrace = juvenilesWithrace
-                .Where(j => j.FilingDecision != null && j.FilingDecision.ID == 1 && j.Juvenile.Race != null)
+            var delinquencyrace = _context.Crimes
+                .Where(j => j.FilingDecisionID == 1)
                 .GroupBy(j => j.Juvenile.Race.Name)
                 .Select(group => new { delinquencyrace = group.Key, Count = group.Count() })
                 .ToList();
@@ -271,17 +259,11 @@ public class ReportModel : PageModel
     }
     public async Task<IActionResult> OnGetDelinquencyAgeDistributionDataAsync()
     {
-        Console.WriteLine("Function called");
         try
         {
-        var juvenilesWithAge = _context.Crimes
-            .Include(j => j.Juvenile)
-            .ToList();
-
-        var delinquencyage = juvenilesWithAge
-            .Where(j => j.FilingDecisionID != null && j.FilingDecisionID == 1 && j.Juvenile.Age != null)
-            .GroupBy(j => ((j.Juvenile.Age - 1) / 3) * 3)
-            .OrderBy(group => group.Key)
+        var delinquencyage = _context.Crimes
+            .Where(j => j.FilingDecisionID == 1)
+            .GroupBy(j => (j.Juvenile.Age - 1) / 3 * 3)
             .Select(group => new { delinquencyage = $"{group.Key + 1}-{group.Key + 3}", Count = group.Count() })
             .ToList();
 
@@ -299,19 +281,13 @@ public class ReportModel : PageModel
     public async Task<IActionResult> OnGetRaceDistributionDataAsync()
     {
 
-        try
-        {
-            var crimes = _context.Crimes
-                .Include(c => c.Juvenile)
-                .ThenInclude(j => j.Race)
-                .ToList();
-
-            var raceCounts = crimes
-                .Select(c => c.Juvenile?.Race?.Name)
-                .Where(race => !string.IsNullOrEmpty(race))
-                .GroupBy(race => race)
+        try {
+            var raceCounts = _context.Crimes
+                .Where(c => c.IntakeDecisionID == 3)
+                .GroupBy(j => j.Juvenile.Race.Name)
                 .Select(group => new { Race = group.Key, Count = group.Count() })
                 .ToList();
+
                 foreach (var race in raceCounts)
                     Console.WriteLine($"Race: {race.Race}, Count: {race.Count}");
 
@@ -332,13 +308,9 @@ public class ReportModel : PageModel
 
         try
         {
-            var juvenilesWithGender = _context.Juveniles
-                .Include(j => j.Gender)
-                .ToList();
-
-            var genderCounts = juvenilesWithGender
-                .Where(j => j.Gender != null)
-                .GroupBy(j => j.Gender.Name)
+            var genderCounts = _context.Crimes
+                .Where(j => j.IntakeDecisionID == 3)
+                .GroupBy(j => j.Juvenile.Gender.Name)
                 .Select(group => new { Gender = group.Key, Count = group.Count() })
                 .ToList();
 
@@ -358,17 +330,15 @@ public class ReportModel : PageModel
         Console.WriteLine("Function called");
         try
         {
-        var juvenilesWithAge = _context.Juveniles.ToList();
-
-        var ageGroups = juvenilesWithAge
-            .GroupBy(j => ((j.Age - 1) / 3) * 3)
-            .OrderBy(group => group.Key)
+        var ageGroups = _context.Crimes
+            .Where(j => j.IntakeDecisionID == 3)
+            .GroupBy(j => ((j.Juvenile.Age - 1) / 3) * 3)
             .Select(group => new { ageGroups = $"{group.Key + 1}-{group.Key + 3}", Count = group.Count() })
             .ToList();
 
 
-            foreach (var juvenile in juvenilesWithAge)
-                Console.WriteLine($"Juvenile ID: {juvenile.ID}, Age: {juvenile.Age}");
+            // foreach (var juvenile in juvenilesWithAge)
+            //     Console.WriteLine($"Juvenile ID: {juvenile.ID}, Age: {juvenile.Age}");
 
             return new JsonResult(ageGroups);
         }
@@ -386,13 +356,9 @@ public class ReportModel : PageModel
 
          try
     {
-        var juvenileRisk = _context.Juveniles
-            .Include(j => j.Risk)
-            .ToList();
-
-        var AdRiskCounts = juvenileRisk
-            .Where(j => j.Risk != null)
-            .GroupBy(j => j.Risk.Name)
+        var AdRiskCounts = _context.Crimes
+            .Where(j => j.IntakeDecisionID == 3)
+            .GroupBy(j => j.Juvenile.Risk.Name)
             .Select(group => new { adriskcount = group.Key.ToString(), count = group.Count() })
             .ToList();
 
@@ -412,11 +378,9 @@ public class ReportModel : PageModel
 
         try
         {
-            var juvenilesWithdrugGender = _context.Crimes.ToList();
-
-            var druggenderCounts = juvenilesWithdrugGender
-                .Where(j => j.DrugCourt != null && j.DrugCourt == true && j.Juvenile != null && j.Juvenile.Gender != null)
-                .GroupBy(j => j.Juvenile.Gender)
+            var druggenderCounts = _context.Crimes
+                .Where(j => j.DrugCourt == true)
+                .GroupBy(j => j.Juvenile.Gender.Name)
                 .Select(group => new { druggendercount = group.Key, Count = group.Count() })
                 .ToList();
 
@@ -436,11 +400,9 @@ public class ReportModel : PageModel
 
         try
         {
-            var juvenilesWithdrugRace = _context.Crimes.ToList();
-
-            var drugraceCounts = juvenilesWithdrugRace
-                .Where(j => j.DrugCourt != null && j.DrugCourt == true && j.Juvenile != null && j.Juvenile.Race != null)
-                .GroupBy(j => j.Juvenile.Race)
+            var drugraceCounts = _context.Crimes
+                .Where(j => j.DrugCourt == true)
+                .GroupBy(j => j.Juvenile.Race.Name)
                 .Select(group => new { drugracecount = group.Key, Count = group.Count() })
                 .ToList();
 
