@@ -190,7 +190,7 @@ public class ReportModel : PageModel
         try
         {
             var delinquencyschool = _context.Crimes
-                .Where(j => j.FilingDecision.ID == 1)
+                .Where(j => j.FilingDecisionID == 1)
                 .GroupBy(j => j.School.Name)
                 .Select(group => new { delinquencyschool = group.Key, Count = group.Count() })
                 .ToList();
@@ -236,12 +236,8 @@ public class ReportModel : PageModel
 
         try
         {
-            var juvenilesWithGender = _context.Crimes
-                .Include(j => j.Juvenile)
-                .ToList();
-
-            var delinquencygender = juvenilesWithGender
-                .Where(j => j.FilingDecision != null && j.FilingDecision.ID == 1 && j.Juvenile.Gender != null)
+            var delinquencygender = _context.Crimes
+                .Where(j => j.FilingDecisionID == 1)
                 .GroupBy(j => j.Juvenile.Gender.Name)
                 .Select(group => new { delinquencygender = group.Key, Count = group.Count() })
                 .ToList();
