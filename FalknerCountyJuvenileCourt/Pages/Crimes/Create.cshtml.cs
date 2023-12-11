@@ -39,19 +39,25 @@ namespace FalknerCountyJuvenileCourt.Pages.Crimes
          if (await TryUpdateModelAsync<Crime>(
             emptyCrime,
             "crime",   // Prefix for form value.
-            c => c.Offense, c => c.IntakeDecision, c => c.FilingDecision, c => c.School, c => c.Juvenile))
+            c => c.OffenseID, 
+            c => c.IntakeDecisionID, 
+            c => c.FilingDecisionID,
+            c => c.JuvenileID, 
+            c => c.SchoolID, 
+            c => c.Date,
+            c => c.DrugCourt,
+            c => c.DrugOffense))
          {
             _context.Crimes.Add(emptyCrime);
             await _context.SaveChangesAsync();
             return RedirectToPage("./Index");
          }
 
-
-         PopulateOffensesDropDownList(_context, emptyCrime.Offense);
-         PopulateIntakeDropDownList(_context, emptyCrime.IntakeDecision);
-         PopulateFilingDropDownList(_context, emptyCrime.FilingDecision);
-         PopulateSchoolDropDownList(_context, emptyCrime.School);
-         PopulateJuvenilesDropDownList(_context, emptyCrime.Juvenile);
+         PopulateOffensesDropDownList(_context, emptyCrime.OffenseID);
+         PopulateIntakeDropDownList(_context, emptyCrime.IntakeDecisionID);
+         PopulateFilingDropDownList(_context, emptyCrime.FilingDecisionID);
+         PopulateSchoolDropDownList(_context, emptyCrime.SchoolID);
+         PopulateJuvenilesDropDownList(_context, emptyCrime.JuvenileID);
          return Page();
       }
     }

@@ -43,10 +43,11 @@ namespace FalknerCountyJuvenileCourt.Pages.Crimes
                 return NotFound();
             }
 
-            PopulateOffensesDropDownList(_context, Crime.Offense.ID);
-            PopulateIntakeDropDownList(_context, Crime.IntakeDecision.ID);
-            PopulateFilingDropDownList(_context, Crime.FilingDecision.ID);
-            PopulateSchoolDropDownList(_context, Crime.School.ID);
+
+            PopulateOffensesDropDownList(_context, Crime.OffenseID);
+            PopulateIntakeDropDownList(_context, Crime.IntakeDecisionID);
+            PopulateFilingDropDownList(_context, Crime.FilingDecisionID);
+            PopulateSchoolDropDownList(_context, Crime.SchoolID);
             return Page();
         }
 
@@ -59,37 +60,49 @@ namespace FalknerCountyJuvenileCourt.Pages.Crimes
                 return NotFound();
             }
 
-            var offenseToUpdate = await _context.Offenses.FindAsync(id);
-            var intakeToUpdate = await _context.IntakeDecisions.FindAsync(id);
-            var filingToUpdate = await _context.FilingDecisions.FindAsync(id);
-            var schoolToUpdate = await _context.Schools.FindAsync(id);
+            var crimeToUpdate = await _context.Crimes.FindAsync(id);
 
-            if (offenseToUpdate == null || intakeToUpdate == null || filingToUpdate == null || schoolToUpdate == null) {
-               return NotFound();
+            if (crimeToUpdate == null)
+            {
+                return NotFound();
             }
 
-            if (await TryUpdateModelAsync<Offense>(offenseToUpdate,"offense", c => c.ID, c => c.Name)) {
-               await _context.SaveChangesAsync();
-               return RedirectToPage("./Index");
-            }
-            if (await TryUpdateModelAsync<IntakeDecision>(intakeToUpdate,"intake decision?", c => c.ID, c => c.Name)) {
-               await _context.SaveChangesAsync();
-               return RedirectToPage("./Index");
-            }
-            if (await TryUpdateModelAsync<FilingDecision>(filingToUpdate,"filing", c => c.ID, c => c.Name)) {
-               await _context.SaveChangesAsync();
-               return RedirectToPage("./Index");
-            }
-            if (await TryUpdateModelAsync<School>(schoolToUpdate,"school", c => c.ID, c => c.Name)) {
-               await _context.SaveChangesAsync();
-               return RedirectToPage("./Index");
-            }
+            if (await TryUpdateModelAsync<Crime>(
+                crimeToUpdate, "Crime",
+                c => c.FilingDecisionID,
+                c => c.IntakeDecisionID,
+                c => c.Date,
+                c => c.SchoolID,
+                c => c.DrugOffense,
+                c => c.DrugCourt,
+                c => c.OffenseID))
+            {
 
-            PopulateOffensesDropDownList(_context, offenseToUpdate.ID);
-            PopulateIntakeDropDownList(_context, intakeToUpdate.ID);
-            PopulateFilingDropDownList(_context, filingToUpdate.ID);
-            PopulateSchoolDropDownList(_context, schoolToUpdate.ID);
-            return Page();
+            if (Crime.Juvenile != null && crimeToUpdate.Juvenile != null)
+            {
+                crimeToUpdate.Juvenile.FaulknerCountyIdentification = Crime.Juvenile.FaulknerCountyIdentification;
+            }
+            
+            await _context.SaveChangesAsync();
+            Console.WriteLine($"Crime with ID {id} successfully updated.");
+            return RedirectToPage("./Index");
+        }
+
+        Console.WriteLine($"Update failed for Crime with ID {id}. Model state errors:");
+        foreach (var key in ModelState.Keys)
+        {
+            var modelStateEntry = ModelState[key];
+            foreach (var error in modelStateEntry.Errors)
+            {
+                Console.WriteLine($"Key: {key}, Error: {error.ErrorMessage}");
+            }
+        }
+
+        PopulateOffensesDropDownList(_context, crimeToUpdate.OffenseID);
+        PopulateIntakeDropDownList(_context, crimeToUpdate.IntakeDecisionID);
+        PopulateFilingDropDownList(_context, crimeToUpdate.FilingDecisionID);
+        PopulateSchoolDropDownList(_context, crimeToUpdate.SchoolID);
+        return Page();
         }
     }
 }

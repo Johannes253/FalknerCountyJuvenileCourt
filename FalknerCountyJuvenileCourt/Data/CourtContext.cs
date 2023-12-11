@@ -24,11 +24,14 @@ namespace FalknerCountyJuvenileCourt.Data {
       public DbSet<Gender> Genders { get; set; }
       public DbSet<Risk> Risks { get; set; }
       public DbSet<School> Schools { get; set; }
+
       protected override void OnModelCreating(ModelBuilder modelBuilder) {
          base.OnModelCreating(modelBuilder);
-         modelBuilder.Entity<Juvenile>().ToTable(nameof(Juveniles));
-            // .HasOne(j => j.Crimes);
-         modelBuilder.Entity<Crime>().ToTable("Crime");
+         modelBuilder.Entity<Juvenile>().ToTable(nameof(Juveniles))
+            .HasMany(j => j.Crimes)
+            .WithOne(c => c.Juvenile);
+         modelBuilder.Entity<Crime>().ToTable("Crime")
+            .HasOne(j => j.Juvenile);
          modelBuilder.Entity<Offense>().ToTable("Offense");
          modelBuilder.Entity<IntakeDecision>().ToTable("Intake Decision");
          modelBuilder.Entity<FilingDecision>().ToTable("Filing Decision");

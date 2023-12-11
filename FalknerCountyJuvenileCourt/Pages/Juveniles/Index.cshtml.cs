@@ -58,12 +58,12 @@ namespace FalknerCountyJuvenileCourt.Pages.Juveniles
          IQueryable<Juvenile> juvenilesIQ = from s in _context.Juveniles select s;
 
          if (!String.IsNullOrEmpty(searchID)) {
-            juvenilesIQ = juvenilesIQ.Where(s => s.ID == int.Parse(searchID));
+            juvenilesIQ = juvenilesIQ.Where(s => s.FaulknerCountyIdentification.Contains(searchID));
          }
 
          switch (sortOrder) {
             case "id_desc":
-               juvenilesIQ = juvenilesIQ.OrderByDescending(s => s.ID);
+               juvenilesIQ = juvenilesIQ.OrderByDescending(s => s.FaulknerCountyIdentification);
                break;
             case "Age":
                juvenilesIQ = juvenilesIQ.OrderBy(s => s.Age);
@@ -96,7 +96,7 @@ namespace FalknerCountyJuvenileCourt.Pages.Juveniles
                juvenilesIQ = juvenilesIQ.OrderByDescending(s => s.Repeat);
                break;
             default:
-               juvenilesIQ = juvenilesIQ.OrderBy(s => s.ID);
+               juvenilesIQ = juvenilesIQ.OrderBy(s => s.FaulknerCountyIdentification);
                break;
          }
          var pageSize = Configuration.GetValue("PageSize", 4);

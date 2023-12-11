@@ -14,6 +14,15 @@ namespace FalknerCountyJuvenileCourt.Pages.Crimes
         public SelectList FilingNameSL {get;set;}
         public SelectList SchoolNameSL {get;set;}
         public SelectList JuvenileNameSL {get;set;}
+        public SelectList DateNameSL {get;set;}
+
+      public void PopulateDateDropDown(CourtContext _context, object selectedDate = null) {
+         var dateQuery = from d in _context.Crimes
+            orderby d.Date 
+            select d;
+            // select DateTime.Parse(d.Date).Year;
+         DateNameSL = new SelectList(dateQuery.AsNoTracking(), nameof(Crime.Date), nameof(Crime.Date), selectedDate);
+      }
 
         public void PopulateOffensesDropDownList(CourtContext _context,
             object selectedOffense = null)
@@ -67,12 +76,12 @@ namespace FalknerCountyJuvenileCourt.Pages.Crimes
             object selectedJuvenile = null)
         {
             var juvenilesQuery = from d in _context.Juveniles
-                                   orderby d.ID // Sort by name.
+                                   orderby d.FaulknerCountyIdentification // Sort by name.
                                    select d;
 
             JuvenileNameSL = new SelectList(juvenilesQuery.AsNoTracking(),
                 nameof(Juvenile.ID),
-                nameof(Juvenile.ID),
+                nameof(Juvenile.FaulknerCountyIdentification),
                 selectedJuvenile);
         }
     }

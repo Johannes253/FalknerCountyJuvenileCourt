@@ -10,35 +10,81 @@
 <p>
     <a id="Cbtn" asp-page="Create">Create New</a>
 </p>
+
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by Juvenile ID:
+            <input type="text" name="SearchID" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a id="Back_To_List" asp-page="./Index">Back to full List</a>
+        </p>
+        <p>
+         <select asp-for="@Model.DateFilter" class="form-control"
+            asp-items="@Model.DateNameSL"> 
+            <option value="">
+               -- All years --
+            </option> 
+         </select>
+        </p>
+</form>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Crimes[0].ID)
+                <a id="Back_To_List" asp-page="./Index" asp-route-sortOrder="@Model.IDSort"
+                  asp-route-currentFilter="@Model.CurrentFilter">
+                  @Html.DisplayNameFor(model => model.Crimes[0].ID)
+               </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Crimes[0].Juvenile)
+                <a id="Back_To_List" asp-page="./Index" asp-route-sortOrder="@Model.JuvenileSort"
+                  asp-route-currentFilter="@Model.CurrentFilter">
+                  @Html.DisplayNameFor(model => model.Crimes[0].Juvenile)
+               </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Crimes[0].Offense)
+                <a id="Back_To_List" asp-page="./Index" asp-route-sortOrder="@Model.OffenseSort"
+                  asp-route-currentFilter="@Model.CurrentFilter">
+                  @Html.DisplayNameFor(model => model.Crimes[0].Offense)
+               </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Crimes[0].IntakeDecision)
+                <a id="Back_To_List" asp-page="./Index" asp-route-sortOrder="@Model.IntakeSort"
+                  asp-route-currentFilter="@Model.CurrentFilter">
+                  @Html.DisplayNameFor(model => model.Crimes[0].IntakeDecision)
+               </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Crimes[0].FilingDecision)
+                <a id="Back_To_List" asp-page="./Index" asp-route-sortOrder="@Model.FilingSort"
+                  asp-route-currentFilter="@Model.CurrentFilter">
+                  @Html.DisplayNameFor(model => model.Crimes[0].FilingDecision)
+               </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Crimes[0].School)
+                <a id="Back_To_List" asp-page="./Index" asp-route-sortOrder="@Model.SchoolSort"
+                  asp-route-currentFilter="@Model.CurrentFilter">
+                  @Html.DisplayNameFor(model => model.Crimes[0].School)
+               </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Crimes[0].DrugOffense)
+                <a id="Back_To_List" asp-page="./Index" asp-route-sortOrder="@Model.DOffenseSort"
+                  asp-route-currentFilter="@Model.CurrentFilter">
+                  @Html.DisplayNameFor(model => model.Crimes[0].DrugOffense)
+               </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Crimes[0].DrugCourt)
+                <a id="Back_To_List" asp-page="./Index" asp-route-sortOrder="@Model.DCourtSort"
+                  asp-route-currentFilter="@Model.CurrentFilter">
+                  @Html.DisplayNameFor(model => model.Crimes[0].DrugCourt)
+               </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Crimes[0].Date)
+                <a id="Back_To_List" asp-page="./Index" asp-route-sortOrder="@Model.DateSort"
+                  asp-route-currentFilter="@Model.CurrentFilter">
+                  @Html.DisplayNameFor(model => model.Crimes[0].Date)
+               </a>
             </th>
             <th></th>
         </tr>
@@ -51,7 +97,7 @@
                 @Html.DisplayFor(modelItem => item.ID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Juvenile.ID)
+                @Html.DisplayFor(modelItem => item.Juvenile.FaulknerCountyIdentification)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Offense.Name)
@@ -84,3 +130,23 @@
 }
     </tbody>
 </table>
+
+@{
+    var prevDisabled = !Model.Crimes.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Crimes.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Crimes.PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   id="NP" class="btn btn-primary @prevDisabled">
+   Previous
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Crimes.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   id="NP" class="btn btn-primary @nextDisabled">
+   Next
+</a>

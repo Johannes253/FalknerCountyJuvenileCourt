@@ -37,7 +37,8 @@ namespace FalknerCountyJuvenileCourt.Pages.Juveniles
          if (await TryUpdateModelAsync<Juvenile>(
             emptyJuvenile,
             "juvenile",   // Prefix for form value.
-            s => s.Age, s => s.Race, s => s.Gender, s => s.Repeat, s => s.Risk))
+            s => s.FaulknerCountyIdentification, 
+            s => s.Age, s => s.RaceID, s => s.GenderID, s => s.Repeat, s => s.RiskID))
          {
             _context.Juveniles.Add(emptyJuvenile);
             await _context.SaveChangesAsync();
@@ -48,9 +49,9 @@ namespace FalknerCountyJuvenileCourt.Pages.Juveniles
             .Select(E => E.ErrorMessage)
             .ToList(); 
 
-         PopulateRacesDropDownList(_context, emptyJuvenile.Race);
-         PopulateGendersDropDownList(_context, emptyJuvenile.Gender);
-         PopulateRisksDropDownList(_context, emptyJuvenile.Risk);
+         PopulateRacesDropDownList(_context, emptyJuvenile.RaceID);
+         PopulateGendersDropDownList(_context, emptyJuvenile.GenderID);
+         PopulateRisksDropDownList(_context, emptyJuvenile.RiskID);
          return Page();
       }
     }

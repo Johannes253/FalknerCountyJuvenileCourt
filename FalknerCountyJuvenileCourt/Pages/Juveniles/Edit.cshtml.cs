@@ -31,9 +31,10 @@ namespace FalknerCountyJuvenileCourt.Pages.Juveniles
             }
 
             Juvenile = await _context.Juveniles
-               .Include(c => c.Race)
-               .Include(c => c.Gender)
-               .Include(c => c.Risk)
+               .Include(j => j.Race)
+               .Include(j => j.Gender)
+               .Include(j => j.Risk)
+               .Include(j => j.Crimes)
                .FirstOrDefaultAsync(m => m.ID == id);
 
             if (Juvenile == null)
@@ -42,43 +43,52 @@ namespace FalknerCountyJuvenileCourt.Pages.Juveniles
             }
 
             // Select current DepartmentID.
-            PopulateRacesDropDownList(_context, Juvenile.Race.ID);
-            PopulateGendersDropDownList(_context, Juvenile.Gender.ID);
-            PopulateRisksDropDownList(_context, Juvenile.Risk.ID);
+            PopulateRacesDropDownList(_context, Juvenile.RaceID);
+            PopulateGendersDropDownList(_context, Juvenile.GenderID);
+            PopulateRisksDropDownList(_context, Juvenile.RiskID);
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var raceToUpdate = await _context.Races.FindAsync(id);
-            var genderToUpdate = await _context.Genders.FindAsync(id);
-            var riskToUpdate = await _context.Risks.FindAsync(id);
-
-            if (raceToUpdate == null || genderToUpdate == null || riskToUpdate == null) {
+            if (id == null) {
                return NotFound();
             }
 
-            if (await TryUpdateModelAsync<Race>(raceToUpdate,"race", c => c.ID, c => c.Name)) {
-               await _context.SaveChangesAsync();
-               return RedirectToPage("./Index");
+            var juvenileToUpdate = await _context.Juveniles.FindAsync(id);
+
+            if (juvenileToUpdate == null) {
+                return NotFound();
             }
-            if (await TryUpdateModelAsync<Gender>(genderToUpdate,"gender", c => c.ID, c => c.Name)) {
+
+            if (await TryUpdateModelAsync<Juvenile>(
+                  juvenileToUpdate, "Juvenile", 
+                  j => j.FaulknerCountyIdentification,
+                  j => j.Age, 
+                  j => j.RaceID, 
+                  j => j.GenderID,
+                  j => j.RiskID,
+                  j => j.Repeat)) 
+               {
                await _context.SaveChangesAsync();
-               return RedirectToPage("./Index");
-            }
-            if (await TryUpdateModelAsync<Risk>(riskToUpdate,"risk", c => c.ID, c => c.Name)) {
-               await _context.SaveChangesAsync();
+               Console.WriteLine($"Juvenile with ID {id} successfully updated.");
                return RedirectToPage("./Index");
             }
 
-            PopulateRacesDropDownList(_context, raceToUpdate.ID);
-            PopulateGendersDropDownList(_context, genderToUpdate.ID);
-            PopulateRisksDropDownList(_context, riskToUpdate.ID);
+            Console.WriteLine($"Update failed for Juvenile with ID {id}. Model state errors:");
+            foreach (var key in ModelState.Keys)
+            {
+                var modelStateEntry = ModelState[key];
+                foreach (var error in modelStateEntry.Errors)
+                {
+                    Console.WriteLine($"Key: {key}, Error: {error.ErrorMessage}");
+                }
+            }
+
+            PopulateRacesDropDownList(_context, juvenileToUpdate.RaceID);
+            PopulateGendersDropDownList(_context, juvenileToUpdate.GenderID);
+            PopulateRisksDropDownList(_context, juvenileToUpdate.RiskID);
             return Page();
         }
     }
