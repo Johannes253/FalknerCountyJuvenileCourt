@@ -105,7 +105,7 @@ public class ReportModel : PageModel
         try
         {
             var IntakeDecisionCounts = _context.Crimes
-                .GroupBy(j => j.IntakeDecisionID)
+                .GroupBy(j => j.IntakeDecision.Name)
                 .Select(group => new { IntakeDecisionCounts = group.Key, count = group.Count() })
                 .ToList();
 
@@ -178,7 +178,7 @@ public class ReportModel : PageModel
         try
         {
             var FilingDecisionCounts = _context.Crimes
-                .GroupBy(j => j.FilingDecisionID)
+                .GroupBy(j => j.FilingDecision.Name)
                 .Select(group => new { filingdecisioncount = group.Key, count = group.Count() })
                 .ToList();
 
@@ -279,7 +279,7 @@ public class ReportModel : PageModel
             .ToList();
 
         var delinquencyage = juvenilesWithAge
-            .Where(j => j.FilingDecision != null && j.FilingDecision.ID == 1 && j.Juvenile.Age != null)
+            .Where(j => j.FilingDecisionID != null && j.FilingDecisionID == 1 && j.Juvenile.Age != null)
             .GroupBy(j => ((j.Juvenile.Age - 1) / 3) * 3)
             .OrderBy(group => group.Key)
             .Select(group => new { delinquencyage = $"{group.Key + 1}-{group.Key + 3}", Count = group.Count() })
@@ -412,11 +412,11 @@ public class ReportModel : PageModel
 
         try
         {
-            var juvenilesWithGender = _context.Crimes.ToList();
+            var juvenilesWithdrugGender = _context.Crimes.ToList();
 
-            var druggenderCounts = juvenilesWithGender
-                .Where(j => j.DrugCourt == true)
-                .GroupBy(j => j.Juvenile.Gender.Name)
+            var druggenderCounts = juvenilesWithdrugGender
+                .Where(j => j.DrugCourt != null && j.DrugCourt == true && j.Juvenile != null && j.Juvenile.Gender != null)
+                .GroupBy(j => j.Juvenile.Gender)
                 .Select(group => new { druggendercount = group.Key, Count = group.Count() })
                 .ToList();
 
@@ -436,11 +436,11 @@ public class ReportModel : PageModel
 
         try
         {
-            var juvenilesWithRace = _context.Crimes.ToList();
+            var juvenilesWithdrugRace = _context.Crimes.ToList();
 
-            var drugraceCounts = juvenilesWithRace
-                .Where(j => j.DrugCourt == true)
-                .GroupBy(j => j.Juvenile.Race.Name)
+            var drugraceCounts = juvenilesWithdrugRace
+                .Where(j => j.DrugCourt != null && j.DrugCourt == true && j.Juvenile != null && j.Juvenile.Race != null)
+                .GroupBy(j => j.Juvenile.Race)
                 .Select(group => new { drugracecount = group.Key, Count = group.Count() })
                 .ToList();
 
