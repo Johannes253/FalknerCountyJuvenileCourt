@@ -196,3 +196,9 @@ input[type=checkbox] {
 #Priv:hover{
   color: darkgoldenrod;
 }
+#picture_logo{
+  width: 200px; 
+  height: 200px;
+  float: left; /* Float the image to the left */
+  margin-right: 10px;
+}

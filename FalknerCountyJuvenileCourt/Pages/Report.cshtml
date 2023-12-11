@@ -87,7 +87,7 @@
     <br>
     <div style="display: flex; flex-direction: row;">
         <!-- Graph 8 -->
-        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 75px;">
+        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 140px;">
             <h1>School and Non-School Related Delinquency Petitions</h1>
             <canvas id="DelinquencySchoolPieChart" width="400" height="400"></canvas>
         </div>
@@ -129,52 +129,52 @@
         </div>
     </div>
     <br>
-    <div style="display: flex; flex-direction: row;">
+        <div style="display: flex; flex-direction: row;">
         <!-- Graph 12 -->
+        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 150px;">
+            <h1>SAVRY Ratings of Delinquent Youth Petitions</h1>
+            <canvas id="AdRiskPieChart" width="400" height="400"></canvas>
+        </div>
+        <!-- Text 12 -->
+         <div id="adsavryText" style="flex: 1; font-size: 24px; margin-top: 150px;">
+        </div>
+    </div>
+    <div style="display: flex; flex-direction: row;">
+        <!-- Graph 13 -->
         <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 35px;">
             <h1>Admissions by Race</h1>
             <canvas id="adracePieChart" width="400" height="400"></canvas>
         </div>
-        <!-- Text 12 -->
-        <div id="adraceText" style="flex: 1; font-size: 24px; margin-top: 150px;">
-        </div>
-    </div>
-    <br>
-    <div style="display: flex; flex-direction: row;">
-        <!-- Graph 13 -->
-        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 40px;">
-            <h1>Admission by Gender</h1>
-            <canvas id="adgenderPieChart" width="400" height="400"></canvas>
-        </div>
         <!-- Text 13 -->
-        <div id="adgenderText" style="flex: 1; font-size: 24px; margin-top: 150px;">
+        <div id="adraceText" style="flex: 1; font-size: 24px; margin-top: 150px;">
         </div>
     </div>
     <br>
     <div style="display: flex; flex-direction: row;">
         <!-- Graph 14 -->
         <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 40px;">
-            <h1>Admissions by Age</h1>
-            <canvas id="adagebarChart" width="400" height="400"></canvas>
+            <h1>Admission by Gender</h1>
+            <canvas id="adgenderPieChart" width="400" height="400"></canvas>
         </div>
         <!-- Text 14 -->
-        <div id="adageText" style="flex: 1; font-size: 24px; margin-top: 150px;">
+        <div id="adgenderText" style="flex: 1; font-size: 24px; margin-top: 150px;">
         </div>
     </div>
     <br>
     <div style="display: flex; flex-direction: row;">
         <!-- Graph 15 -->
-        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 130px;">
-            <h1>SAVRY Levels of Admitted Youth</h1>
-            <canvas id="AdRiskPieChart" width="400" height="400"></canvas>
+        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 40px;">
+            <h1>Admissions by Age</h1>
+            <canvas id="adagebarChart" width="400" height="400"></canvas>
         </div>
         <!-- Text 15 -->
-         <div id="adsavryText" style="flex: 1; font-size: 24px; margin-top: 150px;">
+        <div id="adageText" style="flex: 1; font-size: 24px; margin-top: 150px;">
         </div>
     </div>
+    <br>
     <div style="display: flex; flex-direction: row;">
         <!-- Graph 16 -->
-        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 130px;">
+        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 110px;">
             <h1>Participants by Gender</h1>
             <canvas id="DrugGenderPieChart" width="400" height="400"></canvas>
         </div>
@@ -184,7 +184,7 @@
     </div>
     <div style="display: flex; flex-direction: row;">
         <!-- Graph 17 -->
-        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 130px;">
+        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 110px;">
             <h1>Participants by Race</h1>
             <canvas id="DrugRacePieChart" width="400" height="400"></canvas>
         </div>
@@ -192,7 +192,6 @@
          <div id="DrugRaceText" style="flex: 1; font-size: 24px; margin-top: 150px;">
         </div>
     </div>
- 
  
 <script>
     // Predefined set of colors, use this for every piechart so that color scheme is similar
@@ -578,11 +577,11 @@
                 console.log('Received DelinquencySchoolData:', DelinquencySchoolData);
 
                 var DelinquencySchoolLabels = DelinquencySchoolData.map(item => item.delinquencyschool);
-                var DelinquencySchoolValues = DelinquencySchoolData.map(item => item.Count);
+                var DelinquencySchoolValues = DelinquencySchoolData.map(item => item.count);
 
                 var DelinquencySchoolText = document.getElementById('DelinquencySchoolText');
-                DelinquencySchoolText.innerHTML = DelinquencySchoolData.map(item => `${item.delinquencyschool}: ${item.Count} (${((item.Count / DelinquencySchoolData.reduce((acc, curr) => acc + curr.Count, 0)) * 100).toFixed(1)}%)`).join('<br>') +
-                `<br>Grand Total: ${DelinquencySchoolData.reduce((acc, curr) => acc + curr.Count, 0)}`;
+                DelinquencySchoolText.innerHTML = DelinquencySchoolData.map(item => `${item.delinquencyschool}: ${item.count} (${((item.count / DelinquencySchoolData.reduce((acc, curr) => acc + curr.count, 0)) * 100).toFixed(1)}%)`).join('<br>') +
+                `<br>Grand Total: ${DelinquencySchoolData.reduce((acc, curr) => acc + curr.count, 0)}`;
 
                 // Use predefined colors for the first 5 colors
                 var backgroundColors = predefinedColors.slice(0, Math.min(DelinquencySchoolLabels.length, predefinedColors.length));
@@ -627,11 +626,11 @@
                 console.log('Received DelinquencyRaceData:', DelinquencyRaceData);
 
                 var DelinquencyRaceLabels = DelinquencyRaceData.map(item => item.delinquencyrace);
-                var DelinquencyRaceValues = DelinquencyRaceData.map(item => item.Count);
+                var DelinquencyRaceValues = DelinquencyRaceData.map(item => item.count);
 
                 var DelinquencyRaceText = document.getElementById('DelinquencyRaceText');
-                DelinquencyRaceText.innerHTML = DelinquencyRaceData.map(item => `${item.delinquencyrace}: ${item.Count} (${((item.Count / DelinquencyRaceData.reduce((acc, curr) => acc + curr.Count, 0)) * 100).toFixed(1)}%)`).join('<br>') +
-                `<br>Grand Total: ${DelinquencyRaceData.reduce((acc, curr) => acc + curr.Count, 0)}`;
+                DelinquencyRaceText.innerHTML = DelinquencyRaceData.map(item => `${item.delinquencyrace}: ${item.count} (${((item.count / DelinquencyRaceData.reduce((acc, curr) => acc + curr.count, 0)) * 100).toFixed(1)}%)`).join('<br>') +
+                `<br>Grand Total: ${DelinquencyRaceData.reduce((acc, curr) => acc + curr.count, 0)}`;
 
                 // Use predefined colors for the first 5 colors
                 var backgroundColors = predefinedColors.slice(0, Math.min(DelinquencyRaceLabels.length, predefinedColors.length));
@@ -677,11 +676,11 @@
                 console.log('Received DelinquencyGenderData:', DelinquencyGenderData);
 
                 var DelinquencyGenderLabels = DelinquencyGenderData.map(item => item.delinquencygender);
-                var DelinquencyGenderValues = DelinquencyGenderData.map(item => item.Count);
+                var DelinquencyGenderValues = DelinquencyGenderData.map(item => item.count);
 
                 var DelinquencyGenderText = document.getElementById('DelinquencyGenderText');
-                DelinquencyGenderText.innerHTML = DelinquencyGenderData.map(item => `${item.delinquencygender}: ${item.Count} (${((item.Count / DelinquencyGenderData.reduce((acc, curr) => acc + curr.Count, 0)) * 100).toFixed(1)}%)`).join('<br>') +
-                `<br>Grand Total: ${DelinquencyGenderData.reduce((acc, curr) => acc + curr.Count, 0)}`;
+                DelinquencyGenderText.innerHTML = DelinquencyGenderData.map(item => `${item.delinquencygender}: ${item.count} (${((item.count / DelinquencyGenderData.reduce((acc, curr) => acc + curr.count, 0)) * 100).toFixed(1)}%)`).join('<br>') +
+                `<br>Grand Total: ${DelinquencyGenderData.reduce((acc, curr) => acc + curr.count, 0)}`;
 
                 // Use predefined colors for the first 5 colors
                 var backgroundColors = predefinedColors.slice(0, Math.min(DelinquencyGenderLabels.length, predefinedColors.length));
@@ -727,11 +726,11 @@
                 console.log('Received DelinquencyAgeData:', DelinquencyAgeData);
 
                 var DelinquencyAgeLabels = DelinquencyAgeData.map(item => item.delinquencyage);
-                var DelinquencyAgeValues = DelinquencyAgeData.map(item => item.Count);
+                var DelinquencyAgeValues = DelinquencyAgeData.map(item => item.count);
 
                 var DelinquencyAgeText = document.getElementById('DelinquencyAgeText');
-                DelinquencyAgeText.innerHTML = DelinquencyAgeData.map(item => `${item.delinquencyage}: ${item.Count} (${((item.Count / DelinquencyAgeData.reduce((acc, curr) => acc + curr.Count, 0)) * 100).toFixed(1)}%)`).join('<br>') +
-                `<br>Grand Total: ${DelinquencyAgeData.reduce((acc, curr) => acc + curr.Count, 0)}`;
+                DelinquencyAgeText.innerHTML = DelinquencyAgeData.map(item => `${item.delinquencyage}: ${item.count} (${((item.count / DelinquencyAgeData.reduce((acc, curr) => acc + curr.count, 0)) * 100).toFixed(1)}%)`).join('<br>') +
+                `<br>Grand Total: ${DelinquencyAgeData.reduce((acc, curr) => acc + curr.count, 0)}`;
 
                 // Use predefined colors for the first 5 colors
                 var backgroundColors = predefinedColors.slice(0, Math.min(DelinquencyAgeLabels.length, predefinedColors.length));
