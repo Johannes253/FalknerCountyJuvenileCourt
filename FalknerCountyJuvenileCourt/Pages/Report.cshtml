@@ -129,49 +129,49 @@
         </div>
     </div>
     <br>
-    <div style="display: flex; flex-direction: row;">
+        <div style="display: flex; flex-direction: row;">
         <!-- Graph 12 -->
+        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 150px;">
+            <h1>SAVRY Ratings of Delinquent Youth Petitions</h1>
+            <canvas id="AdRiskPieChart" width="400" height="400"></canvas>
+        </div>
+        <!-- Text 12 -->
+         <div id="adsavryText" style="flex: 1; font-size: 24px; margin-top: 150px;">
+        </div>
+    </div>
+    <div style="display: flex; flex-direction: row;">
+        <!-- Graph 13 -->
         <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 35px;">
             <h1>Admissions by Race</h1>
             <canvas id="adracePieChart" width="400" height="400"></canvas>
         </div>
-        <!-- Text 12 -->
-        <div id="adraceText" style="flex: 1; font-size: 24px; margin-top: 150px;">
-        </div>
-    </div>
-    <br>
-    <div style="display: flex; flex-direction: row;">
-        <!-- Graph 13 -->
-        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 40px;">
-            <h1>Admission by Gender</h1>
-            <canvas id="adgenderPieChart" width="400" height="400"></canvas>
-        </div>
         <!-- Text 13 -->
-        <div id="adgenderText" style="flex: 1; font-size: 24px; margin-top: 150px;">
+        <div id="adraceText" style="flex: 1; font-size: 24px; margin-top: 150px;">
         </div>
     </div>
     <br>
     <div style="display: flex; flex-direction: row;">
         <!-- Graph 14 -->
         <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 40px;">
-            <h1>Admissions by Age</h1>
-            <canvas id="adagebarChart" width="400" height="400"></canvas>
+            <h1>Admission by Gender</h1>
+            <canvas id="adgenderPieChart" width="400" height="400"></canvas>
         </div>
         <!-- Text 14 -->
-        <div id="adageText" style="flex: 1; font-size: 24px; margin-top: 150px;">
+        <div id="adgenderText" style="flex: 1; font-size: 24px; margin-top: 150px;">
         </div>
     </div>
     <br>
     <div style="display: flex; flex-direction: row;">
         <!-- Graph 15 -->
-        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 130px;">
-            <h1>SAVRY Levels of Admitted Youth</h1>
-            <canvas id="AdRiskPieChart" width="400" height="400"></canvas>
+        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 40px;">
+            <h1>Admissions by Age</h1>
+            <canvas id="adagebarChart" width="400" height="400"></canvas>
         </div>
         <!-- Text 15 -->
-         <div id="adsavryText" style="flex: 1; font-size: 24px; margin-top: 150px;">
+        <div id="adageText" style="flex: 1; font-size: 24px; margin-top: 150px;">
         </div>
     </div>
+    <br>
     <div style="display: flex; flex-direction: row;">
         <!-- Graph 16 -->
         <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 110px;">
@@ -192,17 +192,6 @@
          <div id="DrugRaceText" style="flex: 1; font-size: 24px; margin-top: 150px;">
         </div>
     </div>
-    <div style="display: flex; flex-direction: row;">
-        <!-- Graph 18 -->
-        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 130px;">
-            <h1>20th Judicial District SAVRYs 2022</h1>
-            <canvas id="DrugSavryPieChart" width="400" height="400"></canvas>
-        </div>
-        <!-- Text 18 -->
-         <div id="DrugSavryText" style="flex: 1; font-size: 24px; margin-top: 150px;">
-        </div>
-    </div>
- 
  
 <script>
     // Predefined set of colors, use this for every piechart so that color scheme is similar
@@ -1059,57 +1048,6 @@
                         labels: DrugRaceLabels,
                         datasets: [{
                             data: DrugRaceValues,
-                            backgroundColor: backgroundColors
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        legend: {
-                            position: 'top',
-                        }
-                    }
-                });
-            } else {
-                console.error("Error fetching data. Status:", response.status);
-                console.log("Raw response data:", await response.text());
-            }
-        } catch (error) {
-            console.error("Error fetching or parsing data:", error);
- 
-        }
-    });
-    document.addEventListener('DOMContentLoaded', async function () {
-        try {
-            var response = await fetch('/Report?handler=DrugSavryDistributionData', {
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
-            //console.log("Raw response data:", await response.text());
-            if (response.ok) {
-                var DrugSavryData = await response.json();
- 
-                console.log('Received DrugSavryData:', DrugSavryData);
- 
-                var DrugSavryLabels = DrugSavryData.map(item => item.drugsavrycount);
-                var DrugSavryValues = DrugSavryData.map(item => item.count);
-
-                var DrugSavryText = document.getElementById('DrugSavryText');
-                DrugSavryText.innerHTML = DrugSavryData.map(item => `${item.drugsavrycount}: ${item.count} (${((item.count / DrugSavryData.reduce((acc, curr) => acc + curr.count, 0)) * 100).toFixed(1)}%)`).join('<br>') +
-                `<br>Grand Total: ${DrugSavryData.reduce((acc, curr) => acc + curr.count, 0)}`;
- 
-                // Use predefined colors for the first 5 colors
-                var backgroundColors = predefinedColors.slice(0, Math.min(DrugSavryLabels.length, predefinedColors.length));
-                backgroundColors = backgroundColors.concat(generateRandomColors(Math.max(0, DrugSavryLabels.length - predefinedColors.length)));
- 
-                var ctx = document.getElementById('DrugSavryPieChart').getContext('2d');
-                var DrugSavryPieChart = new Chart(ctx, {
-                    type: 'pie',
-                    data: {
-                        labels: DrugSavryLabels,
-                        datasets: [{
-                            data: DrugSavryValues,
                             backgroundColor: backgroundColors
                         }]
                     },

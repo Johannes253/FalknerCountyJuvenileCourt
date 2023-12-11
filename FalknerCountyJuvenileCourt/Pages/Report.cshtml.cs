@@ -16,18 +16,12 @@ public class ReportModel : PageModel
 
     public async Task<IActionResult> OnGetArrestedRaceDistributionDataAsync()
     {
-
         try
         {
             var raceCounts = _context.Juveniles
-                .Select(c => c.Race)
-                .GroupBy(c => c.Name)
+                .GroupBy(c => c.Race.Name)
                 .Select(group => new { Race = group.Key, Count = group.Count() })
                 .ToList();
-
-               //  foreach (var race in raceCounts)
-               //      Console.WriteLine($"Race: {race.Race}, Count: {race.Count}");
-
 
             return new JsonResult(raceCounts);
         }
@@ -45,12 +39,7 @@ public class ReportModel : PageModel
 
         try
         {
-            var juvenilesWithGender = _context.Juveniles
-                .Include(j => j.Gender)
-                .ToList();
-
-            var genderCounts = juvenilesWithGender
-                .Where(j => j.Gender != null)
+            var genderCounts = _context.Juveniles
                 .GroupBy(j => j.Gender.Name)
                 .Select(group => new { Gender = group.Key, Count = group.Count() })
                 .ToList();
@@ -68,20 +57,12 @@ public class ReportModel : PageModel
     }
     public async Task<IActionResult> OnGetAgeDistributionDataAsync()
     {
-        Console.WriteLine("Function called");
         try
         {
-        var juvenilesWithAge = _context.Juveniles.ToList();
-
-        var ageGroups = juvenilesWithAge
-            .GroupBy(j => ((j.Age - 1) / 3) * 3)
-            .OrderBy(group => group.Key)
+        var ageGroups = _context.Juveniles
+            .GroupBy(j => (j.Age - 1) / 3 * 3)
             .Select(group => new { ageGroups = $"{group.Key + 1}-{group.Key + 3}", Count = group.Count() })
             .ToList();
-
-
-            foreach (var juvenile in juvenilesWithAge)
-                Console.WriteLine($"Juvenile ID: {juvenile.ID}, Age: {juvenile.Age}");
 
             return new JsonResult(ageGroups);
         }
@@ -142,12 +123,7 @@ public class ReportModel : PageModel
 
         try
         {
-            var juvenileSchool = _context.Crimes
-                .Include(j => j.School)
-                .ToList();
-
-            var SchoolCounts = juvenileSchool
-                .Where(j => j.School != null)
+            var SchoolCounts = _context.Crimes
                 .GroupBy(j => j.School.Name)
                 .Select(group => new { schoolCount = group.Key, count = group.Count() })
                 .ToList();
@@ -284,10 +260,6 @@ public class ReportModel : PageModel
                 .Select(group => new { Race = group.Key, Count = group.Count() })
                 .ToList();
 
-                foreach (var race in raceCounts)
-                    Console.WriteLine($"Race: {race.Race}, Count: {race.Count}");
-
-
             return new JsonResult(raceCounts);
         }
         catch (Exception ex)
@@ -323,18 +295,13 @@ public class ReportModel : PageModel
     }
     public async Task<IActionResult> OnGetAdAgeDistributionDataAsync()
     {
-        Console.WriteLine("Function called");
         try
         {
         var ageGroups = _context.Crimes
             .Where(j => j.IntakeDecisionID == 3)
-            .GroupBy(j => ((j.Juvenile.Age - 1) / 3) * 3)
+            .GroupBy(j => (j.Juvenile.Age - 1) / 3 * 3)
             .Select(group => new { ageGroups = $"{group.Key + 1}-{group.Key + 3}", Count = group.Count() })
             .ToList();
-
-
-            // foreach (var juvenile in juvenilesWithAge)
-            //     Console.WriteLine($"Juvenile ID: {juvenile.ID}, Age: {juvenile.Age}");
 
             return new JsonResult(ageGroups);
         }
@@ -350,16 +317,16 @@ public class ReportModel : PageModel
     public async Task<IActionResult> OnGetAdRiskDistributionDataAsync()
     {
 
-         try
-    {
+      try
+      {
         var AdRiskCounts = _context.Crimes
-            .Where(j => j.IntakeDecisionID == 3)
+            .Where(j => j.FilingDecisionID == 1)
             .GroupBy(j => j.Juvenile.Risk.Name)
             .Select(group => new { adriskcount = group.Key.ToString(), count = group.Count() })
             .ToList();
 
         return new JsonResult(AdRiskCounts);
-    }
+      }
         catch (Exception ex)
         {
             Console.WriteLine(ex.ToString());
@@ -413,4 +380,5 @@ public class ReportModel : PageModel
             };
         }
     }
+
 }
