@@ -196,3 +196,8 @@ input[type=checkbox] {
 #Priv:hover{
   color: darkgoldenrod;
 }
+#picture_logo{
+  width: 250px; 
+  height: 250px;
+  padding: 0px;
+}
