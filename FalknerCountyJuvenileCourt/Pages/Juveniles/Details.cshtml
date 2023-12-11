@@ -5,9 +5,7 @@
     ViewData["Title"] = "Details";
 }
 
-<div id=bottom>
-    Here you are able to view the details of a juvenile.
-</div>
+
 
 <h1>Details</h1>
 
@@ -80,6 +78,6 @@
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Juvenile?.ID">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <a id="Back_To_List" asp-page="./Edit" asp-route-id="@Model.Juvenile?.ID">Edit</a> |
+    <a id="Back_To_List" asp-page="./Index">Back to List</a>
 </div>

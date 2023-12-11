@@ -5,9 +5,7 @@
     ViewData["Title"] = "Delete";
 }
 
-<div id=bottom>
-    Here you are able to delete this crime.
-</div>
+
 
 <h1>Delete</h1>
 
@@ -75,6 +73,6 @@
     <form method="post">
         <input type="hidden" asp-for="Crime.ID" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
+        <a id="Back_To_List" asp-page="./Index">Back to List</a>
     </form>
 </div>

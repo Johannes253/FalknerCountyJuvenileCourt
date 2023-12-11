@@ -1,6 +1,11 @@
+* {
+  font-family: 'Roboto Slab', serif;;
+  font-size: 18px;  
+}
 html {
   font-size: 14px;
   font-family: 'Times New Roman', Times, serif;
+  
 }
 
 @media (min-width: 768px) {
@@ -15,13 +20,16 @@ html {
 }
 #tableB{
   color: #fff;
-  background-color: #0d6efd;
-  border-color: #0d6efd;
-  outline: 2px solid #0d6efd;
+  background-color: black;
+  border-color: black;
+  outline: 2px solid black;
   text-decoration: none;
   width: fit-content;
   height: 50px;
   font-size: 27px;
+}
+#tableB:hover{
+  background-color: darkgoldenrod;
 }
 
 html {
@@ -30,13 +38,68 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+  background-color: #885; 
+  padding-bottom: 100px;
 }
+
+
+
 #Cbtn{
   color: #fff;
-  background-color: #0d6efd;
-  border-color: #0d6efd;
-  outline: 2px solid #0d6efd;
+  background-color: black;
+  border-color: black;
+  outline: 2px solid black;
+  border-radius: .25rem;
+  text-decoration: none;
+  font-size: 1rem;
+  width: fit-content;
+  height: fit-content;
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
+  padding: 0.375rem 0.75rem;
+  transition-duration: 0.2s;
+}
+#Cbtn:hover{
+  background-color: darkgoldenrod; 
+  border: black;
+  outline: 2px solid black;
+}
+#EDbtn{
+  color: #fff;
+  background-color: black;
+  border-color: black;
+  outline: 2px solid black;
+  border-radius: .25rem;
+  text-decoration: none;
+  font-size: .75rem;
+  width: fit-content;
+  height: fit-content;
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.25;
+  padding: 0.2rem 0.3rem;
+  transition-duration: 0.2s;
+}
+#EDbtn:hover{
+  background-color: darkgoldenrod; 
+  border: black;
+  outline: 2px solid black;
+}
+#bottom {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /*background: white;*/
+  text-align: center;
+  padding: 10px 0;
+  line-height: 43px;
+}
+input{
+  color: black;
+  background-color: white;
+  border-color: black;
+  outline: 2px solid black;
   border-radius: .25rem;
   text-decoration: none;
   font-size: 1rem;
@@ -47,27 +110,89 @@ body {
   line-height: 1.5;
   padding: 0.375rem 0.75rem;
 }
-#EDbtn{
+input[type=submit] {
+  background-color: black;
+  color: white;
+  border-color: black;
+  outline: 2px solid black;
+  transition-duration: 0.2s;
+}
+input[type=submit]:hover {
+  background-color: darkgoldenrod; 
+  border: black;
+  outline: 2px solid black;
+  color: white
+}
+#Back_To_List{
+  color: black;
+}
+#Back_To_List:hover{
+  color:darkgoldenrod;
+}
+#NP{
+  background-color: black;
+  color: white;
+  border-color: black;
+  outline: 2px solid black;
+  transition-duration: 0.2s;
+}
+#NP:hover{
+  background-color: darkgoldenrod; 
+  border: black;
+  outline: 2px solid black;
+}
+input[type=checkbox] {
+  width: 15px; /* Set the desired width */
+  height: 15px; /* Set the desired height */
+  border-radius: 0;
+  padding-right: 5px;
+}
+.forgot{
+  color: black;
+}
+.forgot:hover{
+  color:darkgoldenrod;
+}
+#login-submit, #registerSubmit{
   color: #fff;
-  background-color: #0d6efd;
-  border-color: #0d6efd;
-  outline: 2px solid #0d6efd;
-  border-radius: .25rem;
+  background-color: black;
+  border-color: black;
+  outline: 2px solid black;
   text-decoration: none;
-  font-size: .75rem;
-  width: fit-content;
-  height: fit-content;
+  font-size: 1rem;
   display: inline-block;
   font-weight: 400;
-  line-height: 1.25;
-  padding: 0.2rem 0.3rem;
+  line-height: 1.5;
+  
+  transition-duration: 0.2s;
 }
-#bottom {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: white;
-  text-align: center;
-  padding: 10px 0;
-  line-height: 43px;
+#login-submit:hover, #registerSubmit:hover{
+  background-color:darkgoldenrod;
+}
+.header{
+  background-color: rgba(58, 58, 41, 0.9);
+  outline:2px solid black; ;
+  color: white;
+}
+#here{
+  background-color: rgba(58, 58, 41, 0.9);
+}
+#nav-link, .nav-item {
+  background-color: black;
+  color: white;
+  border-color: black;
+  outline: 2px solid black;
+  transition-duration: 0.2s;
+}
+#nav-link:hover, .nav-item:hover {
+  background-color: darkgoldenrod; 
+  border: black;
+  outline: 2px solid black;
+  color: white
+}
+#Priv{
+  color:gray;
+}
+#Priv:hover{
+  color: darkgoldenrod;
 }
