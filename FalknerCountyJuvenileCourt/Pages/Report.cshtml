@@ -87,7 +87,7 @@
     <br>
     <div style="display: flex; flex-direction: row;">
         <!-- Graph 8 -->
-        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 75px;">
+        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 140px;">
             <h1>School and Non-School Related Delinquency Petitions</h1>
             <canvas id="DelinquencySchoolPieChart" width="400" height="400"></canvas>
         </div>
@@ -174,7 +174,7 @@
     </div>
     <div style="display: flex; flex-direction: row;">
         <!-- Graph 16 -->
-        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 130px;">
+        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 110px;">
             <h1>Participants by Gender</h1>
             <canvas id="DrugGenderPieChart" width="400" height="400"></canvas>
         </div>
@@ -184,12 +184,22 @@
     </div>
     <div style="display: flex; flex-direction: row;">
         <!-- Graph 17 -->
-        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 130px;">
+        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 110px;">
             <h1>Participants by Race</h1>
             <canvas id="DrugRacePieChart" width="400" height="400"></canvas>
         </div>
         <!-- Text 17 -->
          <div id="DrugRaceText" style="flex: 1; font-size: 24px; margin-top: 150px;">
+        </div>
+    </div>
+    <div style="display: flex; flex-direction: row;">
+        <!-- Graph 18 -->
+        <div style="width: 400px; height: 400px; margin-right: 70px; margin-bottom: 130px;">
+            <h1>20th Judicial District SAVRYs 2022</h1>
+            <canvas id="DrugSavryPieChart" width="400" height="400"></canvas>
+        </div>
+        <!-- Text 18 -->
+         <div id="DrugSavryText" style="flex: 1; font-size: 24px; margin-top: 150px;">
         </div>
     </div>
  
@@ -1049,6 +1059,57 @@
                         labels: DrugRaceLabels,
                         datasets: [{
                             data: DrugRaceValues,
+                            backgroundColor: backgroundColors
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                });
+            } else {
+                console.error("Error fetching data. Status:", response.status);
+                console.log("Raw response data:", await response.text());
+            }
+        } catch (error) {
+            console.error("Error fetching or parsing data:", error);
+ 
+        }
+    });
+    document.addEventListener('DOMContentLoaded', async function () {
+        try {
+            var response = await fetch('/Report?handler=DrugSavryDistributionData', {
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            //console.log("Raw response data:", await response.text());
+            if (response.ok) {
+                var DrugSavryData = await response.json();
+ 
+                console.log('Received DrugSavryData:', DrugSavryData);
+ 
+                var DrugSavryLabels = DrugSavryData.map(item => item.drugsavrycount);
+                var DrugSavryValues = DrugSavryData.map(item => item.count);
+
+                var DrugSavryText = document.getElementById('DrugSavryText');
+                DrugSavryText.innerHTML = DrugSavryData.map(item => `${item.drugsavrycount}: ${item.count} (${((item.count / DrugSavryData.reduce((acc, curr) => acc + curr.count, 0)) * 100).toFixed(1)}%)`).join('<br>') +
+                `<br>Grand Total: ${DrugSavryData.reduce((acc, curr) => acc + curr.count, 0)}`;
+ 
+                // Use predefined colors for the first 5 colors
+                var backgroundColors = predefinedColors.slice(0, Math.min(DrugSavryLabels.length, predefinedColors.length));
+                backgroundColors = backgroundColors.concat(generateRandomColors(Math.max(0, DrugSavryLabels.length - predefinedColors.length)));
+ 
+                var ctx = document.getElementById('DrugSavryPieChart').getContext('2d');
+                var DrugSavryPieChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: DrugSavryLabels,
+                        datasets: [{
+                            data: DrugSavryValues,
                             backgroundColor: backgroundColors
                         }]
                     },
